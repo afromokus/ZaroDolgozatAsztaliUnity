@@ -606,10 +606,9 @@ GameObject:
   - component: {fileID: 534669905}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
-  - component: {fileID: 534669906}
-  - component: {fileID: 534669909}
   - component: {fileID: 534669908}
   - component: {fileID: 534669907}
+  - component: {fileID: 534669906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -667,7 +666,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 46.7, y: 2, z: -45.3}
+  m_LocalPosition: {x: 38.75, y: 2, z: -45.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -685,7 +684,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jatekosTranszformacio: {fileID: 1890731549}
-  eltolas: {x: 5, y: 1.5, z: 0}
+  kameraTest: {fileID: 534669908}
+  Eltolas: {x: 0, y: 0, z: 0}
+  nullVector: {x: 0, y: 0, z: 0}
 --- !u!65 &534669907
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -696,7 +697,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &534669908
 Rigidbody:
@@ -713,17 +714,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &534669909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f8332531e9716946b290ebf521c8b9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &851520817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,6 +1053,7 @@ GameObject:
   - component: {fileID: 1740745891}
   - component: {fileID: 1740745890}
   - component: {fileID: 1740745889}
+  - component: {fileID: 1740745893}
   m_Layer: 0
   m_Name: D Fal
   m_TagString: Fal
@@ -1134,6 +1125,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!54 &1740745893
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1740745888}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1755173466
 GameObject:
   m_ObjectHideFlags: 0
@@ -1295,7 +1301,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1890731545}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41.7, y: 0.5, z: -45.3}
+  m_LocalPosition: {x: 33.73, y: 0.5, z: -45.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
