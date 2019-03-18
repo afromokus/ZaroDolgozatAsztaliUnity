@@ -12,6 +12,7 @@ public class kameraKovetes : MonoBehaviour
     Pozicio kameraAllapot;
 
     TavolsagFigyelo tolatasFigyeles;
+    TavolsagFigyelo eloreFigyeles;
 
     float rovidVektorhossz = 0.5f;
     float hosszuVektorhossz = 0f;
@@ -24,6 +25,7 @@ public class kameraKovetes : MonoBehaviour
         Cursor.visible = false;
 
         tolatasFigyeles = new TavolsagFigyelo(transform.position, rovidVektorhossz);
+        eloreFigyeles = new TavolsagFigyelo(transform.position, -hosszuVektorhossz);
         kameraAllapot = Pozicio.alap;
 
     }
@@ -32,18 +34,12 @@ public class kameraKovetes : MonoBehaviour
     void Update()
     {
         transform.position = jatekosTranszformacio.position + Eltolas;
+
         tolatasFigyeles.setSugarOrigin(kameraTest.position);
+        eloreFigyeles.setSugarOrigin(kameraTest.position);
 
-        if (kameraAllapot == Pozicio.alap && tolatasFigyeles.utkozikE())
-        {
-            kameraValtAlapPoz();
-        }
-        else if (kameraAllapot == Pozicio.kozeli && !tolatasFigyeles.utkozikE())
-        {
-            kameraValtKozeli();
-        }
-
-        tolatasFigyeles.rajzolFigyelo();
+        tolatasFigyeles.rajzolFigyelo(Color.white);
+        eloreFigyeles.rajzolFigyelo();
 
     }
 

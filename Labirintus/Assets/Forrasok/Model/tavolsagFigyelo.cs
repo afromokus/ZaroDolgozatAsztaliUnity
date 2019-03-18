@@ -54,7 +54,12 @@ namespace Assets.Model
 
         public void rajzolFigyelo()
         {
-            Debug.DrawLine(sugar.origin, sugar.origin + sugarHossz);
+            Debug.DrawLine(sugar.origin, sugar.origin + sugarHossz, Color.blue);
+        }
+
+        public void rajzolFigyelo(Color szin)
+        {
+            Debug.DrawLine(sugar.origin, sugar.origin + sugarHossz, szin);
         }
 
     }
