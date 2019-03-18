@@ -21,6 +21,12 @@ namespace Assets.Model
             this.sugarHossz = eltolas;
         }
 
+        public TavolsagFigyelo(Vector3 kezdoPont, float eltolas)
+        {
+            this.sugarHossz = new Vector3(eltolas, 0, 0);
+            this.sugar = new Ray(kezdoPont, sugarHossz);
+        }
+
         public Ray getSugar()
         {
             return sugar;

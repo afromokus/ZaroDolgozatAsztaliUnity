@@ -10,22 +10,20 @@ public class kameraKovetes : MonoBehaviour
     public Vector3 Eltolas;
     enum Pozicio { alap, kozeli, felul }
     Pozicio kameraAllapot;
-    Vector3 figyeloVektorHatra;
 
     TavolsagFigyelo tolatasFigyeles;
 
     float rovidVektorhossz = 0.5f;
-    float hosszuVektorhossz;
+    float hosszuVektorhossz = 0f;
 
     private void Start()
     {
         Eltolas = new Vector3(5, 1.5f, 0);
         hosszuVektorhossz = Eltolas.x;
-        figyeloVektorHatra = new Vector3(rovidVektorhossz, 0, 0);
 
         Cursor.visible = false;
 
-        tolatasFigyeles = new TavolsagFigyelo(transform.position, figyeloVektorHatra);
+        tolatasFigyeles = new TavolsagFigyelo(transform.position, rovidVektorhossz);
         kameraAllapot = Pozicio.alap;
 
     }
