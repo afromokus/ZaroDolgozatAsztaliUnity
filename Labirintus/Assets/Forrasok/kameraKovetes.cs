@@ -17,7 +17,7 @@ public class kameraKovetes : MonoBehaviour
         kameraTest.freezeRotation = true;
 
         Eltolas = new Vector3(5, 1.5f, 0);
-        figyeloVektor = new Vector3(5, 0, 0);
+        figyeloVektor = new Vector3(0.2f, 0, 0);
 
         Cursor.visible = false;
 
@@ -32,7 +32,20 @@ public class kameraKovetes : MonoBehaviour
         transform.position = jatekosTranszformacio.position + Eltolas;
         tolatasFigyeles.origin = kameraTest.position;
 
-
+        if (Physics.Raycast(tolatasFigyeles, 0.2f) && kameraAllapot == Pozicio.alap)
+        {
+            Debug.Log("Nekiment!");
+            Eltolas.x = 2f;
+            figyeloVektor.x = 5f;
+            kameraAllapot = Pozicio.kozeli;
+        }
+        else if (!Physics.Raycast(tolatasFigyeles, 5f) && kameraAllapot == Pozicio.kozeli)
+        {
+            Debug.Log("Kijöhet!");
+            Eltolas.x = 5f;
+            figyeloVektor.x = 0.2f;
+            kameraAllapot = Pozicio.alap;
+        }
 
         Debug.DrawLine(tolatasFigyeles.origin, tolatasFigyeles.origin + figyeloVektor, Color.red);
 
