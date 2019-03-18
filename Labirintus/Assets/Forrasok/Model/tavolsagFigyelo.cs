@@ -42,9 +42,14 @@ namespace Assets.Model
             sugar.origin = origin;
         }
 
+        public void setSugarOrigin(Vector3 origin, float eltolas)
+        {
+            sugar.origin = origin + new Vector3(eltolas, 0, 0);
+        }
+
         public bool utkozikE()
         {
-            return Physics.Raycast(sugar, sugarHossz.x);
+            return Physics.Raycast(sugar,Mathf.Abs(sugarHossz.x));
         }
 
         public void setSugarHossz(float x)
