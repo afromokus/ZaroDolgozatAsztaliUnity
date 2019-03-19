@@ -12,8 +12,8 @@ public class kameraKovetes : MonoBehaviour
     enum Pozicio { alap, kozeli, felul }
     Pozicio kameraAllapot;
 
-    TavolsagFigyelo tolatasFigyeles;
-    TavolsagFigyelo eloreFigyeles;
+    VektorSugar tolatasFigyeles;
+    VektorSugar eloreFigyeles;
 
     float rovidVektorhossz = 0.5f;
     float hosszuVektorhossz = 0f;
@@ -28,8 +28,8 @@ public class kameraKovetes : MonoBehaviour
 
         Cursor.visible = false;
 
-        tolatasFigyeles = new TavolsagFigyelo(transform.position, rovidVektorhossz - tolatasRadarVisszah);
-        eloreFigyeles = new TavolsagFigyelo(transform.position, -hosszuVektorhossz);
+        tolatasFigyeles = new VektorSugar(transform.position, rovidVektorhossz - tolatasRadarVisszah);
+        eloreFigyeles = new VektorSugar(transform.position, -hosszuVektorhossz);
         kameraAllapot = Pozicio.alap;
 
     }
@@ -37,6 +37,7 @@ public class kameraKovetes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Eltolas.Set(Eltolas.x, Eltolas.y + Input.GetAxis("Mouse Y"), Eltolas.z);
         transform.position = jatekosTranszformacio.position + Eltolas;
 
         tolatasFigyeles.setSugarOrigin(kameraTest.position, tolatasRadarVisszah);

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Assets.Model;
 
 public class JatekosMozgas : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class JatekosMozgas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        VektorSugar jatekosSugar = new VektorSugar(transform.position, new Vector3(5f, 1f, 0f));
+
+        jatekosSugar.rajzolFigyelo();
+
         mozgasVizsgalat();
 
         if (jatekosElore) { jatekosTest.AddForce(eroElore * Time.deltaTime, 0, 0); }

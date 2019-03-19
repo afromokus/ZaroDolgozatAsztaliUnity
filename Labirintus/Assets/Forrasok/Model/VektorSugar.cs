@@ -3,25 +3,25 @@ using UnityEngine;
 
 namespace Assets.Model
 {
-    class TavolsagFigyelo
+    class VektorSugar
     {
         Ray sugar;
 
         Vector3 sugarHossz;
 
-        public TavolsagFigyelo(Ray sugar)
+        public VektorSugar(Ray sugar)
         {
             this.sugar = sugar;
             this.sugarHossz = sugar.origin;
         }
 
-        public TavolsagFigyelo(Vector3 kezdoPont, Vector3 eltolas)
+        public VektorSugar(Vector3 kezdoPont, Vector3 eltolas)
         {
             this.sugar = new Ray(kezdoPont, eltolas);
             this.sugarHossz = eltolas;
         }
 
-        public TavolsagFigyelo(Vector3 kezdoPont, float eltolas)
+        public VektorSugar(Vector3 kezdoPont, float eltolas)
         {
             this.sugarHossz = new Vector3(eltolas, 0, 0);
             this.sugar = new Ray(kezdoPont, sugarHossz);
