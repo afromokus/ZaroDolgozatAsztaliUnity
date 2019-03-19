@@ -7,13 +7,15 @@ public class JatekosMozgas : MonoBehaviour
 {
 
     public Rigidbody jatekosTest;
-    float eroElore = -1f;
-    float eroOldalra = 0.8f;
+    float eroElore = 1f;
+    float eroOldalra = 1.5f;
 
     float sebesseg = 1f;
-    float maxSebesseg = 3f;
+    float normalTempo = 5f;
+    float maxSebesseg;
+    float a = 0.01f;
 
-    bool jatekosJobbra = false, jatekosBalra = false, jatekosElore = false, jatekosHatra = false;
+    bool jatekosElore = false, jatekosHatra = false;
 
     // Start is called before the first frame update
     void Start()
@@ -27,21 +29,13 @@ public class JatekosMozgas : MonoBehaviour
 
         if (jatekosElore)
         {
-            transform.Translate(-eroElore * Time.deltaTime * sebesseg, 0, 0);
+            transform.Translate(eroElore * Time.deltaTime * sebesseg, 0, 0);
             gyorsulas();
         }
         if (jatekosHatra)
         {
-            transform.Translate(eroElore * Time.deltaTime * sebesseg, 0, 0);
+            transform.Translate(-eroElore * Time.deltaTime * sebesseg, 0, 0);
             gyorsulas();
-        }
-        if (jatekosJobbra)
-        {
-            transform.Translate(0, 0, -eroOldalra * Time.deltaTime * sebesseg);
-        }
-        if (jatekosBalra)
-        {
-            transform.Translate(0, 0, eroOldalra * Time.deltaTime * sebesseg);
         }
 
     }
@@ -50,7 +44,7 @@ public class JatekosMozgas : MonoBehaviour
     {
         if (sebesseg < maxSebesseg)
         {
-            sebesseg += 0.01f;
+            sebesseg += a;
             Debug.Log(sebesseg);
         }
 
@@ -58,6 +52,22 @@ public class JatekosMozgas : MonoBehaviour
 
     void mozgasVizsgalat()
     {
+
+        if (Input.GetKey(KeyCode.LeftAlt))
+        {
+            maxSebesseg = 10f;
+            a = 0.02f;
+        }
+        else
+        {
+            a = 0.01f;
+            maxSebesseg = normalTempo;
+            if (sebesseg > normalTempo)
+            {
+                sebesseg = normalTempo;
+            }
+        }
+
         if (Input.GetKey("w") || Input.GetKey(KeyCode.UpArrow))
         {
             if (jatekosHatra)
@@ -94,27 +104,11 @@ public class JatekosMozgas : MonoBehaviour
         }
         else if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow))
         {
-            if (jatekosBalra)
-            {
-                jatekosBalra = false;
-                System.Threading.Thread.Sleep(50);
-            }
-            else
-            {
-                jatekosJobbra = true;
-            }
+            transform.Translate(0, 0, -eroOldalra * Time.deltaTime * sebesseg);
         }
         else if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow))
         {
-            if (jatekosJobbra)
-            {
-                jatekosJobbra = false;
-                System.Threading.Thread.Sleep(50);
-            }
-            else
-            {
-                jatekosBalra = true;
-            }
+            transform.Translate(0, 0, eroOldalra * Time.deltaTime * sebesseg);
         }
     }
 
