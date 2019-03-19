@@ -29,12 +29,12 @@ public class JatekosMozgas : MonoBehaviour
 
         if (jatekosElore)
         {
-            transform.Translate(eroElore * Time.deltaTime * sebesseg, 0, 0);
+            transform.Translate(-eroElore * Time.deltaTime * sebesseg, 0, 0);
             gyorsulas();
         }
         if (jatekosHatra)
         {
-            transform.Translate(-eroElore * Time.deltaTime * sebesseg, 0, 0);
+            transform.Translate(eroElore * Time.deltaTime * sebesseg, 0, 0);
             gyorsulas();
         }
 
@@ -45,7 +45,6 @@ public class JatekosMozgas : MonoBehaviour
         if (sebesseg < maxSebesseg)
         {
             sebesseg += a;
-            Debug.Log(sebesseg);
         }
 
     }
@@ -104,11 +103,11 @@ public class JatekosMozgas : MonoBehaviour
         }
         else if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow))
         {
-            transform.Translate(0, 0, -eroOldalra * Time.deltaTime * sebesseg);
+            transform.Translate(0, 0, eroOldalra * Time.deltaTime * sebesseg);
         }
         else if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.Translate(0, 0, eroOldalra * Time.deltaTime * sebesseg);
+            transform.Translate(0, 0, -eroOldalra * Time.deltaTime * sebesseg);
         }
     }
 

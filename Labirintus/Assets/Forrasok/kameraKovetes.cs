@@ -7,7 +7,8 @@ using UnityEngine;
 public class kameraKovetes : MonoBehaviour
 {
     public Transform jatekosTranszformacio;
-    public Transform kameraTest;
+    public GameObject foKamera;
+    public GameObject valtoKamera;
     public Vector3 Eltolas;
     enum Pozicio { alap, kozeli, felul }
     Pozicio kameraAllapot;
@@ -23,12 +24,14 @@ public class kameraKovetes : MonoBehaviour
 
     private void Start()
     {
-            Eltolas = new Vector3(5f, normalKameraMagassag, 0);
+        Eltolas = new Vector3(5f, normalKameraMagassag, 0);
         hosszuVektorhossz = Eltolas.x;
 
         Cursor.visible = false;
 
-        tolatasFigyeles = new VektorSugar(transform.position, rovidVektorhossz - tolatasRadarVisszah);
+        foKamera.SetActive(true);
+
+        tolatasFigyeles = new VektorSugar(transform.position, 5f);
         eloreFigyeles = new VektorSugar(transform.position, -hosszuVektorhossz);
         kameraAllapot = Pozicio.alap;
 
@@ -49,8 +52,8 @@ public class kameraKovetes : MonoBehaviour
 
         transform.position = jatekosTranszformacio.position + Eltolas;
 
-        tolatasFigyeles.setSugarOrigin(kameraTest.position, tolatasRadarVisszah);
-        eloreFigyeles.setSugarOrigin(kameraTest.position);
+        tolatasFigyeles.setSugarOrigin(valtoKamera.transform.position, tolatasRadarVisszah);
+        eloreFigyeles.setSugarOrigin(valtoKamera.transform.position);
 
         if (kameraAllapot == Pozicio.alap && tolatasFigyeles.utkozikE())
         {
