@@ -23,7 +23,7 @@ public class kameraKovetes : MonoBehaviour
 
     private void Start()
     {
-        Eltolas = new Vector3(5f, normalKameraMagassag, 0);
+            Eltolas = new Vector3(5f, normalKameraMagassag, 0);
         hosszuVektorhossz = Eltolas.x;
 
         Cursor.visible = false;
@@ -37,7 +37,16 @@ public class kameraKovetes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Eltolas.Set(Eltolas.x, Eltolas.y + Input.GetAxis("Mouse Y"), Eltolas.z);
+        if (Input.GetKey("c") && transform.position.y + Input.GetAxis("Mouse Y") < 9f && transform.position.y + Input.GetAxis("Mouse Y") > 1.2f)
+        {
+            Eltolas.Set(Eltolas.x, Eltolas.y + Input.GetAxis("Mouse Y"), Eltolas.z);
+        }
+        else if (Input.GetKey("r"))
+        {
+            Eltolas.Set(5f, normalKameraMagassag, 0);
+        }
+
+
         transform.position = jatekosTranszformacio.position + Eltolas;
 
         tolatasFigyeles.setSugarOrigin(kameraTest.position, tolatasRadarVisszah);
