@@ -12,10 +12,12 @@ public class FoKameraMozgas : MonoBehaviour
     Pozicio kameraAllapot;
 
     VektorSugar figyeloKameraEloreX;
-    VektorSugar jobbraFigyelo;
+    VektorSugar balraFigyelo;
 
     Vector3 forgatasNormal;
     Vector3 forgatasLefele;
+
+    Vector3 balraFigyeloEltolas;
 
     float tolatasRadarVisszah = -1f;
     float rovidVektorHossz = 0.5f;
@@ -28,13 +30,15 @@ public class FoKameraMozgas : MonoBehaviour
         eltolasKozeli = new Vector3(-3f, 0f, 0f);
         eltolasFelul = new Vector3(-2f, 1.5f, 0f);
 
+        balraFigyeloEltolas = new Vector3(-0.5f,0,0);
+
         forgatasNormal = new Vector3(0f, -90f, 0f);
         forgatasLefele = new Vector3(80f, -90f, 0f);
 
         kameraAllapot = Pozicio.alap;
 
         figyeloKameraEloreX = new VektorSugar(transform.position, rovidVektorHossz + tolatasRadarVisszah);
-        jobbraFigyelo = new VektorSugar(transform.position, new Vector3(0f, 0f, 2f));
+        balraFigyelo = new VektorSugar(transform.position, new Vector3(0f, 0f, 2f));
         
         transform.position = transform.parent.position + eltolasAlap;
         transform.eulerAngles = forgatasNormal;
@@ -45,14 +49,14 @@ public class FoKameraMozgas : MonoBehaviour
     void Update()
     {
         figyeloKameraEloreX.setSugarOrigin(transform.position);
-        jobbraFigyelo.setSugarOrigin(transform.position);
+        balraFigyelo.setSugarOrigin(transform.position + balraFigyeloEltolas);
 
         if (figyeloKameraEloreX.utkozikEX())
         {
             Debug.Log("ütközik");
         }
 
-        if (jobbraFigyelo.utkozikE(2f))
+        if (balraFigyelo.utkozikE(0.5f))
         {
             Debug.Log("ütközik oldalt (jobbra)");
         }
@@ -71,7 +75,7 @@ public class FoKameraMozgas : MonoBehaviour
         }
 
         figyeloKameraEloreX.rajzolFigyelo(Color.white);
-        jobbraFigyelo.rajzolFigyelo(Color.red);
+        balraFigyelo.rajzolFigyelo(Color.red);
 
     }
 }
