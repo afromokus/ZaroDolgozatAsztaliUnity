@@ -55,19 +55,19 @@ public class kameraKovetes : MonoBehaviour
         tolatasFigyeles.setSugarOrigin(valtoKamera.transform.position, tolatasRadarVisszah);
         eloreFigyeles.setSugarOrigin(valtoKamera.transform.position);
 
-        if (kameraAllapot == Pozicio.alap && tolatasFigyeles.utkozikE())
+        if (kameraAllapot == Pozicio.alap && tolatasFigyeles.utkozikEX())
         {
             kameraValtKozeli();
         }
-        else if (kameraAllapot == Pozicio.kozeli && !tolatasFigyeles.utkozikE())
+        else if (kameraAllapot == Pozicio.kozeli && !tolatasFigyeles.utkozikEX())
         {
             kameraValtAlapPoz();
         }
-        else if (eloreFigyeles.utkozikE())
+        else if (eloreFigyeles.utkozikEX())
         {
             kameraValtFelul();
         }
-        else if (!tolatasFigyeles.utkozikE() && kameraAllapot == Pozicio.felul)
+        else if (!tolatasFigyeles.utkozikEX() && kameraAllapot == Pozicio.felul)
         {
             kameraValtKozeli();
         }
@@ -82,7 +82,7 @@ public class kameraKovetes : MonoBehaviour
     {
         Eltolas.y = 5f;
         Eltolas.x = 0.5f;
-        tolatasFigyeles.setSugarHossz(rovidVektorhossz - tolatasRadarVisszah);
+        tolatasFigyeles.setSugarHosszX(rovidVektorhossz - tolatasRadarVisszah);
         transform.rotation = Quaternion.Euler(60f, -90f, 0);
         kameraAllapot = Pozicio.felul;
     }
@@ -91,7 +91,7 @@ public class kameraKovetes : MonoBehaviour
     {
         Eltolas.y = normalKameraMagassag;
         Eltolas.x = 5f;
-        tolatasFigyeles.setSugarHossz(rovidVektorhossz -tolatasRadarVisszah);
+        tolatasFigyeles.setSugarHosszX(rovidVektorhossz -tolatasRadarVisszah);
         transform.rotation = Quaternion.Euler(0, -90f, 0);
         kameraAllapot = Pozicio.alap;
     }
@@ -100,7 +100,7 @@ public class kameraKovetes : MonoBehaviour
     {
         Eltolas.y = normalKameraMagassag;
         Eltolas.x = 2f;
-        tolatasFigyeles.setSugarHossz(hosszuVektorhossz - tolatasRadarVisszah);
+        tolatasFigyeles.setSugarHosszX(hosszuVektorhossz - tolatasRadarVisszah);
         transform.rotation = Quaternion.Euler(0, -90f, 0);
         kameraAllapot = Pozicio.kozeli;
     }
