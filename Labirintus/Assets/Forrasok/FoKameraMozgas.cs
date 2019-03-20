@@ -56,11 +56,6 @@ public class FoKameraMozgas : MonoBehaviour
             Debug.Log("ütközik");
         }
 
-        if (balraFigyelo.utkozikE(0.5f))
-        {
-            Debug.Log("ütközik oldalt (jobbra)");
-        }
-
         if (kameraAllapot == Pozicio.alap && figyeloKameraEloreX.utkozikEX())
         {
             transform.position = transform.position + eltolasKozeli;
