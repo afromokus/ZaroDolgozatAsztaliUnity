@@ -4,6 +4,8 @@ using Assets.Model;
 
 public class FoKameraMozgas : MonoBehaviour
 {
+    public GameObject foKamera;
+
     Vector3 eltolasAlap;
     Vector3 eltolasKozeli;
     enum Pozicio { alap, kozeli, felul}
@@ -37,6 +39,7 @@ public class FoKameraMozgas : MonoBehaviour
         if (kameraAllapot == Pozicio.kozeli)
         {
             transform.position = transform.parent.position + eltolasAlap;
+            foKamera.transform.eulerAngles = new Vector3(transform.rotation.eulerAngles.x, -90f, transform.rotation.eulerAngles.z);
             kameraAllapot = Pozicio.alap;
         }
 
