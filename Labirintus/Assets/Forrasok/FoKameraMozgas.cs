@@ -28,9 +28,8 @@ public class FoKameraMozgas : MonoBehaviour
 
     private void Start()
     {
-        eltolasAlap = new Vector3(5f, 1.5f, 0f);
-
-        eltolasKozeli = new Vector3(2f, 1.5f, 0f);
+        eltolasAlap = new Vector3(2.5f, 2.0f, 0f);
+        eltolasKozeli = new Vector3(2f, 2.5f, 0f);
         eltolasFelul = new Vector3(0f, 3f, 0f);
 
         balraFigyeloEltolas = new Vector3(-0.5f, 0, 0);
@@ -43,8 +42,6 @@ public class FoKameraMozgas : MonoBehaviour
 
         figyeloKameraEloreXTukrozott = new VektorSugar(transform.position, 2f);
         kijovetelFigyeloTukrozott = new VektorSugar(transform.position, -7f);
-
-        transform.position = transform.parent.position + eltolasAlap;
 
     }
 
@@ -123,18 +120,21 @@ public class FoKameraMozgas : MonoBehaviour
     {
         transform.localPosition = eltolasAlap;
         transform.LookAt(transform.parent);
+        transform.localRotation = Quaternion.Euler(0f, 270f, 0f);
     }
 
     void valtKameraKozeliNezet()
     {
         transform.localPosition = eltolasKozeli;
         transform.LookAt(transform.parent);
+        transform.localRotation = Quaternion.Euler(0f, 270f, 0f);
     }
 
     void valtKameraFelulNezet()
     {
         transform.localPosition = eltolasFelul;
         transform.LookAt(transform.parent);
+        transform.localRotation = Quaternion.Euler(90f, 270f, 0f);
     }
 
 }
