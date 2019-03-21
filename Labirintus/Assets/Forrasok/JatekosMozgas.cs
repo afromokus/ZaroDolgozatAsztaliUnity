@@ -17,11 +17,6 @@ public class JatekosMozgas : MonoBehaviour
 
     bool jatekosElore = false, jatekosHatra = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -38,6 +33,11 @@ public class JatekosMozgas : MonoBehaviour
             gyorsulas();
         }
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        sebesseg = 1f;
     }
 
     private void gyorsulas()
