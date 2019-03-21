@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Model
@@ -42,14 +43,19 @@ namespace Assets.Model
             sugar.origin = origin;
         }
 
-        public void setSugarOrigin(Vector3 origin, float eltolas)
+        public void setSugarOrigin(Vector3 origin, float eltolasX)
         {
-            sugar.origin = origin + new Vector3(eltolas, 0, 0);
+            sugar.origin = origin + new Vector3(eltolasX, 0, 0);
         }
 
         public bool utkozikEX()
         {
             return Physics.Raycast(sugar,Mathf.Abs(sugarHossz.x));
+        }
+
+        public void tukrozesZ()
+        {
+            sugar = new Ray(sugar.origin, -sugar.direction);
         }
 
         public bool utkozikE(float maxDistance)

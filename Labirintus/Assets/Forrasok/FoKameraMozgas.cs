@@ -6,20 +6,24 @@ public class FoKameraMozgas : MonoBehaviour
 {
     public Transform foKameraTransform;
 
-    Vector3 eltolasKozeli;
-    Vector3 eltolasFelul;
-    enum Pozicio { alap, kozeli, felul }
+    enum Pozicio { alap, kozeli, felul}
+    enum VektorSugarAllapot { normal, tukrozott}
+
+    VektorSugarAllapot figyeloAllapot;
 
     Pozicio kameraAllapot;
 
     VektorSugar figyeloKameraEloreX;
     VektorSugar kijovetelFigyelo;
-    VektorSugar balraFigyelo;
+
+
+    VektorSugar figyeloKameraEloreXTukrozott;
+    VektorSugar kijovetelFigyeloTukrozott;
 
     Vector3 balraFigyeloEltolas;
 
-    float tolatasRadarVisszah = -1f;
-    float rovidVektorHossz = 0.5f;
+    Vector3 eltolasKozeli;
+    Vector3 eltolasFelul;
     private Vector3 eltolasAlap;
 
     private void Start()
@@ -36,7 +40,9 @@ public class FoKameraMozgas : MonoBehaviour
 
         figyeloKameraEloreX = new VektorSugar(transform.position, -2f);
         kijovetelFigyelo = new VektorSugar(transform.position, 7f);
-        balraFigyelo = new VektorSugar(transform.position, new Vector3(0f, 0f, 2f));
+
+        figyeloKameraEloreXTukrozott = new VektorSugar(transform.position, 2f);
+        kijovetelFigyeloTukrozott = new VektorSugar(transform.position, -7f);
 
         transform.position = transform.parent.position + eltolasAlap;
 
@@ -44,33 +50,64 @@ public class FoKameraMozgas : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-
-        figyeloKameraEloreX.setSugarOrigin(transform.position);
-        kijovetelFigyelo.setSugarOrigin(transform.position, -2f);
-        balraFigyelo.setSugarOrigin(transform.position + balraFigyeloEltolas);
-
-        if (kameraAllapot == Pozicio.kozeli && !kijovetelFigyelo.utkozikEX() && !figyeloKameraEloreX.utkozikEX())
+    {        
+        if (transform.parent.localRotation.y > 0.5f)
         {
-            valtKameraAlaphelyzetbe();
-            kameraAllapot = Pozicio.alap;
+            figyeloAllapot = VektorSugarAllapot.tukrozott;
         }
-        else if ((kameraAllapot == Pozicio.alap && figyeloKameraEloreX.utkozikEX()) || 
-            kameraAllapot == Pozicio.felul && !kijovetelFigyelo.utkozikEX())
+        else
         {
-            valtKameraKozeliNezet();
-            kameraAllapot = Pozicio.kozeli;
-        }
-        else if (kameraAllapot == Pozicio.kozeli && figyeloKameraEloreX.utkozikEX())
-        {
-            valtKameraFelulNezet();
-            kameraAllapot = Pozicio.felul;
+            figyeloAllapot = VektorSugarAllapot.normal;
         }
 
+        if (figyeloAllapot == VektorSugarAllapot.normal)
+        {
+            figyeloKameraEloreX.setSugarOrigin(transform.position);
+            kijovetelFigyelo.setSugarOrigin(transform.position, -2f);
+                
+            if (kameraAllapot == Pozicio.kozeli && !kijovetelFigyelo.utkozikEX() && !figyeloKameraEloreX.utkozikEX())
+            {
+                valtKameraAlaphelyzetbe();
+                kameraAllapot = Pozicio.alap;
+            }
+            else if ((kameraAllapot == Pozicio.alap && figyeloKameraEloreX.utkozikEX()) ||
+                kameraAllapot == Pozicio.felul && !kijovetelFigyelo.utkozikEX())
+            {
+                valtKameraKozeliNezet();
+                kameraAllapot = Pozicio.kozeli;
+            }
+            else if (kameraAllapot == Pozicio.kozeli && figyeloKameraEloreX.utkozikEX())
+            {
+                valtKameraFelulNezet();
+                kameraAllapot = Pozicio.felul;
+            }
+        }
+        else if (figyeloAllapot == VektorSugarAllapot.tukrozott)
+        {
+            figyeloKameraEloreXTukrozott.setSugarOrigin(transform.position);
+            kijovetelFigyeloTukrozott.setSugarOrigin(transform.position, 2f);
 
-        figyeloKameraEloreX.rajzolFigyelo(Color.white);
-        kijovetelFigyelo.rajzolFigyelo();
-        balraFigyelo.rajzolFigyelo(Color.red);
+            if (kameraAllapot == Pozicio.kozeli && !kijovetelFigyeloTukrozott.utkozikEX() && !figyeloKameraEloreXTukrozott.utkozikEX())
+            {
+                valtKameraAlaphelyzetbe();
+                kameraAllapot = Pozicio.alap;
+            }
+            else if ((kameraAllapot == Pozicio.alap && figyeloKameraEloreXTukrozott.utkozikEX()) ||
+                kameraAllapot == Pozicio.felul && !kijovetelFigyeloTukrozott.utkozikEX())
+            {
+                valtKameraKozeliNezet();
+                kameraAllapot = Pozicio.kozeli;
+            }
+            else if (kameraAllapot == Pozicio.kozeli && figyeloKameraEloreXTukrozott.utkozikEX())
+            {
+                valtKameraFelulNezet();
+                kameraAllapot = Pozicio.felul;
+            }
+        }
+
+
+        figyeloKameraEloreXTukrozott.rajzolFigyelo(Color.white);
+        kijovetelFigyeloTukrozott.rajzolFigyelo();
 
     }
 
@@ -88,7 +125,6 @@ public class FoKameraMozgas : MonoBehaviour
 
     void valtKameraFelulNezet()
     {
-        Debug.Log("Váltás fellül nézetre");
         transform.localPosition = eltolasFelul;
         transform.LookAt(transform.parent);
     }

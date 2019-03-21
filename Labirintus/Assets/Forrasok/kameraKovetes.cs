@@ -51,7 +51,6 @@ public class kameraKovetes : MonoBehaviour
 
 
         transform.position = jatekosTranszformacio.position + Eltolas;
-
         tolatasFigyeles.setSugarOrigin(valtoKamera.transform.position, tolatasRadarVisszah);
         eloreFigyeles.setSugarOrigin(valtoKamera.transform.position);
 
