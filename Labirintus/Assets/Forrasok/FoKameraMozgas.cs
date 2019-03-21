@@ -50,7 +50,12 @@ public class FoKameraMozgas : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        
+    {
+        figyeloKameraEloreX.setSugarOrigin(transform.position);
+        kijovetelFigyelo.setSugarOrigin(transform.position, -2f);
+
+        figyeloKameraEloreXTukrozott.setSugarOrigin(transform.position);
+        kijovetelFigyeloTukrozott.setSugarOrigin(transform.position, 2f);
         if (transform.parent.localRotation.y > 0.5f)
         {
             figyeloAllapot = VektorSugarAllapot.tukrozott;
@@ -62,8 +67,6 @@ public class FoKameraMozgas : MonoBehaviour
 
         if (figyeloAllapot == VektorSugarAllapot.normal)
         {
-            figyeloKameraEloreX.setSugarOrigin(transform.position);
-            kijovetelFigyelo.setSugarOrigin(transform.position, -2f);
                 
             if (kameraAllapot == Pozicio.kozeli && !kijovetelFigyelo.utkozikEX() && !figyeloKameraEloreX.utkozikEX())
             {
@@ -82,10 +85,9 @@ public class FoKameraMozgas : MonoBehaviour
                 kameraAllapot = Pozicio.felul;
             }
         }
-        else if (figyeloAllapot == VektorSugarAllapot.tukrozott)
+
+        if (figyeloAllapot == VektorSugarAllapot.tukrozott)
         {
-            figyeloKameraEloreXTukrozott.setSugarOrigin(transform.position);
-            kijovetelFigyeloTukrozott.setSugarOrigin(transform.position, 2f);
 
             if (kameraAllapot == Pozicio.kozeli && !kijovetelFigyeloTukrozott.utkozikEX() && !figyeloKameraEloreXTukrozott.utkozikEX())
             {
