@@ -15,6 +15,8 @@ public class JatekosMozgas : MonoBehaviour
     float maxSebesseg;
     float a = 0.01f;
 
+    bool jatekosUtkozikE = false;
+
     bool jatekosElore = false, jatekosHatra = false;
 
     // Update is called once per frame
@@ -22,12 +24,12 @@ public class JatekosMozgas : MonoBehaviour
     {
         mozgasVizsgalat();
 
-        if (jatekosElore)
+        if (jatekosElore && !jatekosUtkozikE)
         {
             transform.Translate(-eroElore * Time.deltaTime * sebesseg, 0, 0);
             gyorsulas();
         }
-        if (jatekosHatra)
+        if (jatekosHatra && !jatekosUtkozikE)
         {
             transform.Translate(eroElore * Time.deltaTime * sebesseg, 0, 0);
             gyorsulas();
@@ -35,9 +37,28 @@ public class JatekosMozgas : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
-        sebesseg = 1f;
+        if (collision.gameObject.tag == "Fal")
+        {
+            utkozes();
+        }
+    }
+
+    private void utkozes()
+    {
+        Debug.Log(sebesseg);
+
+        if (sebesseg > 1f)
+        {
+            sebesseg -= 2f;
+        }
+
+        if (sebesseg <= 1.5f)
+        {
+            jatekosElore = false;
+            jatekosHatra = false;
+        }
     }
 
     private void gyorsulas()

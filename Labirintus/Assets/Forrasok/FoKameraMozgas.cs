@@ -51,6 +51,12 @@ public class FoKameraMozgas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
         figyeloKameraEloreX.setSugarOrigin(transform.position);
         kijovetelFigyelo.setSugarOrigin(transform.position, -2f);
 
