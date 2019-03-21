@@ -27,15 +27,15 @@ public class FoKameraMozgas : MonoBehaviour
         eltolasAlap = new Vector3(5f, 1.5f, 0f);
 
         eltolasKozeli = new Vector3(2f, 1.5f, 0f);
-        eltolasFelul = new Vector3(-2f, 1.5f, 0f);
+        eltolasFelul = new Vector3(0f, 3f, 0f);
 
         balraFigyeloEltolas = new Vector3(-0.5f, 0, 0);
 
         valtKameraAlaphelyzetbe();
         kameraAllapot = Pozicio.alap;
 
-        figyeloKameraEloreX = new VektorSugar(transform.position, rovidVektorHossz + tolatasRadarVisszah);
-        kijovetelFigyelo = new VektorSugar(transform.position, 5f);
+        figyeloKameraEloreX = new VektorSugar(transform.position, -2f);
+        kijovetelFigyelo = new VektorSugar(transform.position, 7f);
         balraFigyelo = new VektorSugar(transform.position, new Vector3(0f, 0f, 2f));
 
         transform.position = transform.parent.position + eltolasAlap;
@@ -47,23 +47,23 @@ public class FoKameraMozgas : MonoBehaviour
     {
 
         figyeloKameraEloreX.setSugarOrigin(transform.position);
-        kijovetelFigyelo.setSugarOrigin(transform.position);
+        kijovetelFigyelo.setSugarOrigin(transform.position, -2f);
         balraFigyelo.setSugarOrigin(transform.position + balraFigyeloEltolas);
 
-        if (kameraAllapot == Pozicio.kozeli && !kijovetelFigyelo.utkozikEX())
+        if (kameraAllapot == Pozicio.kozeli && !kijovetelFigyelo.utkozikEX() && !figyeloKameraEloreX.utkozikEX())
         {
             valtKameraAlaphelyzetbe();
             kameraAllapot = Pozicio.alap;
         }
-        else if (kameraAllapot == Pozicio.alap && figyeloKameraEloreX.utkozikEX())
+        else if ((kameraAllapot == Pozicio.alap && figyeloKameraEloreX.utkozikEX()) || 
+            kameraAllapot == Pozicio.felul && !kijovetelFigyelo.utkozikEX())
         {
             valtKameraKozeliNezet();
             kameraAllapot = Pozicio.kozeli;
         }
         else if (kameraAllapot == Pozicio.kozeli && figyeloKameraEloreX.utkozikEX())
         {
-            transform.position = transform.position + eltolasFelul;
-            transform.LookAt(transform.parent);
+            valtKameraFelulNezet();
             kameraAllapot = Pozicio.felul;
         }
 
@@ -83,6 +83,13 @@ public class FoKameraMozgas : MonoBehaviour
     void valtKameraKozeliNezet()
     {
         transform.localPosition = eltolasKozeli;
+        transform.LookAt(transform.parent);
+    }
+
+    void valtKameraFelulNezet()
+    {
+        Debug.Log("Váltás fellül nézetre");
+        transform.localPosition = eltolasFelul;
         transform.LookAt(transform.parent);
     }
 
