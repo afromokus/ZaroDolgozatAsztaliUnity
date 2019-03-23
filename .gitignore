@@ -9,9 +9,6 @@
 
 # Whitelisted directories/files
 !/ProjectSettings/
-!/Assets/                # Add Assets folder, but ...
-/Assets/*                # Remove everything under Assets again.
-!/Assets/_core/          # Now add back our core game folders.
 !/Assets/_modules/
 !\Library\metadata
 !\Blender
