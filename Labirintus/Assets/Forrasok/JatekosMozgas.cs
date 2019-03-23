@@ -37,14 +37,6 @@ public class JatekosMozgas : MonoBehaviour
 
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.tag == "Fal")
-        {
-            utkozes();
-        }
-    }
-
     private void utkozes()
     {
         Debug.Log(sebesseg);

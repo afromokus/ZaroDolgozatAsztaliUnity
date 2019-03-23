@@ -28,9 +28,9 @@ public class FoKameraMozgas : MonoBehaviour
 
     private void Start()
     {
-        eltolasAlap = new Vector3(2.5f, 2.0f, 0f);
-        eltolasKozeli = new Vector3(2f, 2.5f, 0f);
-        eltolasFelul = new Vector3(0f, 3f, 0f);
+        eltolasAlap = new Vector3(2.5f, 0.6f, 0f);
+        eltolasKozeli = new Vector3(2f, 0.71f, 0f);
+        eltolasFelul = new Vector3(0f, 1f, 0f);
 
         balraFigyeloEltolas = new Vector3(-0.5f, 0, 0);
 
