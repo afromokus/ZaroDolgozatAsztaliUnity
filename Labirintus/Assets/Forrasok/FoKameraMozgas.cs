@@ -6,8 +6,8 @@ public class FoKameraMozgas : MonoBehaviour
 {
     public Transform foKameraTransform;
 
-    enum Pozicio { alap, kozeli, felul}
-    enum VektorSugarAllapot { normal, tukrozott}
+    enum Pozicio { alap, kozeli, felul }
+    enum VektorSugarAllapot { normal, tukrozott }
 
     VektorSugarAllapot figyeloAllapot;
 
@@ -70,7 +70,7 @@ public class FoKameraMozgas : MonoBehaviour
 
         if (figyeloAllapot == VektorSugarAllapot.normal)
         {
-                
+
             if (kameraAllapot == Pozicio.kozeli && !kijovetelFigyelo.utkozikEX() && !figyeloKameraEloreX.utkozikEX())
             {
                 valtKameraAlaphelyzetbe();
