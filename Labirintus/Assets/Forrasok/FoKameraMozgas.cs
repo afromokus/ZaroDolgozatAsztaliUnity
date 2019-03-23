@@ -46,7 +46,7 @@ public class FoKameraMozgas : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
 
         if (Input.GetKey(KeyCode.Escape))
@@ -113,6 +113,12 @@ public class FoKameraMozgas : MonoBehaviour
 
         figyeloKameraEloreXTukrozott.rajzolFigyelo(Color.white);
         kijovetelFigyeloTukrozott.rajzolFigyelo();
+
+        if (kameraAllapot == Pozicio.alap)
+        {
+            transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x -
+                Input.GetAxis("Mouse Y") * 10,  270f, 0f);
+        }
 
     }
 
