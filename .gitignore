@@ -14,6 +14,7 @@
 !/Assets/_core/          # Now add back our core game folders.
 !/Assets/_modules/
 !\Library\metadata
+!\Blender
 
 # Any modules kept in their own git repo.
 Assets/_modules/fps/
