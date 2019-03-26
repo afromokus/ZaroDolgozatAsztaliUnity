@@ -5,9 +5,13 @@ using Assets.Model;
 public class FoKameraMozgas : MonoBehaviour
 {
     public Transform foKameraTransform;
+    public Camera kameraFpLatas;
+    public GameObject kameraFpMaga;
 
     enum Pozicio { alap, kozeli, felul }
     enum VektorSugarAllapot { normal, tukrozott }
+
+    Ray ray;
 
     VektorSugarAllapot figyeloAllapot;
 
@@ -28,6 +32,9 @@ public class FoKameraMozgas : MonoBehaviour
 
     private void Start()
     {
+        kameraFpMaga.SetActive(false);
+        ray = kameraFpLatas.ScreenPointToRay(Input.mousePosition);
+
         eltolasAlap = new Vector3(2.5f, 0.6f, 0f);
         eltolasKozeli = new Vector3(2f, 0.71f, 0f);
         eltolasFelul = new Vector3(0f, 1f, 0f);
@@ -48,6 +55,20 @@ public class FoKameraMozgas : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        RaycastHit hami = new RaycastHit();
+
+        ray = kameraFpLatas.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray,out hami, 5f))
+        {
+            Debug.Log(hami.collider.name);
+            if (hami.collider.name == "Ny Fal")
+            {
+                Application.Quit();
+            }
+        }
+
+        Debug.DrawLine(ray.origin, ray.origin + ray.direction, Color.green);
 
         if (Input.GetKey(KeyCode.Escape))
         {
