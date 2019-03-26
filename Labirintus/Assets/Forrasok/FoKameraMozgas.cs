@@ -2,14 +2,19 @@
 using UnityEngine;
 using Assets.Model;
 using UnityEngine.UI;
+using System;
 
-public class FoKameraMozgas : MonoBehaviour
+public partial class FoKameraMozgas : MonoBehaviour
 {
     public Transform foKameraTransform;
     public Camera kameraFpLatas;
     public GameObject kameraFpMaga;
     public Text targyakSzovege;
-    public GameObject bevitel;
+    public GameObject bevitelObj;
+    public InputField bevitel;
+
+    public Transform kutyaTransform;
+    public Rigidbody kutyaRigidBody;
 
     public GameObject csontParent;
     public GameObject kovekParent;
@@ -40,19 +45,43 @@ public class FoKameraMozgas : MonoBehaviour
     Vector3 eltolasFelul;
     private Vector3 eltolasAlap;
 
+    
+
     string figyeltTargy = "";
 
-    List<string> karakterTulajdonok;
+    List<string> karakterTulajdonok = new List<string>();
     private bool felvehetoKovekreNez;
     private bool felvehetoBuzaraNez;
     private bool kutyaraNez;
 
+    string beirtParancs;
+    string uzenet;
+
+    bool megjelenitUzenetet = false;
+    bool kutyaKovet = false;
+
+    Vector3 kutyaEltolas = new Vector3(3f,-0.5f,0f);
+    private Vector3 kutyaTukrozottEltolas = new Vector3(-3f, -0.5f, 0f);
+    private float jatekosHelyeZ;
+    private float jatekosHelyeX;
+    private Transform jatekosTransf;
+    public GameObject holgy;
+    private Vector3 holgyEredetiHely;
+
     private void Start()
     {
-        bevitel.SetActive(false);
-        targyakSzovege.text = "";
+        
+        //
+        kutyaRigidBody.freezeRotation = true;
+        kutyaRigidBody = null;
+        jatekosTransf = transform.parent;
 
-        karakterTulajdonok = new List<string>();
+        holgyEredetiHely = holgy.transform.position;
+
+
+        bevitelObj.SetActive(false);
+        targyakSzovege.text = "";
+        
 
         kameraFpMaga.SetActive(false);
         ray = kameraFpLatas.ScreenPointToRay(Input.mousePosition);
@@ -74,14 +103,63 @@ public class FoKameraMozgas : MonoBehaviour
 
     }
 
+    void megjelenikUzenet(string kiir)
+    {
+        uzenet = kiir;
+        megjelenitUzenetet = true;
+    }
+
     // Update is called once per frame
     void LateUpdate()
     {
+        if (megjelenitUzenetet)
+        {
+            targyakSzovege.text = uzenet;
+            System.Threading.Thread.Sleep(1000);
+            megjelenitUzenetet = false;
+        }
         if (Cursor.visible == true)
         {
-            if (Input.GetKey("enter"))
+            bevitel.placeholder.GetComponent<Text>().text = "Mit teszel?";
+            if (Input.GetKey(KeyCode.Return) && bevitel.text != "")
             {
-                targyakSzovege.text = "elküldve";
+                if (bevitel.text.Length < 20)
+                {
+                    beirtParancs = bevitel.text.ToLower();
+                }
+                else
+                {
+                    beirtParancs = bevitel.text.Substring(0, 20).ToLower();
+                }
+                if (kutyaraNez)
+                {
+                    if (beirtParancs.Contains("ad") && beirtParancs.Contains("csont"))
+                    {
+
+                        if (karakterTulajdonok.Contains("Csont"))
+                        {
+                            megjelenikUzenet("Csont átadva!");
+                            kutyaKovet = true;
+                        }
+                        else
+                        {
+                            megjelenikUzenet("Tárgy nincs felvéve!");
+                        }
+                    }
+                    else if (beirtParancs.Contains("ad"))
+                    {
+                        megjelenikUzenet("Ad - Mit?");
+                    }
+                    else if (beirtParancs.Contains("csont"))
+                    {
+                        megjelenikUzenet("Csont - Mi történjék vele?");
+                    }
+                }
+                Cursor.visible = false;
+                bevitel.text = "";
+                bevitelObj.SetActive(false);
+                targyakSzovege.text = uzenet;
+
             }
         }
         else
@@ -94,12 +172,15 @@ public class FoKameraMozgas : MonoBehaviour
             {
                 figyeltTargy = hami.collider.name;
 
-                if (figyeltTargy != "Talaj" && !figyeltTargy.Contains("Fal"))
+                /*if (figyeltTargy != "Talaj" && !figyeltTargy.Contains("Fal"))
                 {
                     Debug.Log(figyeltTargy);
-                }
+                }*/
 
-                if (figyeltTargy == "csontHit")
+                if (megjelenitUzenetet)
+                {
+                }
+                else if (figyeltTargy == "csontHit")
                 {
                     targyakSzovege.text = "Csont";
                     felvehetoCsontraNez = true;
@@ -152,7 +233,7 @@ public class FoKameraMozgas : MonoBehaviour
                 else if (kutyaraNez)
                 {
                     Cursor.visible = true;
-                    bevitel.SetActive(true);
+                    bevitelObj.SetActive(true);
                 }
 
             }
@@ -228,6 +309,43 @@ public class FoKameraMozgas : MonoBehaviour
                 transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x -
                     Input.GetAxis("Mouse Y") * 2, 270f, 0f);
             }
+        }
+        holgyTamadJatekost();
+    }
+
+    private void Update()
+    {
+        if (kutyaKovet)
+        {
+            
+            if (transform.rotation.y < 0.25f)
+            {
+                kutyaTransform.position = transform.parent.position + kutyaEltolas;
+                kutyaTransform.localRotation = Quaternion.Euler(0f, 270f, 0f);
+            }
+            else
+            {
+                kutyaTransform.position = transform.parent.position + kutyaTukrozottEltolas;
+            }
+        }
+
+
+    }
+
+    private void holgyTamadJatekost()
+    {
+        //-39, -25
+        jatekosHelyeZ = transform.parent.localPosition.z;
+        jatekosHelyeX = jatekosTransf.position.x;
+        if (jatekosHelyeZ < -25 && jatekosHelyeZ > -39 || (jatekosHelyeZ < -39 && jatekosHelyeX < -25))
+        {
+            holgy.transform.LookAt(jatekosTransf.position);
+            holgy.transform.Translate(0f, 0f, 0.08f);
+        }
+        else
+        {
+            holgy.transform.LookAt(holgyEredetiHely);
+            holgy.transform.Translate(0f, 0f, 0.08f);
         }
     }
 

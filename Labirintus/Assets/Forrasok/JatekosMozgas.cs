@@ -42,6 +42,12 @@ public class JatekosMozgas : MonoBehaviour
                 gyorsulas();
             }
         }
+        else
+        {
+            lassulas();
+            jatekosElore = false;
+            jatekosHatra = false;
+        }
 
     }
 
