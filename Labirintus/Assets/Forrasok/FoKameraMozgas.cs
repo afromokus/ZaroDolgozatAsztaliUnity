@@ -1,12 +1,18 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Assets.Model;
+using UnityEngine.UI;
 
 public class FoKameraMozgas : MonoBehaviour
 {
     public Transform foKameraTransform;
     public Camera kameraFpLatas;
     public GameObject kameraFpMaga;
+    public Text targyakSzovege;
+
+    public GameObject csontParent;
+
+    bool felvehetoCsontraNez = false;
 
     enum Pozicio { alap, kozeli, felul }
     enum VektorSugarAllapot { normal, tukrozott }
@@ -30,8 +36,14 @@ public class FoKameraMozgas : MonoBehaviour
     Vector3 eltolasFelul;
     private Vector3 eltolasAlap;
 
+    List<string> karakterTulajdonok;
+
     private void Start()
     {
+        targyakSzovege.text = "";
+
+        karakterTulajdonok = new List<string>();
+
         kameraFpMaga.SetActive(false);
         ray = kameraFpLatas.ScreenPointToRay(Input.mousePosition);
 
@@ -57,18 +69,35 @@ public class FoKameraMozgas : MonoBehaviour
     {
         RaycastHit hami = new RaycastHit();
 
-        ray = kameraFpLatas.ScreenPointToRay(Input.mousePosition);
+        ray = kameraFpLatas.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 
-        if (Physics.Raycast(ray,out hami, 5f))
+        if (Physics.Raycast(ray,out hami, 2.8f))
         {
-            Debug.Log(hami.collider.name);
-            if (hami.collider.name == "Ny Fal")
+            if (hami.collider.name != "Talaj" && !hami.collider.name.Contains("Fal"))
             {
-                Application.Quit();
+                Debug.Log(hami.collider.name);
+            }
+
+            if (hami.collider.name == "csontHit")
+            {
+                targyakSzovege.text = "Csont";
+                felvehetoCsontraNez = true;
+            }
+            else
+            {
+                targyakSzovege.text = "";
+                felvehetoCsontraNez = false;
             }
         }
 
-        Debug.DrawLine(ray.origin, ray.origin + ray.direction, Color.green);
+        if (Input.GetKey("e") && felvehetoCsontraNez)
+        {
+            karakterTulajdonok.Add("Csont");
+            targyakSzovege.text = "Felvette";
+            csontParent.SetActive(false);
+        }
+
+        Debug.DrawRay(ray.origin, ray.direction, Color.green, 2.8f);
 
         if (Input.GetKey(KeyCode.Escape))
         {
@@ -138,7 +167,7 @@ public class FoKameraMozgas : MonoBehaviour
         if (kameraAllapot == Pozicio.alap)
         {
             transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x -
-                Input.GetAxis("Mouse Y") * 10,  270f, 0f);
+                Input.GetAxis("Mouse Y") * 2,  270f, 0f);
         }
 
     }
