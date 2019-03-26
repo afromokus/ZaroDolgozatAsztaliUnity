@@ -19,20 +19,28 @@ public class JatekosMozgas : MonoBehaviour
 
     bool jatekosElore = false, jatekosHatra = false;
 
+    private void Start()
+    {
+        Cursor.visible = false;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        mozgasVizsgalat();
+        if (Cursor.visible == false)
+        {
+            mozgasVizsgalat();
 
-        if (jatekosElore && !jatekosUtkozikE)
-        {
-            transform.Translate(-eroElore * Time.deltaTime * sebesseg, 0, 0);
-            gyorsulas();
-        }
-        if (jatekosHatra && !jatekosUtkozikE)
-        {
-            transform.Translate(eroElore * Time.deltaTime * sebesseg, 0, 0);
-            gyorsulas();
+            if (jatekosElore && !jatekosUtkozikE)
+            {
+                transform.Translate(-eroElore * Time.deltaTime * sebesseg, 0, 0);
+                gyorsulas();
+            }
+            if (jatekosHatra && !jatekosUtkozikE)
+            {
+                transform.Translate(eroElore * Time.deltaTime * sebesseg, 0, 0);
+                gyorsulas();
+            }
         }
 
     }

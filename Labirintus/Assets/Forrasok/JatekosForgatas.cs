@@ -14,10 +14,13 @@ public class JatekosForgatas : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
-        forgatasVektor.y += forgatasiSebesseg * Input.GetAxis("Mouse X");
 
-        transform.eulerAngles = forgatasVektor;
+        if (Cursor.visible == false)
+        {
+            forgatasVektor.y += forgatasiSebesseg * Input.GetAxis("Mouse X");
+
+            transform.eulerAngles = forgatasVektor;
+        }
 
 	}
 }
