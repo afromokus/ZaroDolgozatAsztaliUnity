@@ -139,6 +139,7 @@ public partial class FoKameraMozgas : MonoBehaviour
                         if (karakterTulajdonok.Contains("Csont"))
                         {
                             megjelenikUzenet("Csont átadva!");
+                            karakterTulajdonok.Remove("Csont");
                             kutyaKovet = true;
                         }
                         else
