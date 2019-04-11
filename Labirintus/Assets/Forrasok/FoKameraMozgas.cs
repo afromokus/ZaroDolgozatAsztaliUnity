@@ -3,6 +3,7 @@ using UnityEngine;
 using Assets.Model;
 using UnityEngine.UI;
 using System;
+using System.Threading.Tasks;
 
 public partial class FoKameraMozgas : MonoBehaviour
 {
@@ -20,9 +21,11 @@ public partial class FoKameraMozgas : MonoBehaviour
     public GameObject kovekParent;
     public GameObject buzaParent;
 
+    int i = 0;
 
     bool felvehetoCsontraNez = false;
-    bool csengoreNezE = false;
+    bool csengoreNez = false;
+    bool urRaNez = false;
 
     enum Pozicio { alap, kozeli, felul }
     enum VektorSugarAllapot { normal, tukrozott }
@@ -68,6 +71,9 @@ public partial class FoKameraMozgas : MonoBehaviour
     private Transform jatekosTransf;
     public GameObject holgy;
     private Vector3 holgyEredetiHely;
+    private bool ajtotLattaMar = true;
+    private bool urKutyaraRakerdezett;
+    private bool urLezarva;
 
     private void Start()
     {
@@ -116,7 +122,7 @@ public partial class FoKameraMozgas : MonoBehaviour
         if (megjelenitUzenetet)
         {
             targyakSzovege.text = uzenet;
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(2000);
             megjelenitUzenetet = false;
         }
         if (Cursor.visible == true)
@@ -155,6 +161,30 @@ public partial class FoKameraMozgas : MonoBehaviour
                     else if (beirtParancs.Contains("csont"))
                     {
                         megjelenikUzenet("Csont - Mi történjék vele?");
+                    }
+                }
+                if (urRaNez && !urLezarva)
+                {
+                    urBeszel();
+                    if (!urKutyaraRakerdezett)
+                    {
+                        if (beirtParancs.Contains("elkér"))
+                        {
+                            urKutyaraRakerdezett = true;
+                            megjelenikUzenet("Persze odaadom, de mondja csak uram, mi lesz a kutyával?");
+                        }
+                    }
+                    else
+                    {
+                        if ((beirtParancs.Contains("ad") || beirtParancs.Contains(" lehet")) && !beirtParancs.Contains("nem"))
+                        {
+                            megjelenikUzenet("Persze, szívesen felnevelem, együtt fog élni velünk!");
+                            urLezarva = true;
+                        }
+                        else
+                        {
+                            megjelenikUzenet("Nem szeretném, ha kivinné oda…");
+                        }
                     }
                 }
                 Cursor.visible = false;
@@ -205,7 +235,12 @@ public partial class FoKameraMozgas : MonoBehaviour
                 else if (figyeltTargy == "csengoHit")
                 {
                     targyakSzovege.text = "Csengő";
-                    csengoreNezE = true;
+                    csengoreNez = true;
+                }
+                else if (figyeltTargy == "urHit")
+                {
+                    targyakSzovege.text = "Mylord";
+                    urRaNez = true;
                 }
                 else
                 {
@@ -214,6 +249,8 @@ public partial class FoKameraMozgas : MonoBehaviour
                     felvehetoKovekreNez = false;
                     felvehetoBuzaraNez = false;
                     kutyaraNez = false;
+                    csengoreNez = false;
+                    urRaNez = false;
                 }
             }
 
@@ -242,9 +279,21 @@ public partial class FoKameraMozgas : MonoBehaviour
                     Cursor.visible = true;
                     bevitelObj.SetActive(true);
                 }
-                else if (csengoreNezE)
+                else if (csengoreNez)
                 {
                     ajtoNyitas();
+                }
+                else if (urRaNez)
+                {
+                    if (ajtotLattaMar)
+                    {
+                        Cursor.visible = true;
+                        bevitelObj.SetActive(true);
+                    }
+                    else
+                    {
+                        urBeszel();
+                    }
                 }
 
             }
@@ -323,7 +372,32 @@ public partial class FoKameraMozgas : MonoBehaviour
         }
         holgyTamadJatekost();
 
+        if (!ajtotLattaMar)
+        {
+            if (jatekosHelyeZ > 25 && jatekosHelyeX > -25)
+            {
+                ajtotLattaMar = true;
+            }
+        }
+
         Debug.DrawRay(ray.origin, ray.direction);
+    }
+
+    private void urBeszel()
+    {
+        if (ajtotLattaMar)
+        {
+            parbeszed("Kinyitni az ajtót? Régen nem járt már arra senki. Már csak a fémtokja maradt meg, a kulcsot három évszázada senki nem látta.");
+        }
+        else
+        {
+            parbeszed("Jó napot!");
+        }
+    }
+
+    private void parbeszed(string szoveg)
+    {
+        targyakSzovege.text = szoveg;
     }
 
     private void Update()
