@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class JatekosElet : MonoBehaviour
 {
 
-    int hp = 100;
+    float hp = 100;
     Vector3 eletVonalMeret;
     public Transform jatekosKockaTranszform;
 
@@ -24,18 +24,39 @@ public class JatekosElet : MonoBehaviour
         {
             if (jatekosKockaTranszform.position.x < 27 && jatekosKockaTranszform.position.x > -42 && jatekosKockaTranszform.position.z > -25 && jatekosKockaTranszform.position.z < -11)
             {
-                hp--;
-                Debug.Log(hp);
+                eletKezeles(true);
             }
-
-            eletVonalMeret.x = hp / 100;
-            transform.localScale = eletVonalMeret;
+            else
+            {
+                eletKezeles(false);
+            }
         }
         else
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+    }
 
+    void eletKezeles(bool serulE)
+    {
+        if (serulE)
+        {
+            hp -= 2.2f;
+            Debug.Log(hp);
+        }
+        else if(hp < 100)
+        {
+            hp += 0.5f;
+            Debug.Log(hp);
+        }
+
+        if (hp > 100)
+        {
+            hp = 100;
+        }
+
+        eletVonalMeret.x = hp / 100;
+        transform.localScale = eletVonalMeret;
     }
 
 }
