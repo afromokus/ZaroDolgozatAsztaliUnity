@@ -42,12 +42,10 @@ public class JatekosElet : MonoBehaviour
         if (serulE)
         {
             hp -= 2.2f;
-            Debug.Log(hp);
         }
         else if(hp < 100)
         {
             hp += 0.5f;
-            Debug.Log(hp);
         }
 
         if (hp > 100)
