@@ -22,6 +22,7 @@ public partial class FoKameraMozgas : MonoBehaviour
 
 
     bool felvehetoCsontraNez = false;
+    bool csengoreNezE = false;
 
     enum Pozicio { alap, kozeli, felul }
     enum VektorSugarAllapot { normal, tukrozott }
@@ -201,6 +202,11 @@ public partial class FoKameraMozgas : MonoBehaviour
                     targyakSzovege.text = "Kutya";
                     kutyaraNez = true;
                 }
+                else if (figyeltTargy == "csengoHit")
+                {
+                    targyakSzovege.text = "Csengő";
+                    csengoreNezE = true;
+                }
                 else
                 {
                     targyakSzovege.text = "";
@@ -235,6 +241,10 @@ public partial class FoKameraMozgas : MonoBehaviour
                 {
                     Cursor.visible = true;
                     bevitelObj.SetActive(true);
+                }
+                else if (csengoreNezE)
+                {
+                    ajtoNyitas();
                 }
 
             }
@@ -312,6 +322,8 @@ public partial class FoKameraMozgas : MonoBehaviour
             }
         }
         holgyTamadJatekost();
+
+        Debug.DrawRay(ray.origin, ray.direction);
     }
 
     private void Update()
