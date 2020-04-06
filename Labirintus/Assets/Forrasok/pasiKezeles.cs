@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class FoKameraMozgas : MonoBehaviour
+public partial class FoKod : MonoBehaviour
 {
 
     int pasiSzamlalo = 0;

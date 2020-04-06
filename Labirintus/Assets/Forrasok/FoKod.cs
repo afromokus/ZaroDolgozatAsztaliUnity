@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System;
 using System.Threading.Tasks;
 
-public partial class FoKameraMozgas : MonoBehaviour
+public partial class FoKod : MonoBehaviour
 {
     public Transform foKameraTransform;
     public Camera kameraFpLatas;
@@ -85,10 +85,11 @@ public partial class FoKameraMozgas : MonoBehaviour
     private int uzIdo = 201;
 
     private void Start()
-    {
-        //ajtoAnimacio.SetActive(false);
+    {        
         uzMegjel = new UzenetMegjelenito(5, targyakSzovege);
         uzMegjel.megjelenitUzenetet("Nyami");
+
+        ajtoAnimacio.SetActive(false);
 
         kutyaRigidBody.freezeRotation = true;
         kutyaRigidBody = null;

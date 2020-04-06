@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class FoKameraMozgas : MonoBehaviour
+public partial class FoKod : MonoBehaviour
 {
 
     public GameObject zartAjto;
 
     void ajtoNyitas()
     {
-        if (zartAjto.active)
-        {
-            zartAjto.SetActive(false);
-            zartAjto.GetComponent<Animation>().Play();
-        }
+        zartAjto.SetActive(false);
+        ajtoAnimacio.SetActive(true);
     }
 
 }
