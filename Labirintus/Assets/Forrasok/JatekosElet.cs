@@ -18,7 +18,15 @@ public class JatekosElet : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
+    {
+        if (!FoKameraMozgas.kutyaKovet)
+        {
+            mergezoGazSerules();
+        }
+    }
+
+    void mergezoGazSerules()
     {
         if (hp >= 0)
         {
@@ -41,7 +49,7 @@ public class JatekosElet : MonoBehaviour
     {
         if (serulE)
         {
-            hp -= 2.2f;
+            hp -= 1.5f;
         }
         else if(hp < 100)
         {

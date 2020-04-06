@@ -7,6 +7,7 @@ public class JatekosMozgas : MonoBehaviour
 {
 
     public Rigidbody jatekosTest;
+    public GameObject buzaWatch;
     float eroElore = 1f;
     float eroOldalra = 1.5f;
 
@@ -18,15 +19,33 @@ public class JatekosMozgas : MonoBehaviour
     bool jatekosUtkozikE = false;
 
     bool jatekosElore = false, jatekosHatra = false;
+    private float jatekosZ;
 
     private void Start()
     {
         Cursor.visible = false;
     }
 
+    /*private void OnCollisionEnter(Collision col)
+    {
+        if (col.collider.name == "buzaWatch")
+        {
+            buzaWatch.SetActive(false);
+            Debug.Log("búza megütve");
+        }
+    }*/
+
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if (!buzaWatch.active && !(jatekosTest.position.z > -43.6f && jatekosTest.position.z < -41.55f &&
+                jatekosTest.position.x > -26.5f && jatekosTest.position.x < -23.15f))
+        {
+            buzaWatch.SetActive(true);
+            Debug.Log("búza kijőve");
+        }
+
         if (Cursor.visible == false)
         {
             mozgasVizsgalat();
@@ -48,6 +67,9 @@ public class JatekosMozgas : MonoBehaviour
             jatekosElore = false;
             jatekosHatra = false;
         }
+
+        /*Physics.IgnoreCollision(jatekosTest.GetComponent<Collider>(), buzaWatch.GetComponent<Collider>(),
+            false);*/
 
     }
 

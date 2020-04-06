@@ -12,6 +12,7 @@ public partial class FoKameraMozgas : MonoBehaviour
         if (zartAjto.active)
         {
             zartAjto.SetActive(false);
+            zartAjto.GetComponent<Animation>().Play();
         }
     }
 

@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: d72a29f9774091241873bcf144a8c2fd
+guid: e05267fa4a6364245a23d4462a984dcf
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - jatekosTest: {instanceID: 0}
-  - buzaWatch: {fileID: 100000, guid: 9ddbdf359c6c73549882ae79b95fb3b9, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

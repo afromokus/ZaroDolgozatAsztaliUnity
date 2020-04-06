@@ -1,24 +1,14 @@
 fileFormatVersion: 2
-guid: a7c1cd41f220c214cb4f950243be010b
+guid: e6c4dbb6edc6baf4399cd847b526c53d
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Door
-    100002: //RootNode
-    100004: Plane
-    100006: Plane.001
-    400000: Door
-    400002: //RootNode
-    400004: Plane
-    400006: Plane.001
-    2100000: Frame_Material
-    2100002: Door_Material
-    2300000: Plane
-    2300002: Plane.001
-    3300000: Plane
-    3300002: Plane.001
-    4300000: Plane.001
-    4300002: Plane
+    100000: //RootNode
+    400000: //RootNode
+    2100000: Fa
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cylinder
   externalObjects: {}
   materials:
     importMaterials: 1

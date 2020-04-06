@@ -3,7 +3,23 @@ guid: de272ae6ba1574b4c987b07c4f1097ee
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - zartAjto: {instanceID: 0}
+  - ajtoAnimacio: {fileID: -927199367670048503, guid: 7f7ffab133067c64bba7a86519cc3250,
+      type: 3}
+  - foKameraTransform: {instanceID: 0}
+  - kameraFpLatas: {instanceID: 0}
+  - kameraFpMaga: {instanceID: 0}
+  - targyakSzovege: {instanceID: 0}
+  - bevitelObj: {instanceID: 0}
+  - bevitel: {instanceID: 0}
+  - kutyaTransform: {instanceID: 0}
+  - kutyaRigidBody: {instanceID: 0}
+  - pasi: {fileID: 100000, guid: 3f27a5aa7f5b86b41870fa4d6228e254, type: 3}
+  - csontParent: {instanceID: 0}
+  - kovekParent: {instanceID: 0}
+  - buzaParent: {instanceID: 0}
+  - holgy: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
