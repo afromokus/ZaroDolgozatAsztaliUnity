@@ -83,9 +83,15 @@ public partial class FoKod : MonoBehaviour
 
     UzenetMegjelenito uzMegjel;
     private int uzIdo = 201;
+    private Animation[] animaciok;
 
     private void Start()
-    {        
+    {
+        animaciok = (Animation[])Animation.FindObjectsOfType(typeof(Animation)); foreach (Animation a in animaciok)
+        {
+            a.wrapMode = WrapMode.Loop;
+        }
+
         uzMegjel = new UzenetMegjelenito(5, targyakSzovege);
         uzMegjel.megjelenitUzenetet("Nyami");
 
