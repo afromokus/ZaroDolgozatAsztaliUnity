@@ -15,7 +15,6 @@ public partial class FoKod : MonoBehaviour
     public InputField bevitel;
 
     public Transform kutyaTransform;
-    public Rigidbody kutyaRigidBody;
     public GameObject pasi;
 
     public GameObject csontParent;
@@ -87,18 +86,19 @@ public partial class FoKod : MonoBehaviour
 
     private void Start()
     {
-        animaciok = (Animation[])Animation.FindObjectsOfType(typeof(Animation)); foreach (Animation a in animaciok)
-        {
-            a.wrapMode = WrapMode.Loop;
-        }
+        bevitelObj.SetActive(false);
+
+        figyeloKameraEloreXTukrozott = new VektorSugar(transform.position, 2f);
+
+        figyeloKameraEloreX = new VektorSugar(transform.position, -2f);
+        kijovetelFigyelo = new VektorSugar(transform.position, 7f);
+        kijovetelFigyeloTukrozott = new VektorSugar(transform.position, -7f);
 
         uzMegjel = new UzenetMegjelenito(5, targyakSzovege);
         uzMegjel.megjelenitUzenetet("Nyami");
 
         ajtoAnimacio.SetActive(false);
-
-        kutyaRigidBody.freezeRotation = true;
-        kutyaRigidBody = null;
+        
         jatekosTransf = transform.parent;
 
         holgyEredetiHely = holgy.transform.position;
@@ -119,12 +119,6 @@ public partial class FoKod : MonoBehaviour
 
         valtKameraAlaphelyzetbe();
         kameraAllapot = Pozicio.alap;
-
-        figyeloKameraEloreX = new VektorSugar(transform.position, -2f);
-        kijovetelFigyelo = new VektorSugar(transform.position, 7f);
-
-        figyeloKameraEloreXTukrozott = new VektorSugar(transform.position, 2f);
-        kijovetelFigyeloTukrozott = new VektorSugar(transform.position, -7f);
 
     }
 
