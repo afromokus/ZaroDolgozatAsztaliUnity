@@ -20,7 +20,7 @@ public class JatekosElet : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!FoKod.kutyaKovet)
+        if (!FoKod.kutyaMutat)
         {
             mergezoGazSerules();
         }

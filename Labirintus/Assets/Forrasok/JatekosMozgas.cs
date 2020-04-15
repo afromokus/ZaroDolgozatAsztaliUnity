@@ -75,7 +75,7 @@ public class JatekosMozgas : MonoBehaviour
 
     private void utkozes()
     {
-        Debug.Log(sebesseg);
+        //Debug.Log(sebesseg);
 
         if (sebesseg > 1f)
         {

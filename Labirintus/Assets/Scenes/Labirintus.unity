@@ -2448,7 +2448,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532487400}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.39, y: 1.28, z: -36.03}
+  m_LocalPosition: {x: 28.58, y: 1.28, z: -45.67}
   m_LocalScale: {x: 1, y: 2.4760776, z: 0.72852015}
   m_Children:
   - {fileID: 1058804429}
@@ -2542,6 +2542,7 @@ MonoBehaviour:
   kovekParent: {fileID: 1757692416}
   buzaParent: {fileID: 1514545728}
   ajtoAnimacio: {fileID: 1873126954}
+  kutya: {fileID: 1649274532}
   holgy: {fileID: 2060578065}
 --- !u!20 &534669904
 Camera:
@@ -3352,22 +3353,22 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 87c72c7e7e58e4f4380291ea5eee9225,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0009045555
+      value: 0.017751679
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 87c72c7e7e58e4f4380291ea5eee9225,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.045798246
+      value: 0.017142592
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 87c72c7e7e58e4f4380291ea5eee9225,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.019726308
+      value: 0.017142594
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 87c72c7e7e58e4f4380291ea5eee9225,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9987555
+      value: 0.99954855
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 87c72c7e7e58e4f4380291ea5eee9225,
         type: 3}
@@ -3377,17 +3378,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 87c72c7e7e58e4f4380291ea5eee9225,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 87c72c7e7e58e4f4380291ea5eee9225,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 68.146
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 87c72c7e7e58e4f4380291ea5eee9225,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 87c72c7e7e58e4f4380291ea5eee9225,
         type: 3}
@@ -5627,7 +5628,7 @@ Animator:
   m_GameObject: {fileID: 1649274532}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0b04ae8d20095b44f8504590be9fb43f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 06723128d21b45e418a398e51b4e5f18, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
