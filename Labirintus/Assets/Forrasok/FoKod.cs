@@ -86,6 +86,7 @@ public partial class FoKod : MonoBehaviour
     private Animation[] animaciok;
     private bool kutyaElsoHelyenVanE = false;
     private bool kutyaMasodikHelyenVanE = false;
+    private bool kutyaMegyMasodikHelyre;
 
     private void Start()
     {
@@ -134,6 +135,11 @@ public partial class FoKod : MonoBehaviour
         {
             kutyafutMasodikHelyre(0.16f);
         }*/
+
+        if (kutyaMegyMasodikHelyre)
+        {
+            kutyafutMasodikHelyre(0.2f);
+        }
 
         if (Cursor.visible == true)
         {            
@@ -334,7 +340,7 @@ public partial class FoKod : MonoBehaviour
                     else if (kutyaElsoHelyenVanE)
                     {
                         kutya.GetComponent<Animator>().Play("Futas", 0);
-                        kutyafutMasodikHelyre(0.16f);
+                        kutyaMegyMasodikHelyre = true;
                     }
                 }
                 else if (csengoreNez)
@@ -461,18 +467,15 @@ public partial class FoKod : MonoBehaviour
         float fordulas = 1f;
         if (kutyaTransform.position.z < -16)
         {
-            kutyaTransform.Translate(sebesseg, 0f, sebesseg/3);
-
-            if (kutyaTransform.rotation.y < 0.5f)
-            {
-                kutyaTransform.Rotate(0f, fordulas, 0f);
-            }
+            kutyaTransform.rotation = Quaternion.Euler(0f, 340f, 0f);
+            kutyaTransform.Translate(0f, 0f, sebesseg);
         }
         else
         {
             kutyaTransform.rotation = Quaternion.Euler(0f, 90f, 0f);
             kutya.GetComponent<Animator>().Play("Idle", 0);
             kutyaElsoHelyenVanE = false;
+            kutyaMegyMasodikHelyre = false;
             kutyaMasodikHelyenVanE = true;
         }
 
@@ -517,7 +520,10 @@ public partial class FoKod : MonoBehaviour
     {
         if (kutyaMutat)
         {
-            kutyafutElsoHelyre(0.16f, 2);
+            if (!kutyaElsoHelyenVanE && !kutyaMasodikHelyenVanE)
+            {
+                kutyafutElsoHelyre(0.16f, 2);
+            }
         }
 
 
