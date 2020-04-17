@@ -122,6 +122,8 @@ public partial class FoKod : MonoBehaviour
         valtKameraAlaphelyzetbe();
         kameraAllapot = Pozicio.alap;
 
+        kutya.GetComponent<Animator>().Play("Idle", 0);
+
     }
 
     // Update is called once per frame
