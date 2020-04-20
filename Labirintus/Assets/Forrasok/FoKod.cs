@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 public partial class FoKod : MonoBehaviour
 {
+    List<GameObject> halalFejek = new List<GameObject>();
+
     public Transform foKameraTransform;
     public Camera kameraFpLatas;
     public GameObject kameraFpMaga;
@@ -131,9 +133,10 @@ public partial class FoKod : MonoBehaviour
         for (i = 0; i < szomszedosKoord.Count - 1; i += 2)
         {
             GameObject halalFejMasolat = Instantiate(halalFej);
-            halalFejMasolat.name = "halalFej" + i;
+            halalFejMasolat.name = "halalFej" + i/2;
 
             halalFejElhelyezes(halalFejMasolat, szomszedosKoord[i], szomszedosKoord[i + 1]);
+            halalFejek.Add(halalFejMasolat);
         }
 
         /*foreach (double[] koordinataTomb in biztUt.getSzomszedosKoordinatak())
@@ -552,7 +555,7 @@ public partial class FoKod : MonoBehaviour
         {
             if (!kutyaElsoHelyenVanE && !kutyaMasodikHelyenVanE)
             {
-                kutyafutElsoHelyre(0.16f, 2);
+                kutyafutElsoHelyre(0.2f, 2);
             }
         }
 

@@ -30,6 +30,12 @@ namespace Assets.Model
 
         public List<float> getSzomszedosKoordinatak()
         {
+            /*List<float> szomszedosKoordinatak = szamolSzomszedosKoord(utvonalTomb);
+
+            for (i = 0; i < szomszedosKoordinatak.Count - 1; i += 2)
+            {
+                Debug.Log("(" + szomszedosKoordinatak[i] + "; " + szomszedosKoordinatak[i + 1] + ")");
+            }*/
             return szamolSzomszedosKoord(utvonalTomb);
         }
         private List<float> szamolSzomszedosKoord(int[] tomb)
