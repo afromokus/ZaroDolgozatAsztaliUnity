@@ -22,6 +22,7 @@ public partial class FoKod : MonoBehaviour
     public GameObject buzaParent;
     public GameObject ajtoAnimacio;
     public GameObject kutya;
+    public GameObject halalFej;
 
     int i = 0;
 
@@ -90,6 +91,7 @@ public partial class FoKod : MonoBehaviour
 
     private void Start()
     {
+
         bevitelObj.SetActive(false);
 
         figyeloKameraEloreXTukrozott = new VektorSugar(transform.position, 2f);
@@ -121,9 +123,35 @@ public partial class FoKod : MonoBehaviour
 
         valtKameraAlaphelyzetbe();
         kameraAllapot = Pozicio.alap;
+        
+        BiztonsagosUtvonal biztUt = new BiztonsagosUtvonal();
+        List<float> szomszedosKoord = biztUt.getSzomszedosKoordinatak();
+        i = 0;
 
-        kutya.GetComponent<Animator>().Play("Idle", 0);
+        for (i = 0; i < szomszedosKoord.Count - 1; i += 2)
+        {
+            GameObject halalFejMasolat = Instantiate(halalFej);
+            halalFejMasolat.name = "halalFej" + i;
 
+            halalFejElhelyezes(halalFejMasolat, szomszedosKoord[i], szomszedosKoord[i + 1]);
+        }
+
+        /*foreach (double[] koordinataTomb in biztUt.getSzomszedosKoordinatak())
+        {
+            GameObject halalFejMasolat = Instantiate(halalFej);
+            halalFejMasolat.name = "halalFej" + i;
+
+            koordinatak = biztUt.getKoordinatak()[i];
+
+            halalFejElhelyezes(halalFejMasolat, koordinatak);
+            i++;
+        }*/
+
+    }
+
+    private void halalFejElhelyezes(GameObject halalFej, float kordX, float kordZ)
+    {
+        halalFej.transform.position = new Vector3(kordX, 1, kordZ);
     }
 
     // Update is called once per frame
