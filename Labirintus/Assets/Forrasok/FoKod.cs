@@ -27,6 +27,7 @@ public partial class FoKod : MonoBehaviour
     public GameObject halalFej;
 
     int i = 0;
+    int koponyaszam = 0;
 
     bool felvehetoCsontraNez = false;
     bool csengoreNez = false;
@@ -53,12 +54,15 @@ public partial class FoKod : MonoBehaviour
     Vector3 eltolasKozeli;
     Vector3 eltolasFelul;
     private Vector3 eltolasAlap;
+    Vector3 kutyaCel;
 
     
 
     string figyeltTargy = "";
 
     List<string> karakterTulajdonok = new List<string>();
+    List<float> biztonsagosPontok;
+
     private bool felvehetoKovekreNez;
     private bool felvehetoBuzaraNez;
     private bool kutyaraNez;
@@ -92,6 +96,8 @@ public partial class FoKod : MonoBehaviour
     private bool kutyaMegyMasodikHelyre;
     BiztonsagosUtvonal biztUt;
     public static bool serulEJatekos;
+    private bool kutyaSetalGazban;
+    private bool kutyaMegerkezettE = false;
 
     private void Start()
     {
@@ -141,18 +147,9 @@ public partial class FoKod : MonoBehaviour
             halalFejek.Add(halalFejMasolat);
         }
 
-        /*foreach (double[] koordinataTomb in biztUt.getSzomszedosKoordinatak())
-        {
-            GameObject halalFejMasolat = Instantiate(halalFej);
-            halalFejMasolat.name = "halalFej" + i;
-
-            koordinatak = biztUt.getKoordinatak()[i];
-
-            halalFejElhelyezes(halalFejMasolat, koordinatak);
-            i++;
-        }*/
-        kutyaElindultE = true;
-
+        //kutyaElindultE = true;
+        kutyaCel = new Vector3(28,kutyaTransform.position.y,-18);
+        biztonsagosPontok = biztUt.lekerBiztonsagosKoord();
     }
 
     private void halalFejElhelyezes(GameObject halalFej, float kordX, float kordZ)
@@ -160,16 +157,66 @@ public partial class FoKod : MonoBehaviour
         halalFej.transform.position = new Vector3(kordX, 1, kordZ);
     }
 
+    private void setalKutyaGazban()
+    {
+        try
+        {
+            if (koponyaszam < biztonsagosPontok.Count + 1)
+            {
+                if (kutyaTransform.position.x - 0.1f > kutyaCel.x)
+                {
+                    kutyaTransform.position = Vector3.MoveTowards(kutyaTransform.position, kutyaCel, 0.06f);
+                }
+                else
+                {
+                    kutyaCel.x = biztonsagosPontok[koponyaszam];
+                    kutyaCel.z = biztonsagosPontok[koponyaszam + 1];
+                    kutyaTransform.LookAt(kutyaCel);
+                    koponyaszam += 2;
+                }
+            }
+            else
+            {
+                kutyaTransform.rotation = Quaternion.Euler(0f, 90f, 0f);
+                kutyaMasodikHelyenVanE = false;
+                kutyaMegerkezettE = true;
+                kutyaSetalGazban = false;
+                kutya.GetComponent<Animator>().Play("Idle", 0);
+            }
+        }
+        catch
+        {
+            if (kutyaTransform.position.z + 0.5f < -5f)
+            {
+                kutyaCel.x = -46f;
+                kutyaCel.z = -5f;
+                kutyaTransform.LookAt(kutyaCel);
+                kutyaTransform.position = Vector3.MoveTowards(kutyaTransform.position, kutyaCel, 0.06f);
+            }
+            else
+            {
+                kutyaTransform.rotation = Quaternion.Euler(0f, 90f, 0f);
+                kutyaMasodikHelyenVanE = false;
+                kutyaMegerkezettE = true;
+                kutyaSetalGazban = false;
+                kutya.GetComponent<Animator>().Play("Idle", 0);
+            }
+        }
+    }
+
     // Update is called once per frame
     void LateUpdate()
     {
         /*if (!kutyaElsoHelyenVanE && !kutyaMasodikHelyenVanE)
         {
-            kutyafutElsoHelyre(0.16f, 2);
+            //kutyafutElsoHelyre(0.16f, 2);
         }
-        else if(kutyaElsoHelyenVanE)
+        else if (kutyaElsoHelyenVanE)
         {
             kutyafutMasodikHelyre(0.16f);
+        }
+        else if (kutyaMasodikHelyenVanE)
+        {
         }*/
 
         jatekosHelyeZ = (float)Math.Round(transform.parent.localPosition.z, 1);
@@ -187,6 +234,11 @@ public partial class FoKod : MonoBehaviour
         if (kutyaMegyMasodikHelyre)
         {
             kutyafutMasodikHelyre(0.2f);
+        }
+
+        if (kutyaSetalGazban)
+        {
+            setalKutyaGazban();
         }
 
         if (Cursor.visible == true)
@@ -390,6 +442,14 @@ public partial class FoKod : MonoBehaviour
                         kutya.GetComponent<Animator>().Play("Futas", 0);
                         kutyaMegyMasodikHelyre = true;
                     }
+                    else if (kutyaMasodikHelyenVanE)
+                    {
+                        kutyaTransform.rotation = Quaternion.Euler(0f, -90f, 0f);
+                        kutya.GetComponent<Animator>().Play("Seta", 0);
+                        kutyaSetalGazban = true;
+                        kutyaCel.z = biztonsagosPontok[koponyaszam + 1];
+                        kutyaTransform.LookAt(kutyaCel);
+                    }
                 }
                 else if (csengoreNez)
                 {
@@ -566,11 +626,14 @@ public partial class FoKod : MonoBehaviour
 
     private void Update()
     {
-        if (kutyaElindultE)
+        if (!kutyaMegerkezettE)
         {
-            if (!kutyaElsoHelyenVanE && !kutyaMasodikHelyenVanE)
+            if (kutyaElindultE)
             {
-                kutyafutElsoHelyre(0.2f, 2);
+                if (!kutyaElsoHelyenVanE && !kutyaMasodikHelyenVanE)
+                {
+                    kutyafutElsoHelyre(0.2f, 2);
+                }
             }
         }
 

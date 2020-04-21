@@ -137,7 +137,6 @@ namespace Assets.Model
                     }
                     else
                     {
-                        Debug.Log(jatekosMellettiHalalFejek[0] == (float)-20.8);
                         if (jatekosMellettiHalalFejek[0] == (float)-20.8)
                         {
                             if (jatekosZ > -20.8f - 0.7f)
@@ -210,6 +209,25 @@ namespace Assets.Model
         public List<double[]> getKoordinatak()
         {
             return koordinatakSzamitasa(utvonalTomb);
+        }
+
+        public List<float> lekerBiztonsagosKoord()
+        {
+            List<float> biztKoord = new List<float>();
+            List<double[]> koordHatarok = koordinatakSzamitasa(utvonalTomb);
+
+            for (i = koordHatarok.Count - 1; i >= 0; i--)
+            {
+                biztKoord.Add((float)((koordHatarok[i][0] + koordHatarok[i][1]) / 2));
+                biztKoord.Add((float)((koordHatarok[i][2] + koordHatarok[i][3]) / 2));
+            }
+
+            /*foreach (float koordinata in biztKoord)
+            {
+                Debug.Log(koordinata);
+            }*/
+
+            return biztKoord;
         }
 
         private List<double[]> koordinatakSzamitasa(int[] utvonalTomb)
