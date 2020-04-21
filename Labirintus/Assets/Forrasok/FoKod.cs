@@ -67,7 +67,7 @@ public partial class FoKod : MonoBehaviour
     string uzenet;
 
     bool megjelenitUzenetet = false;
-    public static bool kutyaMutat = false;
+    private bool kutyaElindultE = false;
 
     Vector3 kutyaEltolas = new Vector3(3f,-0.5f,0f);
     private Vector3 kutyaTukrozottEltolas = new Vector3(-3f, -0.5f, 0f);
@@ -90,6 +90,8 @@ public partial class FoKod : MonoBehaviour
     private bool kutyaElsoHelyenVanE = false;
     private bool kutyaMasodikHelyenVanE = false;
     private bool kutyaMegyMasodikHelyre;
+    BiztonsagosUtvonal biztUt;
+    public static bool serulEJatekos;
 
     private void Start()
     {
@@ -126,7 +128,7 @@ public partial class FoKod : MonoBehaviour
         valtKameraAlaphelyzetbe();
         kameraAllapot = Pozicio.alap;
         
-        BiztonsagosUtvonal biztUt = new BiztonsagosUtvonal();
+        biztUt = new BiztonsagosUtvonal();
         List<float> szomszedosKoord = biztUt.getSzomszedosKoordinatak();
         i = 0;
 
@@ -149,6 +151,7 @@ public partial class FoKod : MonoBehaviour
             halalFejElhelyezes(halalFejMasolat, koordinatak);
             i++;
         }*/
+        kutyaElindultE = true;
 
     }
 
@@ -169,6 +172,18 @@ public partial class FoKod : MonoBehaviour
             kutyafutMasodikHelyre(0.16f);
         }*/
 
+        jatekosHelyeZ = (float)Math.Round(transform.parent.localPosition.z, 1);
+        jatekosHelyeX = (float)Math.Round(jatekosTransf.position.x, 1);
+
+        if (biztUt.serulEJatekos(jatekosHelyeX, jatekosHelyeZ, kutyaElindultE))
+        {
+            serulEJatekos = true;
+        }
+        else
+        {
+            serulEJatekos = false;
+        }
+
         if (kutyaMegyMasodikHelyre)
         {
             kutyafutMasodikHelyre(0.2f);
@@ -187,7 +202,7 @@ public partial class FoKod : MonoBehaviour
                 {
                     beirtParancs = bevitel.text.Substring(0, 20).ToLower();
                 }
-                if (kutyaraNez && !kutyaMutat)
+                if (kutyaraNez && !kutyaElindultE)
                 {
                     if (beirtParancs.Contains("ad") && beirtParancs.Contains("csont"))
                     {
@@ -197,7 +212,7 @@ public partial class FoKod : MonoBehaviour
                             uzMegjel.megjelenitUzenetet("Csont átadva.");
                             uzIdo = 0;
                             karakterTulajdonok.Remove("Csont");
-                            kutyaMutat = true;
+                            kutyaElindultE = true;
                             kutya.GetComponent<Animator>().Play("Futas", 0);
                         }
                         else
@@ -365,7 +380,7 @@ public partial class FoKod : MonoBehaviour
                 }
                 else if (kutyaraNez)
                 {
-                    if (!kutyaMutat)
+                    if (!kutyaElindultE)
                     {
                         Cursor.visible = true;
                         bevitelObj.SetActive(true);
@@ -551,7 +566,7 @@ public partial class FoKod : MonoBehaviour
 
     private void Update()
     {
-        if (kutyaMutat)
+        if (kutyaElindultE)
         {
             if (!kutyaElsoHelyenVanE && !kutyaMasodikHelyenVanE)
             {

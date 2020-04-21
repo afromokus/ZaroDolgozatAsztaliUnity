@@ -20,17 +20,14 @@ public class JatekosElet : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!FoKod.kutyaMutat)
-        {
-            mergezoGazSerules();
-        }
+        mergezoGazSerules();
     }
 
     void mergezoGazSerules()
     {
         if (hp >= 0)
         {
-            if (jatekosKockaTranszform.position.x < 27 && jatekosKockaTranszform.position.x > -42 && jatekosKockaTranszform.position.z > -25 && jatekosKockaTranszform.position.z < -11)
+            if (FoKod.serulEJatekos)
             {
                 eletKezeles(true);
             }

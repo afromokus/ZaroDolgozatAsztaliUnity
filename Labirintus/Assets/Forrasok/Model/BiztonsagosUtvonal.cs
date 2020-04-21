@@ -11,6 +11,10 @@ namespace Assets.Model
         int i = 0;
         System.Random rnd;
         int[] utvonalTomb;
+        List<float> jatekosMellettiHalalFejek;
+        List<float> osszesKoord;
+        bool jatekosSerulE;
+        List<float> halalFejZLista;
 
         public BiztonsagosUtvonal()
         {
@@ -37,6 +41,131 @@ namespace Assets.Model
                 Debug.Log("(" + szomszedosKoordinatak[i] + "; " + szomszedosKoordinatak[i + 1] + ")");
             }*/
             return szamolSzomszedosKoord(utvonalTomb);
+        }
+
+        private bool jatekosTeruletenVanE(float jatekosX, float jatekosZ)
+        {
+            // -42--- 27 x     -25---- -11 z
+            if ((jatekosX >= -42 && jatekosX <= 24.7) && jatekosZ >= -25 && jatekosZ <= -11)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private List<float> keresHalalFejZKoord(float jatekosX, List<float> osszesKoord)
+        {
+            float keresettX = kerekites(jatekosX, 4.6f);
+            halalFejZLista = new List<float>();
+
+            //Debug.Log("Koponyák keresése ezen az X-en:\t" + keresettX);
+
+            for (i = 0; i < osszesKoord.Count; i += 2)
+            {
+                if (osszesKoord[i] == keresettX)
+                {
+                    halalFejZLista.Add(osszesKoord[i + 1]);
+                }
+            }
+
+            return halalFejZLista;
+        }
+
+        private float kerekites(float szam, float rendszer)
+        {
+            float eredmeny = 0f;
+
+            float tizedesSzam = (float)Math.Round(szam, 1);
+            eredmeny = tizedesSzam * 10;
+            rendszer = rendszer * 10;
+
+            i = 1;
+            if (szam > -0.6)
+            {
+                while (eredmeny % rendszer != 17)
+                {
+                    eredmeny = tizedesSzam * 10 + i;
+                    if (eredmeny % rendszer != 17)
+                    {
+                        eredmeny = tizedesSzam * 10 - i;
+                    }
+                    i++;
+                }
+            }
+            else if (szam <= -0.6)
+            {
+                while (eredmeny % rendszer != -29)
+                {
+                    eredmeny = tizedesSzam * 10 + i;
+                    if (eredmeny % rendszer != -29)
+                    {
+                        eredmeny = tizedesSzam * 10 - i;
+                    }
+                    i++;
+                }
+            }
+            return eredmeny / 10;
+        }
+
+        public bool serulEJatekos(float jatekosX, float jatekosZ, bool kutyaMegkaptaECsontot)
+        {
+            //Debug.Log("Játékos:\t" + jatekosZ);
+            if (osszesKoord == null)
+            {
+                osszesKoord = szamolSzomszedosKoord(utvonalTomb);
+            }
+
+            jatekosSerulE = false;
+
+            if (jatekosTeruletenVanE(jatekosX, jatekosZ))
+            {
+                if (kutyaMegkaptaECsontot)
+                {
+                    jatekosMellettiHalalFejek = keresHalalFejZKoord(jatekosX, osszesKoord);
+
+                    if (jatekosMellettiHalalFejek.Count == 2)
+                    {
+                        //Debug.Log(jatekosMellettiHalalFejek[0]);
+                        //Debug.Log(jatekosMellettiHalalFejek[1]);
+                        if (jatekosZ < jatekosMellettiHalalFejek[1] + 0.7f ||
+                                              jatekosZ > jatekosMellettiHalalFejek[0] - 0.7f)
+                        {
+                            jatekosSerulE = true;
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log(jatekosMellettiHalalFejek[0] == (float)-20.8);
+                        if (jatekosMellettiHalalFejek[0] == (float)-20.8)
+                        {
+                            if (jatekosZ > -20.8f - 0.7f)
+                            {
+                                jatekosSerulE = true;
+                            }
+                        }
+                        else
+                        {
+                            if (jatekosZ < -15.2f + 0.7f)
+                            {
+                                jatekosSerulE = true;
+                            }
+                        }
+                    }
+
+                }
+                else
+                {
+                    jatekosSerulE = true;
+                }
+            }
+            else
+            {
+                jatekosSerulE = false;
+            }
+
+            return jatekosSerulE;
         }
         private List<float> szamolSzomszedosKoord(int[] tomb)
         {
