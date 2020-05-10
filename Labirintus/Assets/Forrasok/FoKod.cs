@@ -10,6 +10,7 @@ public partial class FoKod : MonoBehaviour
     List<GameObject> halalFejek = new List<GameObject>();
 
     public Transform foKameraTransform;
+    public Transform SzellemMeshTransf;
     public Camera kameraFpLatas;
     public GameObject kameraFpMaga;
     public Text targyakSzovege;
@@ -25,6 +26,7 @@ public partial class FoKod : MonoBehaviour
     public GameObject ajtoAnimacio;
     public GameObject kutya;
     public GameObject halalFej;
+    public GameObject atadandoCsont;
 
     int i = 0;
     int koponyaszam = 0;
@@ -56,7 +58,7 @@ public partial class FoKod : MonoBehaviour
     private Vector3 eltolasAlap;
     Vector3 kutyaCel;
 
-    
+    public Animator jatekosAnimator;
 
     string figyeltTargy = "";
 
@@ -68,7 +70,7 @@ public partial class FoKod : MonoBehaviour
     private bool kutyaraNez;
 
     string beirtParancs;
-    string uzenet;
+    string uzenet = "";
 
     bool megjelenitUzenetet = false;
     private bool kutyaElindultE = false;
@@ -101,7 +103,6 @@ public partial class FoKod : MonoBehaviour
 
     private void Start()
     {
-
         bevitelObj.SetActive(false);
 
         figyeloKameraEloreXTukrozott = new VektorSugar(transform.position, 2f);
@@ -134,6 +135,10 @@ public partial class FoKod : MonoBehaviour
         valtKameraAlaphelyzetbe();
         kameraAllapot = Pozicio.alap;
         
+        jatekosValtUnityStatusz(SzellemMeshTransf);
+
+        jatekosAnimator.Play("Idle", 0);
+
         biztUt = new BiztonsagosUtvonal();
         List<float> szomszedosKoord = biztUt.getSzomszedosKoordinatak();
         i = 0;
@@ -150,6 +155,13 @@ public partial class FoKod : MonoBehaviour
         //kutyaElindultE = true;
         kutyaCel = new Vector3(28,kutyaTransform.position.y,-18);
         biztonsagosPontok = biztUt.lekerBiztonsagosKoord();
+    }
+
+    private void jatekosValtUnityStatusz(Transform SzellemMeshT)
+    {
+        SzellemMeshT.localPosition = new Vector3(-0.1f, -0.38f, 0);
+        SzellemMeshT.localRotation = Quaternion.Euler(0, 270, 0);
+        SzellemMeshT.localScale = new Vector3(1.4f, 0.65f, 2.125f);
     }
 
     private void halalFejElhelyezes(GameObject halalFej, float kordX, float kordZ)
@@ -258,14 +270,16 @@ public partial class FoKod : MonoBehaviour
                 {
                     if (beirtParancs.Contains("ad") && beirtParancs.Contains("csont"))
                     {
-
                         if (karakterTulajdonok.Contains("Csont"))
                         {
-                            uzMegjel.megjelenitUzenetet("Csont átadva.");
+                            jatekosAnimator.Play("Atadas", 0);
+                            atadandoCsont.SetActive(true);
+
+                            /*uzMegjel.megjelenitUzenetet("Csont átadva.");
                             uzIdo = 0;
                             karakterTulajdonok.Remove("Csont");
                             kutyaElindultE = true;
-                            kutya.GetComponent<Animator>().Play("Futas", 0);
+                            kutya.GetComponent<Animator>().Play("Futas", 0);*/
                         }
                         else
                         {
@@ -572,7 +586,6 @@ public partial class FoKod : MonoBehaviour
 
     private void kutyafutMasodikHelyre(float sebesseg)
     {
-        float fordulas = 1f;
         if (kutyaTransform.position.z < -16)
         {
             kutyaTransform.rotation = Quaternion.Euler(0f, 340f, 0f);

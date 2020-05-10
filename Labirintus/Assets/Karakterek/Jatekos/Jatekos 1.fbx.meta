@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 970dd40a6aae290428fca332fda7e0f1
+guid: 74aaed329a8719f47b57f5240b2bbc17
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
@@ -47,8 +47,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Csontvaz|Idle
-      takeName: Csontvaz|Idle
+      name: Csontvaz|Haladas
+      takeName: Csontvaz|Haladas
       internalID: 0
       firstFrame: 0
       lastFrame: 54

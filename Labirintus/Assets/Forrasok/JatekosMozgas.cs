@@ -6,6 +6,8 @@ using System;
 public class JatekosMozgas : MonoBehaviour
 {
 
+    public Animator jatekosAnimator;
+
     public Rigidbody jatekosTest;
     public GameObject buzaWatch;
     float eroElore = 1f;
@@ -38,13 +40,19 @@ public class JatekosMozgas : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if ((sebesseg < 1.5f && sebesseg > 1.4f) && jatekosAnimator.GetCurrentAnimatorStateInfo(0).IsName("Haladas") &&
+                                                (jatekosAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 >= 0.9f))
+        {
+            jatekosAnimator.Play("Idle", 0);
+            jatekosAnimator.speed = 0.6f;
+        }
 
-        if (!buzaWatch.active && !(jatekosTest.position.z > -43.6f && jatekosTest.position.z < -41.55f &&
+        /*if (!buzaWatch.active && !(jatekosTest.position.z > -43.6f && jatekosTest.position.z < -41.55f &&
                 jatekosTest.position.x > -26.5f && jatekosTest.position.x < -23.15f))
         {
             buzaWatch.SetActive(true);
             Debug.Log("búza kijőve");
-        }
+        }*/
 
         if (Cursor.visible == false)
         {
@@ -94,8 +102,21 @@ public class JatekosMozgas : MonoBehaviour
         if (sebesseg < maxSebesseg)
         {
             sebesseg += a;
+            valtAnimSebesseg();
         }
 
+    }
+
+    private void valtAnimSebesseg()
+    {
+        if (sebesseg < 2)
+        {
+            jatekosAnimator.speed = sebesseg / 3;
+        }
+        else if (sebesseg > 5)
+        {
+            jatekosAnimator.speed = sebesseg / 8;
+        }
     }
 
     void mozgasVizsgalat()
@@ -118,6 +139,12 @@ public class JatekosMozgas : MonoBehaviour
 
         if (Input.GetKey("w") || Input.GetKey(KeyCode.UpArrow))
         {
+
+            if (jatekosAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            {
+                jatekosAnimator.Play("Haladas");
+            }
+
             if (jatekosHatra)
             {
                 lassulas();
@@ -171,6 +198,8 @@ public class JatekosMozgas : MonoBehaviour
         {
             sebesseg = 1f;
         }
+
+        valtAnimSebesseg();
 
     }
 }
