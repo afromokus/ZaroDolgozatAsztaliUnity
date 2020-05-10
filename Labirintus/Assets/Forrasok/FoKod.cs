@@ -100,6 +100,7 @@ public partial class FoKod : MonoBehaviour
     public static bool serulEJatekos;
     private bool kutyaSetalGazban;
     private bool kutyaMegerkezettE = false;
+    private bool csontAtadvaE;
 
     private void Start()
     {
@@ -219,6 +220,20 @@ public partial class FoKod : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        if (csontAtadvaE)
+        {
+            Debug.Log(jatekosAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+            if (jatekosAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.68f)
+            {
+                uzMegjel.megjelenitUzenetet("Csont átadva.");
+                uzIdo = 0;
+                karakterTulajdonok.Remove("Csont");
+                kutyaElindultE = true;
+                kutya.GetComponent<Animator>().Play("Futas", 0);
+                csontAtadvaE = false;
+            }
+        }
+
         /*if (!kutyaElsoHelyenVanE && !kutyaMasodikHelyenVanE)
         {
             //kutyafutElsoHelyre(0.16f, 2);
@@ -275,11 +290,7 @@ public partial class FoKod : MonoBehaviour
                             jatekosAnimator.Play("Atadas", 0);
                             atadandoCsont.SetActive(true);
 
-                            /*uzMegjel.megjelenitUzenetet("Csont átadva.");
-                            uzIdo = 0;
-                            karakterTulajdonok.Remove("Csont");
-                            kutyaElindultE = true;
-                            kutya.GetComponent<Animator>().Play("Futas", 0);*/
+                            csontAtadvaE = true;
                         }
                         else
                         {
