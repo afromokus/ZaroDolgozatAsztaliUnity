@@ -59,6 +59,7 @@ public partial class FoKod : MonoBehaviour
     Vector3 kutyaCel;
 
     public Animator jatekosAnimator;
+    public Animator holgyAnimator;
 
     string figyeltTargy = "";
 
@@ -101,6 +102,9 @@ public partial class FoKod : MonoBehaviour
     private bool kutyaSetalGazban;
     private bool kutyaMegerkezettE = false;
     private bool csontAtadvaE;
+    private bool holgyHelyenVanE = true;
+    private bool holgyJatekosMelletVanE = false;
+    private bool holgyElindultE = false;
 
     private void Start()
     {
@@ -222,7 +226,7 @@ public partial class FoKod : MonoBehaviour
     {
         if (csontAtadvaE)
         {
-            Debug.Log(jatekosAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+            //Debug.Log(jatekosAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime);
             if (jatekosAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.68f)
             {
                 uzMegjel.megjelenitUzenetet("Csont átadva.");
@@ -581,7 +585,7 @@ public partial class FoKod : MonoBehaviour
             }
         }
         pasiMozog();
-        //holgyTamadJatekost();
+        holgyTamadJatekost();
 
         if (!ajtotLattaMar)
         {
@@ -686,18 +690,55 @@ public partial class FoKod : MonoBehaviour
 
     private void holgyTamadJatekost()
     {
+        if (Math.Abs(holgy.transform.position.z - holgyEredetiHely.z) < 0.1f)
+        {
+            if (holgyElindultE)
+            {
+                if (!holgyHelyenVanE)
+                {
+                    holgyAnimator.Play("VisszaMozgas");
+                }
+            }
+            holgyHelyenVanE = true;
+            holgy.transform.rotation = Quaternion.Euler(0, 270, 0);
+        }
+        else
+        {
+            holgyHelyenVanE = false;
+        }
+
+        if (Vector3.Distance(jatekosTransf.position, holgy.transform.position) < 2f)
+        {
+            holgyJatekosMelletVanE = true;
+        }
+        else
+        {
+            holgyJatekosMelletVanE = false;
+        }
         //-39, -25
         jatekosHelyeZ = transform.parent.localPosition.z;
         jatekosHelyeX = jatekosTransf.position.x;
         if (jatekosHelyeZ < -25 && jatekosHelyeZ > -39 || (jatekosHelyeZ < -39 && jatekosHelyeX < -25))
         {
-            holgy.transform.LookAt(jatekosTransf.position);
-            holgy.transform.Translate(0f, 0f, 0.08f);
+            if (!holgyElindultE)
+            {
+                holgyElindultE = true;
+            }
+
+            if (!holgyJatekosMelletVanE)
+            {
+                holgy.transform.LookAt(jatekosTransf.position);
+                holgy.transform.Translate(0f, 0f, 0.08f);
+                holgyAnimator.Play("Mozgas");
+            }
         }
         else
         {
-            holgy.transform.LookAt(holgyEredetiHely);
-            holgy.transform.Translate(0f, 0f, 0.08f);
+            if (!holgyHelyenVanE)
+            {
+                holgy.transform.LookAt(holgyEredetiHely);
+                holgy.transform.Translate(0f, 0f, 0.08f);
+            }
         }
     }
 

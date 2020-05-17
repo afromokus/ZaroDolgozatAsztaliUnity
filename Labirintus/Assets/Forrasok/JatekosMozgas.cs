@@ -41,7 +41,7 @@ public class JatekosMozgas : MonoBehaviour
     void FixedUpdate()
     {
         if ((sebesseg < 1.5f && sebesseg > 1.4f) && jatekosAnimator.GetCurrentAnimatorStateInfo(0).IsName("Haladas") &&
-                                                (jatekosAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 >= 0.9f))
+                                                (jatekosAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 >= 0.98f))
         {
             jatekosAnimator.Play("Idle", 0);
             jatekosAnimator.speed = 0.6f;

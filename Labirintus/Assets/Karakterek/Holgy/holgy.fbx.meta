@@ -1,29 +1,89 @@
 fileFormatVersion: 2
 guid: 184a1fcaa81651d44b796c490e3ca859
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: MHuman
-    100004: MHuman.001
-    100006: Mesh
-    400000: //RootNode
-    400002: MHuman
-    400004: MHuman.001
-    400006: Mesh
-    2100000: phong8
-    2300000: //RootNode
-    2300002: MHuman
-    2300004: MHuman.001
-    2300006: Mesh
-    3300000: //RootNode
-    3300002: MHuman
-    3300004: MHuman.001
-    3300006: Mesh
-    4300000: MHuman
-    4300002: MHuman.001
-    4300004: Mesh
+  serializedVersion: 19300
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: MHuman
+  - first:
+      1: 100004
+    second: MHuman.001
+  - first:
+      1: 100006
+    second: Mesh
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: MHuman
+  - first:
+      4: 400004
+    second: MHuman.001
+  - first:
+      4: 400006
+    second: Mesh
+  - first:
+      21: 2100000
+    second: phong8
+  - first:
+      23: 2300000
+    second: //RootNode
+  - first:
+      23: 2300002
+    second: MHuman
+  - first:
+      23: 2300004
+    second: MHuman.001
+  - first:
+      23: 2300006
+    second: Mesh
+  - first:
+      33: 3300000
+    second: //RootNode
+  - first:
+      33: 3300002
+    second: MHuman
+  - first:
+      33: 3300004
+    second: MHuman.001
+  - first:
+      33: 3300006
+    second: Mesh
+  - first:
+      43: 4300000
+    second: MHuman
+  - first:
+      43: 4300002
+    second: MHuman.001
+  - first:
+      43: 4300004
+    second: Mesh
+  - first:
+      74: 798181447654753305
+    second: CsontvazAction
+  - first:
+      74: 3928038866771159956
+    second: Csontvaz|Mozgas
+  - first:
+      74: 7869145630395009882
+    second: Mozgas
+  - first:
+      74: 3525552916318068793
+    second: Csontvaz|Idle
+  - first:
+      74: -3100369314251171874
+    second: Idle
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.000
+    second: {fileID: 2100000, guid: 7bc57a03b5d8f264292b7d04f5455752, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -34,8 +94,13 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: phong8
     second: {fileID: 2100000, guid: fc7923a5207ec6d4faa33c305eb8ae32, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong8.001
+    second: {fileID: 2100000, guid: c8c4dbb88b940ab47a8f80f3afd0680f, type: 2}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 0
@@ -52,15 +117,44 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    importConstraints: 0
-    animationCompression: 1
+    importConstraints: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Idle
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 14
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -68,6 +162,7 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -75,18 +170,19 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -95,10 +191,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -108,13 +204,16 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
