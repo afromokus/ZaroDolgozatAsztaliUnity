@@ -10,6 +10,9 @@ public class JatekosMozgas : MonoBehaviour
 
     public Rigidbody jatekosTest;
     public GameObject buzaWatch;
+
+    public static bool JatekosMegutveE = false;
+
     float eroElore = 1f;
     float eroOldalra = 1.5f;
 
@@ -26,6 +29,14 @@ public class JatekosMozgas : MonoBehaviour
     private void Start()
     {
         Cursor.visible = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "Hitbox")
+        {
+            JatekosMegutveE = true;
+        }
     }
 
     /*private void OnCollisionEnter(Collision col)

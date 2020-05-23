@@ -28,6 +28,9 @@ public partial class FoKod : MonoBehaviour
     public GameObject halalFej;
     public GameObject atadandoCsont;
 
+    public GameObject holgy;
+    public GameObject holgyUtes;
+
     int i = 0;
     int koponyaszam = 0;
 
@@ -81,7 +84,6 @@ public partial class FoKod : MonoBehaviour
     private float jatekosHelyeZ;
     private float jatekosHelyeX;
     private Transform jatekosTransf;
-    public GameObject holgy;
     private Vector3 holgyEredetiHely;
     private bool ajtotLattaMar = true;//false;
     private bool urKutyaraRakerdezett;
@@ -105,6 +107,7 @@ public partial class FoKod : MonoBehaviour
     private bool holgyHelyenVanE = true;
     private bool holgyJatekosMelletVanE = false;
     private bool holgyElindultE = false;
+    private int pihenesHolgy = 50;
 
     private void Start()
     {
@@ -356,7 +359,7 @@ public partial class FoKod : MonoBehaviour
                 targyakSzovege.text = uzenet;
 
             }
-        }
+        }       
         else
         {
             RaycastHit hami = new RaycastHit();
@@ -707,7 +710,7 @@ public partial class FoKod : MonoBehaviour
             holgyHelyenVanE = false;
         }
 
-        if (Vector3.Distance(jatekosTransf.position, holgy.transform.position) < 2f)
+        if (Vector3.Distance(jatekosTransf.position, holgy.transform.position) < 3.5f)
         {
             holgyJatekosMelletVanE = true;
         }
@@ -730,6 +733,37 @@ public partial class FoKod : MonoBehaviour
                 holgy.transform.LookAt(jatekosTransf.position);
                 holgy.transform.Translate(0f, 0f, 0.08f);
                 holgyAnimator.Play("Mozgas");
+            }
+            else
+            {
+                //Debug.Log(pihenesHolgy);
+                if (pihenesHolgy >= 50)
+                {
+                    holgy.transform.GetChild(0).gameObject.SetActive(false);
+                    holgyUtes.SetActive(true);
+                    holgyUtes.transform.LookAt(new Vector3(jatekosTransf.position.x, -0.1f, jatekosTransf.position.z));
+                    if (holgyUtes.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.45f &&
+                            holgyUtes.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.85f)
+                    {
+                        holgyUtes.transform.GetChild(3).gameObject.GetComponent<BoxCollider>().enabled = true;
+                    }
+                    else
+                    {
+                        holgyUtes.transform.GetChild(3).gameObject.GetComponent<BoxCollider>().enabled = false;
+                    }
+
+                    if (holgyUtes.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
+                    {
+                        holgyUtes.SetActive(false);
+                        holgy.transform.GetChild(0).gameObject.SetActive(true);
+                        holgyAnimator.Play("Idle");
+                        pihenesHolgy = 0;
+                    }
+                }
+                else
+                {
+                    pihenesHolgy++;
+                }
             }
         }
         else

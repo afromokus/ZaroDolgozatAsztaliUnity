@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,6 +22,21 @@ public class JatekosElet : MonoBehaviour
     void FixedUpdate()
     {
         mergezoGazSerules();
+        utesSerulesEll();
+    }
+
+    private void utesSerulesEll()
+    {
+        if (hp >= 0)
+        {
+            if (JatekosMozgas.JatekosMegutveE)
+            {
+                hp -= 70;
+                eletVonalMeret.x = hp / 100;
+                transform.localScale = eletVonalMeret;
+                JatekosMozgas.JatekosMegutveE = false;
+            }
+        }
     }
 
     void mergezoGazSerules()
@@ -44,22 +60,25 @@ public class JatekosElet : MonoBehaviour
 
     void eletKezeles(bool serulE)
     {
-        if (serulE)
+        if (hp >= 0)
         {
-            hp -= 1.5f;
-        }
-        else if(hp < 100)
-        {
-            hp += 0.5f;
-        }
+            if (serulE)
+            {
+                hp -= 1.5f;
+            }
+            else if (hp < 100)
+            {
+                hp += 0.2f;
+            }
 
-        if (hp > 100)
-        {
-            hp = 100;
-        }
+            if (hp > 100)
+            {
+                hp = 100;
+            }
 
-        eletVonalMeret.x = hp / 100;
-        transform.localScale = eletVonalMeret;
+            eletVonalMeret.x = hp / 100;
+            transform.localScale = eletVonalMeret;
+        }
     }
 
 }
