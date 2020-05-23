@@ -37,6 +37,7 @@ public partial class FoKod : MonoBehaviour
     bool felvehetoCsontraNez = false;
     bool csengoreNez = false;
     bool urraNez = false;
+    bool holgyKovessenE = false;
 
     enum Pozicio { alap, kozeli, felul }
     enum VektorSugarAllapot { normal, tukrozott }
@@ -225,8 +226,16 @@ public partial class FoKod : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void FixedUpdate()
     {
+        if (holgyKovessenE == false)
+        {
+            if (jatekosTransf.position.z > -40f && Vector3.Distance(holgy.transform.position, jatekosTransf.position) < 10f)
+            {
+                holgyKovessenE = true;
+            }
+        }
+
         if (csontAtadvaE)
         {
             //Debug.Log(jatekosAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime);
@@ -369,6 +378,7 @@ public partial class FoKod : MonoBehaviour
             if (Physics.Raycast(ray, out hami, 2.8f))
             {
                 figyeltTargy = hami.collider.name;
+                Debug.Log(figyeltTargy);
 
                 /*if (figyeltTargy != "Talaj" && !figyeltTargy.Contains("Fal"))
                 {
@@ -587,8 +597,13 @@ public partial class FoKod : MonoBehaviour
                     Input.GetAxis("Mouse Y") * 2, 270f, 0f);
             }
         }
+
         pasiMozog();
-        holgyTamadJatekost();
+
+        if (holgyKovessenE)
+        {
+            holgyTamadJatekost();
+        }
 
         if (!ajtotLattaMar)
         {
@@ -655,7 +670,7 @@ public partial class FoKod : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (!kutyaMegerkezettE)
         {
