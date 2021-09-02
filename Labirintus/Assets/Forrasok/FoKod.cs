@@ -16,6 +16,8 @@ public partial class FoKod : MonoBehaviour
     public Text targyakSzovege;
     public GameObject bevitelObj;
     public InputField bevitel;
+    public GameObject fejoJatekos;
+    public GameObject animaltJatekosObj;
 
     public Transform kutyaTransform;
     public GameObject pasi;
@@ -113,6 +115,7 @@ public partial class FoKod : MonoBehaviour
     private void Start()
     {
         bevitelObj.SetActive(false);
+        fejoJatekos.SetActive(false);
 
         figyeloKameraEloreXTukrozott = new VektorSugar(transform.position, 2f);
 
@@ -164,6 +167,8 @@ public partial class FoKod : MonoBehaviour
         //kutyaElindultE = true;
         kutyaCel = new Vector3(28,kutyaTransform.position.y,-18);
         biztonsagosPontok = biztUt.lekerBiztonsagosKoord();
+        /*FejoJatekos.transform.localPosition.Set(jatekosTransf.localPosition.x, FejoJatekos.transform.localPosition.y, jatekosTransf.localPosition.x);
+        FejoJatekos.SetActive(false);*/
     }
 
     private void jatekosValtUnityStatusz(Transform SzellemMeshT)
@@ -228,13 +233,13 @@ public partial class FoKod : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (holgyKovessenE == false)
+        /*if (holgyKovessenE == false)
         {
             if (jatekosTransf.position.z > -40f && Vector3.Distance(holgy.transform.position, jatekosTransf.position) < 10f)
             {
                 holgyKovessenE = true;
             }
-        }
+        }*/
 
         if (csontAtadvaE)
         {
@@ -378,7 +383,7 @@ public partial class FoKod : MonoBehaviour
             if (Physics.Raycast(ray, out hami, 2.8f))
             {
                 figyeltTargy = hami.collider.name;
-                Debug.Log(figyeltTargy);
+                //Debug.Log(figyeltTargy);
 
                 /*if (figyeltTargy != "Talaj" && !figyeltTargy.Contains("Fal"))
                 {
@@ -520,7 +525,7 @@ public partial class FoKod : MonoBehaviour
                 }
                 else if (jatekosTogyreNez)
                 {
-                    megfejesiKiserlet();
+                    megfej();
                 }
 
             }
@@ -650,9 +655,10 @@ public partial class FoKod : MonoBehaviour
         }
     }
 
-    private void megfejesiKiserlet()
+    private void megfej()
     {
-        throw new NotImplementedException();
+        animaltJatekosObj.SetActive(false);
+        fejoJatekos.SetActive(true);
     }
 
     private void urBeszel()
