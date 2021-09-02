@@ -17,7 +17,7 @@ public partial class FoKod : MonoBehaviour
     public GameObject bevitelObj;
     public InputField bevitel;
     public GameObject fejoJatekos;
-    public GameObject animaltJatekosObj;
+    public GameObject jatekosAnimaltObj;
 
     public Transform kutyaTransform;
     public GameObject pasi;
@@ -240,6 +240,12 @@ public partial class FoKod : MonoBehaviour
                 holgyKovessenE = true;
             }
         }*/
+
+        if (fejoJatekos.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+        {
+            fejoJatekos.SetActive(false);
+            jatekosAnimaltObj.SetActive(true);
+        }
 
         if (csontAtadvaE)
         {
@@ -657,7 +663,7 @@ public partial class FoKod : MonoBehaviour
 
     private void megfej()
     {
-        animaltJatekosObj.SetActive(false);
+        jatekosAnimaltObj.SetActive(false);
         fejoJatekos.SetActive(true);
     }
 
