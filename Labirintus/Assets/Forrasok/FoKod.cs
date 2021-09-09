@@ -111,6 +111,7 @@ public partial class FoKod : MonoBehaviour
     private bool holgyJatekosMelletVanE = false;
     private bool holgyElindultE = false;
     private int pihenesHolgy = 50;
+    private bool visszajatszas;
 
     private void Start()
     {
@@ -243,6 +244,7 @@ public partial class FoKod : MonoBehaviour
 
         if (fejoJatekos.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
+            visszajatszas = true;
             fejoJatekos.SetActive(false);
             jatekosAnimaltObj.SetActive(true);
         }

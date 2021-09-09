@@ -2647,7 +2647,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532487400}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.76, y: 1.28, z: -32.88}
+  m_LocalPosition: {x: 39.76, y: 1.28, z: -30.3}
   m_LocalScale: {x: 1, y: 2.4760776, z: 0.7897158}
   m_Children:
   - {fileID: 534669905}
@@ -2738,6 +2738,7 @@ MonoBehaviour:
   bevitelObj: {fileID: 1866580603}
   bevitel: {fileID: 1866580605}
   fejoJatekos: {fileID: 691958007}
+  jatekosAnimaltObj: {fileID: 569058588}
   kutyaTransform: {fileID: 443552937}
   pasi: {fileID: 305878896}
   csontParent: {fileID: 870565247}
@@ -3412,6 +3413,25 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2015483959}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &691958009
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691958007}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e8a95ee689bbd3b4ea15c7e62dc1a91b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &696293226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7666,7 +7686,8 @@ PrefabInstance:
       propertyPath: m_PlayAutomatically
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2223639932434330405, guid: a6e50934103955c469c37140e93d5e3b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a6e50934103955c469c37140e93d5e3b, type: 3}
 --- !u!1001 &2023316052
 PrefabInstance:
