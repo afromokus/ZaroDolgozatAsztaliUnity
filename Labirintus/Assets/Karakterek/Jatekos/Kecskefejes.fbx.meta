@@ -12,7 +12,17 @@ ModelImporter:
   - first:
       74: 2540163670422378493
     second: "Csontvaz|Csontvaz|fej\xE9s (1)"
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ectoplama
+    second: {fileID: 2100000, guid: 80f1f34b94a24444c977f6fec63be819, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: szajSzin
+    second: {fileID: 2100000, guid: cdc5af47deaec824395ecfa9d6ec272d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
