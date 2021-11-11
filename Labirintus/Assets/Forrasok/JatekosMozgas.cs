@@ -16,7 +16,7 @@ public class JatekosMozgas : MonoBehaviour
     float eroElore = 1f;
     float eroOldalra = 1.5f;
 
-    float sebesseg = 1f;
+    public static float sebesseg = 1f;
     float normalTempo = 5f;
     float maxSebesseg;
     float a = 0.01f;

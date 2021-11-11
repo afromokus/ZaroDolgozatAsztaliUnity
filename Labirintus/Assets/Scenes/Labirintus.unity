@@ -2110,15 +2110,15 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1198215950}
     m_Modifications:
     - target: {fileID: 100000, guid: 107217b351d81704ab2f93fc8e1c0d00, type: 3}
       propertyPath: m_Name
-      value: tejesVodor 1
+      value: tejesVodor
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 107217b351d81704ab2f93fc8e1c0d00, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 107217b351d81704ab2f93fc8e1c0d00, type: 3}
       propertyPath: m_LocalScale.x
@@ -2154,11 +2154,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 107217b351d81704ab2f93fc8e1c0d00, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 107217b351d81704ab2f93fc8e1c0d00, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 107217b351d81704ab2f93fc8e1c0d00, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2295,7 +2295,7 @@ Transform:
   - {fileID: 277433426}
   - {fileID: 170076735}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &433018360 stripped
 GameObject:
@@ -2716,7 +2716,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532487400}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 44.4, y: 1.28, z: -37.44}
+  m_LocalPosition: {x: 41.17, y: 1.28, z: -31}
   m_LocalScale: {x: 1, y: 2.4760776, z: 0.7897158}
   m_Children:
   - {fileID: 534669905}
@@ -2810,6 +2810,7 @@ MonoBehaviour:
   jatekosAnimaltObj: {fileID: 569058588}
   kutyaTransform: {fileID: 443552937}
   pasi: {fileID: 305878896}
+  tejesVodor: {fileID: 895632868}
   vodorObj: {fileID: 1774422568}
   csontObj: {fileID: 870565247}
   kovekObj: {fileID: 1757692416}
@@ -2818,6 +2819,7 @@ MonoBehaviour:
   kutya: {fileID: 1576901182}
   halalFej: {fileID: 751382942}
   atadandoCsont: {fileID: 1317737687}
+  togyHitObj: {fileID: 1200970707}
   holgy: {fileID: 2060578065}
   holgyUtes: {fileID: 45547130}
   jatekosAnimator: {fileID: 119055703}
@@ -3735,7 +3737,7 @@ Transform:
   m_Children:
   - {fileID: 751382944}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &743997441
 PrefabInstance:
@@ -4236,6 +4238,31 @@ Transform:
   m_Father: {fileID: 1198215950}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &895632868 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 107217b351d81704ab2f93fc8e1c0d00,
+    type: 3}
+  m_PrefabInstance: {fileID: 411688804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &895632871 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 107217b351d81704ab2f93fc8e1c0d00,
+    type: 3}
+  m_PrefabInstance: {fileID: 411688804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &895632872
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895632868}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.05, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0.05}
 --- !u!1001 &902023053
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5010,8 +5037,9 @@ Transform:
   - {fileID: 275491749}
   - {fileID: 891665540}
   - {fileID: 1774422571}
+  - {fileID: 895632871}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1200970707
 GameObject:
@@ -6551,8 +6579,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1665072279}
   - component: {fileID: 1665072281}
-  - component: {fileID: 1665072280}
-  - component: {fileID: 1665072282}
   m_Layer: 0
   m_Name: JatekosFp
   m_TagString: Untagged
@@ -6574,14 +6600,6 @@ Transform:
   m_Father: {fileID: 532487404}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 30, y: -90, z: 0}
---- !u!81 &1665072280
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665072278}
-  m_Enabled: 1
 --- !u!20 &1665072281
 Camera:
   m_ObjectHideFlags: 0
@@ -6625,25 +6643,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!95 &1665072282
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665072278}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6b485a600ec334747bc7baf9de23774d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &1675914892 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400004, guid: ff3e8c3aad864db4394551f29cc6f224,
@@ -6796,7 +6795,7 @@ Transform:
   m_Children:
   - {fileID: 1330780066}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1740745888
 GameObject:

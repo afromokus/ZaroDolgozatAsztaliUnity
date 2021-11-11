@@ -31,6 +31,7 @@ public partial class FoKod : MonoBehaviour
     public GameObject kutya;
     public GameObject halalFej;
     public GameObject atadandoCsont;
+    public GameObject togyHitObj;
 
     public GameObject holgy;
     public GameObject holgyUtes;
@@ -116,6 +117,8 @@ public partial class FoKod : MonoBehaviour
     private bool visszajatszas;
     private bool vodorreNez;
     private bool tejesVodorreNez;
+    private bool inputEngedelyezes = true;
+    private int inputSzamlalo = 0;
 
     private void Start()
     {
@@ -421,7 +424,16 @@ public partial class FoKod : MonoBehaviour
                 }
             }
 
-            if (Input.GetKey("e"))
+            if (inputEngedelyezes == false) 
+            {
+                inputSzamlalo++;
+                if (inputSzamlalo >= 150) 
+                {
+                    inputEngedelyezes = true;
+                }
+            }
+
+            if (Input.GetKey("e") && inputEngedelyezes)
             {
                 if (felvehetoCsontraNez)
                 {
@@ -434,6 +446,8 @@ public partial class FoKod : MonoBehaviour
                     karakterTulajdonok.Add("Tejes Vödör");
                     tejesVodorreNez = false;
                     tejesVodor.SetActive(false);
+                    karakterTulajdonok.Remove("Vödör");
+                    //targyakSzovege.text = "Tárgy felvéve";
 
                 }
                 else if (vodorreNez)
@@ -505,7 +519,9 @@ public partial class FoKod : MonoBehaviour
                 {
                     if (karakterTulajdonok.Contains("Vödör"))
                     {
+                        inputEngedelyezes = false;
                         kecskeFejes();
+                        togyHitObj.SetActive(false);
                     }
                     else 
                     {
@@ -703,6 +719,7 @@ public partial class FoKod : MonoBehaviour
     private void kecskeFejes()
     {
         jatekosAnimaltObj.SetActive(false);
+        JatekosMozgas.sebesseg = 0;
         fejoJatekos.SetActive(true);
         tejesVodor.SetActive(true);
     }
