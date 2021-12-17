@@ -653,7 +653,7 @@ public partial class FoKod : MonoBehaviour
             valtozasAlvasJel = iranyValtAlvasJel();
         }
 
-        if ((AlvasJel.transform.position.y + valtozasAlvasJel) > 0 && (AlvasJel.transform.position.y + valtozasAlvasJel) < 5)
+        if ((AlvasJel.transform.position.y + valtozasAlvasJel) > 0.20f && (AlvasJel.transform.position.y + valtozasAlvasJel) < 3f)
         {
             helyAlvasJel.Set(AlvasJel.transform.position.x, AlvasJel.transform.position.y + valtozasAlvasJel, AlvasJel.transform.position.z);
             AlvasJel.transform.position = helyAlvasJel;
