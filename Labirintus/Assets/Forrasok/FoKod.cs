@@ -4,6 +4,7 @@ using Assets.Model;
 using UnityEngine.UI;
 using System;
 using System.Threading.Tasks;
+using Random = System.Random;
 
 public partial class FoKod : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public partial class FoKod : MonoBehaviour
     public GameObject halalFej;
     public GameObject atadandoCsont;
     public GameObject togyHitObj;
+    public GameObject AlvasJel;
 
     public GameObject holgy;
     public GameObject holgyUtes;
@@ -43,6 +45,9 @@ public partial class FoKod : MonoBehaviour
     bool csengoreNez = false;
     bool urraNez = false;
     bool holgyKovessenE = false;
+
+    private float sebessegAlvasJel = 0.02f;
+    private float valtozasAlvasJel = 0.026f;
 
     enum Pozicio { alap, kozeli, felul }
     enum VektorSugarAllapot { normal, tukrozott }
@@ -61,6 +66,7 @@ public partial class FoKod : MonoBehaviour
     VektorSugar kijovetelFigyeloTukrozott;
 
     Vector3 balraFigyeloEltolas;
+    Vector3 helyAlvasJel = new Vector3();
 
     Vector3 eltolasKozeli;
     Vector3 eltolasFelul;
@@ -119,6 +125,8 @@ public partial class FoKod : MonoBehaviour
     private bool tejesVodorreNez;
     private bool inputEngedelyezes = true;
     private int inputSzamlalo = 0;
+
+    private Random rnd = new Random();
 
     private void Start()
     {
@@ -182,6 +190,7 @@ public partial class FoKod : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        ZbetuRoptetese();
         if (holgyKovessenE == false)
         {
             if (jatekosTransf.position.z > -40f && Vector3.Distance(holgy.transform.position, jatekosTransf.position) < 10f)
@@ -621,6 +630,57 @@ public partial class FoKod : MonoBehaviour
 
         kiirUzenet();
 
+    }
+
+    private void ZbetuRoptetese()
+    {
+        if (AlvasJel.transform.position.x < -30)
+        {
+            novelAlvasJelX();
+            mozgatFolLeAlvasJel();
+        }
+        else 
+        {
+            visszaAllitAlvasJel();
+        }
+
+    }
+
+    private void mozgatFolLeAlvasJel()
+    {
+        if (rnd.Next(100) > 98)
+        {
+            valtozasAlvasJel = iranyValtAlvasJel();
+        }
+
+        if ((AlvasJel.transform.position.y + valtozasAlvasJel) > 0 && (AlvasJel.transform.position.y + valtozasAlvasJel) < 5)
+        {
+            helyAlvasJel.Set(AlvasJel.transform.position.x, AlvasJel.transform.position.y + valtozasAlvasJel, AlvasJel.transform.position.z);
+            AlvasJel.transform.position = helyAlvasJel;
+        }
+
+    }
+
+    private float iranyValtAlvasJel()
+    {
+        valtozasAlvasJel = rnd.Next(10) - 5;
+        valtozasAlvasJel /= 150f;
+        Debug.Log(valtozasAlvasJel + "f");
+
+        return valtozasAlvasJel;
+    }
+
+    private void visszaAllitAlvasJel()
+    {
+        helyAlvasJel.Set(-41f, 1.6f, AlvasJel.transform.position.z);
+        AlvasJel.transform.position = helyAlvasJel;
+    }
+
+    private void novelAlvasJelX()
+    {
+        helyAlvasJel.Set(AlvasJel.transform.position.x + sebessegAlvasJel, AlvasJel.transform.position.y,
+                                                AlvasJel.transform.position.z);
+        AlvasJel.transform.position = helyAlvasJel;
     }
 
     private void jatekosValtUnityStatusz(Transform SzellemMeshT)
