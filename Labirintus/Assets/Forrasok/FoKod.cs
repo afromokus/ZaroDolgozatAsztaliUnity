@@ -120,13 +120,13 @@ public partial class FoKod : MonoBehaviour
     private bool holgyJatekosMelletVanE = false;
     private bool holgyElindultE = false;
     private int pihenesHolgy = 50;
-    private bool visszajatszas;
     private bool vodorreNez;
     private bool tejesVodorreNez;
     private bool inputEngedelyezes = true;
     private int inputSzamlalo = 0;
 
     private Random rnd = new Random();
+    public static bool mehetEAlvasJel = true;
 
     private void Start()
     {
@@ -190,7 +190,10 @@ public partial class FoKod : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        ZbetuRoptetese();
+        if (mehetEAlvasJel == true)
+        {
+            ZbetuRoptetese();
+        }
         if (holgyKovessenE == false)
         {
             if (jatekosTransf.position.z > -40f && Vector3.Distance(holgy.transform.position, jatekosTransf.position) < 10f)
@@ -201,7 +204,6 @@ public partial class FoKod : MonoBehaviour
 
         if (fejoJatekos.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
-            visszajatszas = true;
             fejoJatekos.SetActive(false);
             jatekosAnimaltObj.SetActive(true);
         }
@@ -341,13 +343,13 @@ public partial class FoKod : MonoBehaviour
         }
         else
         {
-            RaycastHit hami = new RaycastHit();
+            RaycastHit figyeloSugar = new RaycastHit();
 
             ray = kameraFpLatas.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 
-            if (Physics.Raycast(ray, out hami, 2.8f))
+            if (Physics.Raycast(ray, out figyeloSugar, 2.8f))
             {
-                figyeltTargy = hami.collider.name;
+                figyeltTargy = figyeloSugar.collider.name;
 
                 /*if (figyeltTargy != "Talaj" && !figyeltTargy.Contains("Fal"))
                 {
@@ -641,6 +643,7 @@ public partial class FoKod : MonoBehaviour
         }
         else 
         {
+            mehetEAlvasJel = true;
             visszaAllitAlvasJel();
         }
 
@@ -665,7 +668,7 @@ public partial class FoKod : MonoBehaviour
     {
         valtozasAlvasJel = rnd.Next(10) - 5;
         valtozasAlvasJel /= 150f;
-        Debug.Log(valtozasAlvasJel + "f");
+        //Debug.Log(valtozasAlvasJel + "f");
 
         return valtozasAlvasJel;
     }

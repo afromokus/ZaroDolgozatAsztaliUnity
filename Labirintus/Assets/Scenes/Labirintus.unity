@@ -2716,7 +2716,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532487400}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: -32.12, y: 1.28, z: -45.55}
+  m_LocalPosition: {x: -33.61, y: 1.28, z: -45.55}
   m_LocalScale: {x: 1, y: 2.4760776, z: 0.7897158}
   m_Children:
   - {fileID: 534669905}
@@ -2820,6 +2820,7 @@ MonoBehaviour:
   halalFej: {fileID: 751382942}
   atadandoCsont: {fileID: 1317737687}
   togyHitObj: {fileID: 1200970707}
+  AlvasJel: {fileID: 2062024488}
   holgy: {fileID: 2060578065}
   holgyUtes: {fileID: 45547130}
   jatekosAnimator: {fileID: 119055703}
@@ -2875,7 +2876,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 1.82, y: 0.59999996, z: -0.03}
+  m_LocalPosition: {x: 1.84, y: 0.59999996, z: -0.03}
   m_LocalScale: {x: 2, y: 4, z: 3}
   m_Children: []
   m_Father: {fileID: 532487404}
@@ -5981,15 +5982,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 19561d019fa8d674e92b9312d6b2de9f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -41.49
+      value: -41
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 19561d019fa8d674e92b9312d6b2de9f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.633
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 19561d019fa8d674e92b9312d6b2de9f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -45.24
+      value: -46
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 19561d019fa8d674e92b9312d6b2de9f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8209,6 +8210,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &2062024488 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 19561d019fa8d674e92b9312d6b2de9f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1437064651}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2062024489 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 19561d019fa8d674e92b9312d6b2de9f,
