@@ -33,7 +33,11 @@ public partial class FoKod : MonoBehaviour
     public GameObject halalFej;
     public GameObject atadandoCsont;
     public GameObject togyHitObj;
-    public GameObject AlvasJel;
+    public GameObject AlvasJelA;
+    public GameObject AlvasJelB;
+    public GameObject AlvasJelC;
+    public GameObject AlvasJelD;
+    public GameObject AlvasJelE;
 
     public GameObject holgy;
     public GameObject holgyUtes;
@@ -47,7 +51,12 @@ public partial class FoKod : MonoBehaviour
     bool holgyKovessenE = false;
 
     private float sebessegAlvasJel = 0.02f;
-    private float valtozasAlvasJel = 0.026f;
+
+    private float valtozasAlvasJelA = 0.026f;
+    private float valtozasAlvasJelB = 0.026f;
+    private float valtozasAlvasJelC = 0.026f;
+    private float valtozasAlvasJelD = 0.026f;
+    private float valtozasAlvasJelE = 0.026f;
 
     enum Pozicio { alap, kozeli, felul }
     enum VektorSugarAllapot { normal, tukrozott }
@@ -66,7 +75,11 @@ public partial class FoKod : MonoBehaviour
     VektorSugar kijovetelFigyeloTukrozott;
 
     Vector3 balraFigyeloEltolas;
-    Vector3 helyAlvasJel = new Vector3();
+    Vector3 helyAlvasJelA = new Vector3();
+    Vector3 helyAlvasJelB = new Vector3();
+    Vector3 helyAlvasJelC = new Vector3();
+    Vector3 helyAlvasJelD = new Vector3();
+    Vector3 helyAlvasJelE = new Vector3();
 
     Vector3 eltolasKozeli;
     Vector3 eltolasFelul;
@@ -192,7 +205,7 @@ public partial class FoKod : MonoBehaviour
     {
         if (mehetEAlvasJel == true)
         {
-            ZbetuRoptetese();
+            ZbetukRoptetese();
         }
         if (holgyKovessenE == false)
         {
@@ -634,37 +647,105 @@ public partial class FoKod : MonoBehaviour
 
     }
 
-    private void ZbetuRoptetese()
+    private void ZbetukRoptetese()
     {
-        if (AlvasJel.transform.position.x < -30)
+        if (AlvasJelA.transform.position.x < -30)
         {
-            novelAlvasJelX();
-            mozgatFolLeAlvasJel();
+            roptetEloreAlvasjelA();
+            mozgatFolLeAlvasJelA();
+            roptetEloreAlvasjelB();
+            mozgatFolLeAlvasJelB();
+            roptetEloreAlvasjelC();
+            mozgatFolLeAlvasJelC();
+            roptetEloreAlvasjelD();
+            mozgatFolLeAlvasJelD();
+            roptetEloreAlvasjelE();
+            mozgatFolLeAlvasJelE();
         }
         else 
         {
             mehetEAlvasJel = true;
-            visszaAllitAlvasJel();
+            visszaAllitAlvasJelA();
+            visszaAllitAlvasJelB();
+            visszaAllitAlvasJelC();
+            visszaAllitAlvasJelD();
+            visszaAllitAlvasJelE();
         }
 
     }
 
-    private void mozgatFolLeAlvasJel()
+    private void mozgatFolLeAlvasJelA()
     {
         if (rnd.Next(100) > 98)
         {
-            valtozasAlvasJel = iranyValtAlvasJel();
+            valtozasAlvasJelA = iranyValtAlvasJel(valtozasAlvasJelA);
         }
 
-        if ((AlvasJel.transform.position.y + valtozasAlvasJel) > 0.20f && (AlvasJel.transform.position.y + valtozasAlvasJel) < 3f)
+        if ((AlvasJelA.transform.position.y + valtozasAlvasJelA) > 0.20f && (AlvasJelA.transform.position.y + valtozasAlvasJelA) < 3f)
         {
-            helyAlvasJel.Set(AlvasJel.transform.position.x, AlvasJel.transform.position.y + valtozasAlvasJel, AlvasJel.transform.position.z);
-            AlvasJel.transform.position = helyAlvasJel;
+            helyAlvasJelA.Set(AlvasJelA.transform.position.x, AlvasJelA.transform.position.y + valtozasAlvasJelA, AlvasJelA.transform.position.z);
+            AlvasJelA.transform.position = helyAlvasJelA;
+        }
+
+    }
+    private void mozgatFolLeAlvasJelB()
+    {
+        if (rnd.Next(100) > 98)
+        {
+            valtozasAlvasJelB = iranyValtAlvasJel(valtozasAlvasJelB);
+        }
+
+        if ((AlvasJelB.transform.position.y + valtozasAlvasJelB) > 0.20f && (AlvasJelB.transform.position.y + valtozasAlvasJelB) < 3f)
+        {
+            helyAlvasJelB.Set(AlvasJelB.transform.position.x, AlvasJelB.transform.position.y + valtozasAlvasJelB, AlvasJelB.transform.position.z);
+            AlvasJelB.transform.position = helyAlvasJelB;
+        }
+
+    }
+    private void mozgatFolLeAlvasJelC()
+    {
+        if (rnd.Next(100) > 98)
+        {
+            valtozasAlvasJelC = iranyValtAlvasJel(valtozasAlvasJelC);
+        }
+
+        if ((AlvasJelC.transform.position.y + valtozasAlvasJelC) > 0.20f && (AlvasJelC.transform.position.y + valtozasAlvasJelC) < 3f)
+        {
+            helyAlvasJelC.Set(AlvasJelC.transform.position.x, AlvasJelC.transform.position.y + valtozasAlvasJelC, AlvasJelC.transform.position.z);
+            AlvasJelC.transform.position = helyAlvasJelC;
+        }
+
+    }
+    private void mozgatFolLeAlvasJelD()
+    {
+        if (rnd.Next(100) > 98)
+        {
+            valtozasAlvasJelD = iranyValtAlvasJel(valtozasAlvasJelD);
+        }
+
+        if ((AlvasJelD.transform.position.y + valtozasAlvasJelD) > 0.20f && (AlvasJelD.transform.position.y + valtozasAlvasJelD) < 3f)
+        {
+            helyAlvasJelD.Set(AlvasJelD.transform.position.x, AlvasJelD.transform.position.y + valtozasAlvasJelD, AlvasJelD.transform.position.z);
+            AlvasJelD.transform.position = helyAlvasJelD;
+        }
+
+    }
+    private void mozgatFolLeAlvasJelE()
+    {
+        if (rnd.Next(100) > 98)
+        {
+            valtozasAlvasJelE = iranyValtAlvasJel(valtozasAlvasJelE);
+        }
+
+        if ((AlvasJelE.transform.position.y + valtozasAlvasJelE) > 0.20f && (AlvasJelE.transform.position.y + valtozasAlvasJelE) < 3f)
+        {
+            helyAlvasJelE.Set(AlvasJelE.transform.position.x, AlvasJelE.transform.position.y + valtozasAlvasJelE, AlvasJelE.transform.position.z);
+            AlvasJelE.transform.position = helyAlvasJelE;
         }
 
     }
 
-    private float iranyValtAlvasJel()
+    private float iranyValtAlvasJel(float valtozasAlvasJel)
     {
         valtozasAlvasJel = rnd.Next(10) - 5;
         valtozasAlvasJel /= 150f;
@@ -673,17 +754,61 @@ public partial class FoKod : MonoBehaviour
         return valtozasAlvasJel;
     }
 
-    private void visszaAllitAlvasJel()
+    private void visszaAllitAlvasJelA()
     {
-        helyAlvasJel.Set(-41f, 1.6f, AlvasJel.transform.position.z);
-        AlvasJel.transform.position = helyAlvasJel;
+        helyAlvasJelA.Set(-41f, 1.6f, AlvasJelA.transform.position.z);
+        AlvasJelA.transform.position = helyAlvasJelA;
+    }
+    private void visszaAllitAlvasJelB()
+    {
+        helyAlvasJelB.Set(-40f, 2.58f, AlvasJelB.transform.position.z);
+        AlvasJelB.transform.position = helyAlvasJelB;
+    }
+    private void visszaAllitAlvasJelC()
+    {
+        helyAlvasJelC.Set(-39.85f, 2.2f, AlvasJelC.transform.position.z);
+        AlvasJelC.transform.position = helyAlvasJelC;
+    }
+    private void visszaAllitAlvasJelD()
+    {
+        helyAlvasJelD.Set(-38f, 1.92f, AlvasJelD.transform.position.z);
+        AlvasJelD.transform.position = helyAlvasJelD;
+    }
+    private void visszaAllitAlvasJelE()
+    {
+        helyAlvasJelE.Set(-38.8f, 1.76f, AlvasJelE.transform.position.z);
+        AlvasJelE.transform.position = helyAlvasJelE;
     }
 
-    private void novelAlvasJelX()
+    private void roptetEloreAlvasjelA()
     {
-        helyAlvasJel.Set(AlvasJel.transform.position.x + sebessegAlvasJel, AlvasJel.transform.position.y,
-                                                AlvasJel.transform.position.z);
-        AlvasJel.transform.position = helyAlvasJel;
+        helyAlvasJelA.Set(AlvasJelA.transform.position.x + sebessegAlvasJel, AlvasJelA.transform.position.y,
+                                                AlvasJelA.transform.position.z);
+        AlvasJelA.transform.position = helyAlvasJelA;
+    }
+    private void roptetEloreAlvasjelB()
+    {
+        helyAlvasJelB.Set(AlvasJelB.transform.position.x + sebessegAlvasJel, AlvasJelB.transform.position.y,
+                                                AlvasJelB.transform.position.z);
+        AlvasJelB.transform.position = helyAlvasJelB;
+    }
+    private void roptetEloreAlvasjelC()
+    {
+        helyAlvasJelC.Set(AlvasJelC.transform.position.x + sebessegAlvasJel, AlvasJelC.transform.position.y,
+                                                AlvasJelC.transform.position.z);
+        AlvasJelC.transform.position = helyAlvasJelC;
+    }
+    private void roptetEloreAlvasjelD()
+    {
+        helyAlvasJelD.Set(AlvasJelD.transform.position.x + sebessegAlvasJel, AlvasJelD.transform.position.y,
+                                                AlvasJelD.transform.position.z);
+        AlvasJelD.transform.position = helyAlvasJelD;
+    }
+    private void roptetEloreAlvasjelE()
+    {
+        helyAlvasJelE.Set(AlvasJelE.transform.position.x + sebessegAlvasJel, AlvasJelE.transform.position.y,
+                                                AlvasJelE.transform.position.z);
+        AlvasJelE.transform.position = helyAlvasJelE;
     }
 
     private void jatekosValtUnityStatusz(Transform SzellemMeshT)
