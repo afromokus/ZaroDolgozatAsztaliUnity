@@ -748,7 +748,7 @@ public partial class FoKod : MonoBehaviour
     private float iranyValtAlvasJel(float valtozasAlvasJel)
     {
         valtozasAlvasJel = rnd.Next(10) - 5;
-        valtozasAlvasJel /= 150f;
+        valtozasAlvasJel /= 200f;
         //Debug.Log(valtozasAlvasJel + "f");
 
         return valtozasAlvasJel;
@@ -758,6 +758,7 @@ public partial class FoKod : MonoBehaviour
     {
         helyAlvasJelA.Set(-41f, 1.6f, AlvasJelA.transform.position.z);
         AlvasJelA.transform.position = helyAlvasJelA;
+        AlvasJelA.SetActive(true);
     }
     private void visszaAllitAlvasJelB()
     {
