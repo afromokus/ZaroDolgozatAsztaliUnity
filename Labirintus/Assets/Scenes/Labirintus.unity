@@ -2073,7 +2073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3f27a5aa7f5b86b41870fa4d6228e254, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -44.57
+      value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3f27a5aa7f5b86b41870fa4d6228e254, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2781,6 +2781,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eaa83af347e24445add2856e2c9a95c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joPasi: {fileID: 305878896}
+  A: {fileID: 2062024488}
+  B: {fileID: 1122674901}
+  C: {fileID: 1078656841}
+  D: {fileID: 879062151}
+  E: {fileID: 1076622646}
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -5105,19 +5111,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1122674899}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1122674902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1122674901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6a0cc5b5dbfcbd45b44c8bbc1cf18eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alvasJel: {fileID: 1122674901}
 --- !u!65 &1122674903
 BoxCollider:
   m_ObjectHideFlags: 0
