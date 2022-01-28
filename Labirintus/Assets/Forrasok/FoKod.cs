@@ -662,7 +662,7 @@ public partial class FoKod : MonoBehaviour
             roptetEloreAlvasjelE();
             mozgatFolLeAlvasJelE();
         }
-        else 
+        else
         {
             mehetEAlvasJel = true;
             visszaAllitAlvasJelA();
@@ -758,7 +758,6 @@ public partial class FoKod : MonoBehaviour
     {
         helyAlvasJelA.Set(-41f, 1.6f, AlvasJelA.transform.position.z);
         AlvasJelA.transform.position = helyAlvasJelA;
-        AlvasJelA.SetActive(true);
     }
     private void visszaAllitAlvasJelB()
     {
