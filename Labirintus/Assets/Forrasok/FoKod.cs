@@ -38,9 +38,11 @@ public partial class FoKod : MonoBehaviour
     public GameObject AlvasJelC;
     public GameObject AlvasJelD;
     public GameObject AlvasJelE;
-
     public GameObject holgy;
     public GameObject holgyUtes;
+
+    public Image csontKep;
+    RectTransform rt;
 
     int i = 0;
     int koponyaszam = 0;
@@ -143,6 +145,7 @@ public partial class FoKod : MonoBehaviour
 
     private void Start()
     {
+
         bevitelObj.SetActive(false);
         fejoJatekos.SetActive(false);
         tejesVodor.SetActive(false);
@@ -161,7 +164,6 @@ public partial class FoKod : MonoBehaviour
         jatekosTransf = transform.parent;
         holgyEredetiHely = holgy.transform.position;
 
-        bevitelObj.SetActive(false);
         targyakSzovege.text = "";
 
 
@@ -464,6 +466,7 @@ public partial class FoKod : MonoBehaviour
                     karakterTulajdonok.Add("Csont");
                     felvehetoCsontraNez = false;
                     csontObj.SetActive(false);
+                    hozzaadCsontInventoryhoz();
                 }
                 else if (tejesVodorreNez)
                 {
@@ -647,6 +650,13 @@ public partial class FoKod : MonoBehaviour
 
     }
 
+    private void hozzaadCsontInventoryhoz()
+    {
+        rt = csontKep.GetComponent<RectTransform>();
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 170, rt.rect.width - 20);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 15, rt.rect.height - 10);
+    }
+    #region alvasjelek
     private void ZbetukRoptetese()
     {
         if (AlvasJelA.transform.position.x < -30)
@@ -810,6 +820,8 @@ public partial class FoKod : MonoBehaviour
                                                 AlvasJelE.transform.position.z);
         AlvasJelE.transform.position = helyAlvasJelE;
     }
+
+    #endregion
 
     private void jatekosValtUnityStatusz(Transform SzellemMeshT)
     {

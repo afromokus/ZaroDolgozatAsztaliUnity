@@ -80,8 +80,6 @@ public class JatekosCollision : MonoBehaviour
             }
             idozito++;
         }
-
-        Debug.Log(idozito);
     }
 
     private void OnCollisionEnter(Collision col)

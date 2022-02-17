@@ -10,7 +10,7 @@ public class inventoryScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InventoryCanv.enabled = true;//false;
+        InventoryCanv.enabled = false;
     }
 
     // Update is called once per frame
