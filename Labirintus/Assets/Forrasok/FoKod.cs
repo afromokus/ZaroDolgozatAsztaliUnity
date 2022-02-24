@@ -42,6 +42,12 @@ public partial class FoKod : MonoBehaviour
     public GameObject holgyUtes;
 
     public Image csontKep;
+    public Image koKep;
+    public Image kepUI;
+    public Image kepUI1;
+    public Image kepUI2;
+    public Image kepUI3;
+    public Image kepUI4;
     RectTransform rt;
 
     int i = 0;
@@ -145,6 +151,21 @@ public partial class FoKod : MonoBehaviour
 
     private void Start()
     {
+        karakterTulajdonok.Add("Kövek");
+        hozzaadTargyatInventoryhoz(koKep);
+        karakterTulajdonok.Add("Csont");
+        hozzaadTargyatInventoryhoz(csontKep);
+        karakterTulajdonok.Add("Tejes Vödör");
+        hozzaadTargyatInventoryhoz(kepUI);
+        karakterTulajdonok.Add("Vödör");
+        hozzaadTargyatInventoryhoz(kepUI1);
+        karakterTulajdonok.Add("Vasdarab");
+        hozzaadTargyatInventoryhoz(kepUI2);
+        karakterTulajdonok.Add("Hami");
+        hozzaadTargyatInventoryhoz(kepUI3);
+        karakterTulajdonok.Add("nyami");
+        hozzaadTargyatInventoryhoz(kepUI4);
+
 
         bevitelObj.SetActive(false);
         fejoJatekos.SetActive(false);
@@ -466,7 +487,7 @@ public partial class FoKod : MonoBehaviour
                     karakterTulajdonok.Add("Csont");
                     felvehetoCsontraNez = false;
                     csontObj.SetActive(false);
-                    hozzaadCsontInventoryhoz();
+                    hozzaadTargyatInventoryhoz(csontKep);
                 }
                 else if (tejesVodorreNez)
                 {
@@ -489,6 +510,7 @@ public partial class FoKod : MonoBehaviour
                     karakterTulajdonok.Add("Kövek");
                     felvehetoKovekreNez = false;
                     kovekObj.SetActive(false);
+                    hozzaadTargyatInventoryhoz(koKep);
                 }
                 else if (felvehetoBuzaraNez && karakterTulajdonok.Contains("Vágókesztyű"))
                 {
@@ -650,11 +672,25 @@ public partial class FoKod : MonoBehaviour
 
     }
 
-    private void hozzaadCsontInventoryhoz()
+    private void hozzaadTargyatInventoryhoz(Image hozzaadandoKep)
     {
-        rt = csontKep.GetComponent<RectTransform>();
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 170, rt.rect.width - 20);
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 15, rt.rect.height - 10);
+        //összes tárgy száma ezzel együtt
+        rt = hozzaadandoKep.GetComponent<RectTransform>();
+        int alap = 200;
+        int hozzaadando = 490;
+
+        if (karakterTulajdonok.Count >= 1 && karakterTulajdonok.Count <= 4) 
+        {
+            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, alap + (hozzaadando * (karakterTulajdonok.Count - 1)), rt.rect.width - 10);
+
+            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 15, rt.rect.height - 10);
+        }
+        if (karakterTulajdonok.Count >= 5 && karakterTulajdonok.Count <= 8)
+        {
+            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, alap + (hozzaadando * (karakterTulajdonok.Count - 5)), rt.rect.width - 10);
+
+            rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 80, rt.rect.height - 10);
+        }
     }
     #region alvasjelek
     private void ZbetukRoptetese()
