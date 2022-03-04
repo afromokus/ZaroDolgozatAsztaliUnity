@@ -19,7 +19,6 @@ public partial class FoKod : MonoBehaviour
     public InputField bevitel;
     public GameObject fejoJatekos;
     public GameObject jatekosAnimaltObj;
-    public GameObject xJel1;
 
     public Transform kutyaTransform;
     public GameObject pasi;
@@ -152,7 +151,7 @@ public partial class FoKod : MonoBehaviour
 
     private void Start()
     {
-        karakterTulajdonok.Add("Kövek");
+        /*karakterTulajdonok.Add("Kövek");
         hozzaadTargyatInventoryhoz(koKep);
         karakterTulajdonok.Add("Csont");
         hozzaadTargyatInventoryhoz(csontKep);
@@ -165,8 +164,15 @@ public partial class FoKod : MonoBehaviour
         karakterTulajdonok.Add("Hami");
         hozzaadTargyatInventoryhoz(kepUI3);
         karakterTulajdonok.Add("nyami");
-        hozzaadTargyatInventoryhoz(kepUI4);
+        hozzaadTargyatInventoryhoz(kepUI4);*/
 
+        csontKep.transform.GetChild(0).gameObject.SetActive(false);
+        koKep.transform.GetChild(0).gameObject.SetActive(false);
+        kepUI.transform.GetChild(0).gameObject.SetActive(false);
+        kepUI1.transform.GetChild(0).gameObject.SetActive(false);
+        kepUI2.transform.GetChild(0).gameObject.SetActive(false);
+        kepUI3.transform.GetChild(0).gameObject.SetActive(false);
+        kepUI4.transform.GetChild(0).gameObject.SetActive(false);
 
         bevitelObj.SetActive(false);
         fejoJatekos.SetActive(false);
@@ -225,6 +231,11 @@ public partial class FoKod : MonoBehaviour
         FejoJatekos.SetActive(false);*/
     }
 
+    private void athuzKepet(Image kep)
+    {
+        kep.transform.GetChild(0).gameObject.SetActive(true);
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -254,6 +265,7 @@ public partial class FoKod : MonoBehaviour
                 uzMegjel.megjelenitUzenetet("Csont átadva.");
                 uzIdo = 0;
                 karakterTulajdonok.Remove("Csont");
+                athuzKepet(csontKep);
                 kutyaElindultE = true;
                 kutya.GetComponent<Animator>().Play("Futas", 0);
                 csontAtadvaE = false;
@@ -673,10 +685,6 @@ public partial class FoKod : MonoBehaviour
         kiirUzenet();
 
     }
-    private void athuzKepetXszel()
-    {
-
-    }
 
     private void hozzaadTargyatInventoryhoz(Image hozzaadandoKep)
     {
@@ -690,8 +698,6 @@ public partial class FoKod : MonoBehaviour
             rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, alap + (hozzaadando * (karakterTulajdonok.Count - 1)), rt.rect.width - 10);
 
             rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 15, rt.rect.height - 10);
-
-            athuzKepetXszel();
         }
         if (karakterTulajdonok.Count >= 5 && karakterTulajdonok.Count <= 8)
         {
