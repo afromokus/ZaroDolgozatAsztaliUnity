@@ -19,6 +19,7 @@ public partial class FoKod : MonoBehaviour
     public InputField bevitel;
     public GameObject fejoJatekos;
     public GameObject jatekosAnimaltObj;
+    public GameObject xJel1;
 
     public Transform kutyaTransform;
     public GameObject pasi;
@@ -223,6 +224,7 @@ public partial class FoKod : MonoBehaviour
         /*FejoJatekos.transform.localPosition.Set(jatekosTransf.localPosition.x, FejoJatekos.transform.localPosition.y, jatekosTransf.localPosition.x);
         FejoJatekos.SetActive(false);*/
     }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -671,6 +673,10 @@ public partial class FoKod : MonoBehaviour
         kiirUzenet();
 
     }
+    private void athuzKepetXszel()
+    {
+
+    }
 
     private void hozzaadTargyatInventoryhoz(Image hozzaadandoKep)
     {
@@ -684,6 +690,8 @@ public partial class FoKod : MonoBehaviour
             rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, alap + (hozzaadando * (karakterTulajdonok.Count - 1)), rt.rect.width - 10);
 
             rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 15, rt.rect.height - 10);
+
+            athuzKepetXszel();
         }
         if (karakterTulajdonok.Count >= 5 && karakterTulajdonok.Count <= 8)
         {

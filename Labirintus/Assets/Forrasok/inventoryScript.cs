@@ -11,6 +11,7 @@ public class inventoryScript : MonoBehaviour
     void Start()
     {
         InventoryCanv.enabled = false;
+        InventoryCanv.enabled = true;
     }
 
     // Update is called once per frame
