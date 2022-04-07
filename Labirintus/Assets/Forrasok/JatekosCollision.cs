@@ -5,6 +5,7 @@ using UnityEngine;
 public class JatekosCollision : MonoBehaviour
 {
     public GameObject joPasi;
+    public GameObject holgyKesztyuNelkul;
 
     public GameObject A;
     public GameObject B;
@@ -27,8 +28,14 @@ public class JatekosCollision : MonoBehaviour
     bool joPasiAlszik = true;
     private int elalvasIdo = 400;
 
+    private void Start()
+    {
+        holgyKesztyuNelkul.SetActive(false);
+    }
+
     private void FixedUpdate()
     {
+
         if (mehetElorePasi) 
         {
             joPasi.transform.Translate(0f,0f,0.03f);
@@ -80,6 +87,15 @@ public class JatekosCollision : MonoBehaviour
             }
             idozito++;
         }
+
+        if (pasiPoz1 && holgyKesztyuNelkul.transform.position.x < -35 && holgyKesztyuNelkul.transform.position.z < -40)
+        {
+            FoKod.HolgySzerelmesE = true;
+            holgyKesztyuNelkul.SetActive(true);
+        }
+
+        Debug.Log("Hölgy helyzete:\tx: " + holgyKesztyuNelkul.transform.position.x + "\tz: " + holgyKesztyuNelkul.transform.position.z);
+
     }
 
     private void OnCollisionEnter(Collision col)

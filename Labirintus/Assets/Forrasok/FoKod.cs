@@ -149,6 +149,8 @@ public partial class FoKod : MonoBehaviour
     private Random rnd = new Random();
     public static bool mehetEAlvasJel = true;
 
+    public static bool HolgySzerelmesE = false;
+
     private void Start()
     {
         /*karakterTulajdonok.Add("Kövek");
@@ -243,6 +245,7 @@ public partial class FoKod : MonoBehaviour
         {
             ZbetukRoptetese();
         }
+
         if (holgyKovessenE == false)
         {
             if (jatekosTransf.position.z > -40f && Vector3.Distance(holgy.transform.position, jatekosTransf.position) < 10f)
@@ -671,7 +674,14 @@ public partial class FoKod : MonoBehaviour
 
         if (holgyKovessenE)
         {
-            holgyTamadJatekost();
+            if (HolgySzerelmesE == false)
+            {
+                holgyTamadJatekost();
+            }
+            else 
+            {
+                holgy.transform.GetChild(0).gameObject.SetActive(false);
+            }
         }
 
         if (!ajtotLattaMar)
