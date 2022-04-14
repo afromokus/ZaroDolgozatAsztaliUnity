@@ -19,18 +19,26 @@ public class JatekosCollision : MonoBehaviour
     private Vector3 helyD = new Vector3();
     private Vector3 helyE = new Vector3();
 
+    Vector3 vektorPasiMellett;
+    Vector3 vektorSator;
+
     int idozito = 0;
     int varakozPasiIdo = 300;
 
     bool mehetElorePasi = false;
+    //sátor elõtt
     private bool pasiPoz1 = false;
+    //sátorban
     private bool pasiPoz0 = true;
     bool joPasiAlszik = true;
     private int elalvasIdo = 400;
+    private bool pasiVarHolgyre = false;
+    private bool pasiEsHolgyEgyütt = false;
 
     private void Start()
     {
         holgyKesztyuNelkul.SetActive(false);
+        vektorSator = new Vector3(-44f,0f,-44.65f);
     }
 
     private void FixedUpdate()
@@ -46,7 +54,7 @@ public class JatekosCollision : MonoBehaviour
                 pasiPoz1 = true;
             }
         }
-        if (pasiPoz1)
+        if (pasiPoz1 && !pasiVarHolgyre)
         {
             if (idozito >= varakozPasiIdo) 
             {
@@ -58,7 +66,10 @@ public class JatekosCollision : MonoBehaviour
                 {
                     pasiPoz0 = true;
                     pasiPoz1 = false;
-                    idozito = 0;
+                    if (!pasiEsHolgyEgyütt)
+                    {
+                        idozito = 0;
+                    }
                 }
             }
             else
@@ -66,7 +77,7 @@ public class JatekosCollision : MonoBehaviour
                 idozito++;
             }
         }
-        if (pasiPoz0 && !joPasiAlszik && !mehetElorePasi) 
+        if (pasiPoz0 && !joPasiAlszik && !mehetElorePasi && !pasiEsHolgyEgyütt) 
         {
             if(idozito >= elalvasIdo) 
             {
@@ -88,13 +99,33 @@ public class JatekosCollision : MonoBehaviour
             idozito++;
         }
 
-        if (pasiPoz1 && holgyKesztyuNelkul.transform.position.x < -35 && holgyKesztyuNelkul.transform.position.z < -40)
+        if (pasiPoz1 && holgyKesztyuNelkul.transform.position.x < -35 && holgyKesztyuNelkul.transform.position.z < -40 && !FoKod.HolgySzerelmesE)
         {
             FoKod.HolgySzerelmesE = true;
             holgyKesztyuNelkul.SetActive(true);
+            pasiVarHolgyre = true;
+            vektorPasiMellett = new Vector3(joPasi.transform.position.x, joPasi.transform.position.y, joPasi.transform.position.z - 2);
         }
 
-        Debug.Log("Hölgy helyzete:\tx: " + holgyKesztyuNelkul.transform.position.x + "\tz: " + holgyKesztyuNelkul.transform.position.z);
+        if (pasiVarHolgyre) 
+        {
+            if (holgyKesztyuNelkul.transform.position.z > -46.4f && holgyKesztyuNelkul.transform.position.x > -40.8f)
+            {
+                holgyKesztyuNelkul.transform.LookAt(vektorPasiMellett);
+                holgyKesztyuNelkul.transform.Translate(0, 0, Time.deltaTime * 1f);
+            }
+            else 
+            {
+                holgyKesztyuNelkul.transform.LookAt(vektorSator);
+                pasiVarHolgyre = false;
+                pasiEsHolgyEgyütt = true;
+            }
+        }
+
+        if (pasiEsHolgyEgyütt && idozito >= varakozPasiIdo && holgyKesztyuNelkul.transform.position.x > -46f) 
+        {
+            holgyKesztyuNelkul.transform.Translate(0, 0, 0.03f);
+        }
 
     }
 

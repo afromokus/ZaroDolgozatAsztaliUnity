@@ -681,6 +681,7 @@ public partial class FoKod : MonoBehaviour
             else 
             {
                 holgy.transform.GetChild(0).gameObject.SetActive(false);
+                holgy.transform.GetChild(1).gameObject.SetActive(false);
             }
         }
 
