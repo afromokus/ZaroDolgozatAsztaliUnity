@@ -6,6 +6,7 @@ public class JatekosCollision : MonoBehaviour
 {
     public GameObject joPasi;
     public GameObject holgyKesztyuNelkul;
+    public GameObject kesztyu;
 
     public GameObject A;
     public GameObject B;
@@ -39,11 +40,11 @@ public class JatekosCollision : MonoBehaviour
     {
         holgyKesztyuNelkul.SetActive(false);
         vektorSator = new Vector3(-44f,0f,-44.65f);
+        kesztyu.SetActive(false);
     }
 
     private void FixedUpdate()
     {
-
         if (mehetElorePasi) 
         {
             joPasi.transform.Translate(0f,0f,0.03f);
@@ -103,6 +104,7 @@ public class JatekosCollision : MonoBehaviour
         {
             FoKod.HolgySzerelmesE = true;
             holgyKesztyuNelkul.SetActive(true);
+            kesztyu.SetActive(true);
             pasiVarHolgyre = true;
             vektorPasiMellett = new Vector3(joPasi.transform.position.x, joPasi.transform.position.y, joPasi.transform.position.z - 2);
         }
