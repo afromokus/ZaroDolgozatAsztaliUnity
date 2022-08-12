@@ -38,6 +38,8 @@ public class JatekosCollision : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("x :"+ joPasi.transform.localPosition.x + "\ty: " + joPasi.transform.localPosition.y + "\tz: " + joPasi.transform.localPosition.z);
+
         holgyKesztyuNelkul.SetActive(false);
         vektorSator = new Vector3(-44f,0f,-44.65f);
         kesztyu.SetActive(false);
@@ -106,7 +108,7 @@ public class JatekosCollision : MonoBehaviour
             holgyKesztyuNelkul.SetActive(true);
             kesztyu.SetActive(true);
             pasiVarHolgyre = true;
-            vektorPasiMellett = new Vector3(joPasi.transform.position.x, joPasi.transform.position.y, joPasi.transform.position.z - 2);
+            vektorPasiMellett = new Vector3(joPasi.transform.localPosition.x, joPasi.transform.localPosition.y, joPasi.transform.localPosition.z - 1.8f);
         }
 
         if (pasiVarHolgyre) 
@@ -126,7 +128,7 @@ public class JatekosCollision : MonoBehaviour
 
         if (pasiEsHolgyEgyütt && idozito >= varakozPasiIdo && holgyKesztyuNelkul.transform.position.x > -46f) 
         {
-            holgyKesztyuNelkul.transform.Translate(0, 0, 0.03f);
+            holgyKesztyuNelkul.transform.Translate(0, 0, 0.05f);
         }
 
     }

@@ -40,10 +40,11 @@ public partial class FoKod : MonoBehaviour
     public GameObject AlvasJelE;
     public GameObject holgy;
     public GameObject holgyUtes;
+    public GameObject kesztyuObj;
 
     public Image csontKep;
     public Image koKep;
-    public Image kepUI;
+    public Image kesztyuKep;
     public Image kepUI1;
     public Image kepUI2;
     public Image kepUI3;
@@ -125,6 +126,7 @@ public partial class FoKod : MonoBehaviour
     private bool pasiKijonE;
     private bool helikopterreNez;
     private bool jatekosTogyreNez;
+    private bool jatekosKesztyureNez = false;
 
     UzenetMegjelenito uzMegjel;
     private int uzIdo = 201;
@@ -170,7 +172,7 @@ public partial class FoKod : MonoBehaviour
 
         csontKep.transform.GetChild(0).gameObject.SetActive(false);
         koKep.transform.GetChild(0).gameObject.SetActive(false);
-        kepUI.transform.GetChild(0).gameObject.SetActive(false);
+        kesztyuKep.transform.GetChild(0).gameObject.SetActive(false);
         kepUI1.transform.GetChild(0).gameObject.SetActive(false);
         kepUI2.transform.GetChild(0).gameObject.SetActive(false);
         kepUI3.transform.GetChild(0).gameObject.SetActive(false);
@@ -404,10 +406,10 @@ public partial class FoKod : MonoBehaviour
             {
                 figyeltTargy = figyeloSugar.collider.name;
 
-                /*if (figyeltTargy != "Talaj" && !figyeltTargy.Contains("Fal"))
+                if (figyeltTargy != "Talaj" && !figyeltTargy.Contains("Fal"))
                 {
                     Debug.Log(figyeltTargy);
-                }*/
+                }
 
                 if (megjelenitUzenetet)
                 {
@@ -471,6 +473,11 @@ public partial class FoKod : MonoBehaviour
                     targyakSzovege.text = "Kecsketőgy";
                     jatekosTogyreNez = true;
                 }
+                else if (figyeltTargy == "kesztyuHit")
+                {
+                    targyakSzovege.text = "Kesztyű";
+                    jatekosKesztyureNez = true;
+                }
                 else
                 {
                     targyakSzovege.text = "";
@@ -512,7 +519,7 @@ public partial class FoKod : MonoBehaviour
                     tejesVodorreNez = false;
                     tejesVodor.SetActive(false);
                     karakterTulajdonok.Remove("Vödör");
-                    //targyakSzovege.text = "Tárgy felvéve";
+                    targyakSzovege.text = "Tárgy felvéve";
 
                 }
                 else if (vodorreNez)
@@ -520,6 +527,14 @@ public partial class FoKod : MonoBehaviour
                     karakterTulajdonok.Add("Vödör");
                     vodorreNez = false;
                     vodorObj.SetActive(false);
+
+                }
+                else if (jatekosKesztyureNez)
+                {
+                    karakterTulajdonok.Add("Kesztyu");
+                    jatekosKesztyureNez = false;
+                    kesztyuObj.SetActive(false);
+                    hozzaadTargyatInventoryhoz(kesztyuKep);
 
                 }
                 else if (felvehetoKovekreNez)
