@@ -58,6 +58,10 @@ public partial class FoKod : MonoBehaviour
     bool csengoreNez = false;
     bool urraNez = false;
     bool holgyKovessenE = false;
+    bool barmikorFelnyithatoE = false;
+    private int idozito = 0;
+
+    public static bool bevitelObjActive { get; set; }
 
     private float sebessegAlvasJel = 0.02f;
 
@@ -179,6 +183,7 @@ public partial class FoKod : MonoBehaviour
         kepUI4.transform.GetChild(0).gameObject.SetActive(false);
 
         bevitelObj.SetActive(false);
+        bevitelObjActive = false;
         fejoJatekos.SetActive(false);
         tejesVodor.SetActive(false);
 
@@ -243,6 +248,14 @@ public partial class FoKod : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (idozito <= 5)
+        {
+            idozito++;
+        }
+        else 
+        {
+            barmikorFelnyithatoE = false;
+        }
         if (mehetEAlvasJel == true)
         {
             ZbetukRoptetese();
@@ -311,10 +324,17 @@ public partial class FoKod : MonoBehaviour
             setalKutyaGazban();
         }
 
+        if (Cursor.visible == false && Input.GetKey(KeyCode.Return) && !kutyaraNez && !urraNez && !bevitelObjActive && !barmikorFelnyithatoE)//return = enter
+        {
+            Cursor.visible = true;
+        }
+
         if (Cursor.visible == true)
         {
             bevitel.placeholder.GetComponent<Text>().text = "Mit teszel?";
-            if (Input.GetKey(KeyCode.Return) && bevitel.text != "")
+            bevitelObj.SetActive(true);
+            bevitelObjActive = true;
+            if (Input.GetKey(KeyCode.Return)/*Return = enter*/ && bevitel.text != "")
             {
                 if (bevitel.text.Length < 20)
                 {
@@ -326,7 +346,7 @@ public partial class FoKod : MonoBehaviour
                 }
                 if (kutyaraNez && !kutyaElindultE)
                 {
-                    if (beirtParancs.Contains("ad") && beirtParancs.Contains("csont"))
+                    if (beirtParancs.Contains("ad") && beirtParancs.Contains(" csont"))
                     {
                         if (karakterTulajdonok.Contains("Csont"))
                         {
@@ -356,9 +376,13 @@ public partial class FoKod : MonoBehaviour
                         uzMegjel.megjelenitUzenetet("Ismeretlen parancs");
                         uzIdo = 0;
                     }
+                    Cursor.visible = false;
+                    bevitel.text = "";
+                    bevitelObj.SetActive(false);
+                    bevitelObjActive = false;
+                    targyakSzovege.text = uzenet;
                 }
-
-                if (urraNez && !urLezarva)
+                else if (urraNez && !urLezarva)
                 {
                     urBeszel();
                     if (!urKutyaraRakerdezett)
@@ -388,11 +412,22 @@ public partial class FoKod : MonoBehaviour
                             uzIdo = 0;
                         }
                     }
+                    Cursor.visible = false;
+                    bevitel.text = "";
+                    bevitelObj.SetActive(false);
+                    bevitelObjActive = false;
+                    targyakSzovege.text = uzenet;
                 }
-                Cursor.visible = false;
-                bevitel.text = "";
-                bevitelObj.SetActive(false);
-                targyakSzovege.text = uzenet;
+                else 
+                {
+                    Debug.Log("nyami");
+                    bevitel.text = "";
+                    Cursor.visible = false;
+                    bevitelObj.SetActive(false);
+                    bevitelObjActive = false;
+                    barmikorFelnyithatoE = true;
+                    idozito = 0;
+                }
 
             }
         }
@@ -408,7 +443,7 @@ public partial class FoKod : MonoBehaviour
 
                 if (figyeltTargy != "Talaj" && !figyeltTargy.Contains("Fal"))
                 {
-                    Debug.Log(figyeltTargy);
+                    //Debug.Log(figyeltTargy);
                 }
 
                 if (megjelenitUzenetet)
@@ -556,6 +591,7 @@ public partial class FoKod : MonoBehaviour
                     {
                         Cursor.visible = true;
                         bevitelObj.SetActive(true);
+                        bevitelObjActive = true;
                     }
                     else if (kutyaElsoHelyenVanE)
                     {
@@ -581,6 +617,7 @@ public partial class FoKod : MonoBehaviour
                     {
                         Cursor.visible = true;
                         bevitelObj.SetActive(true);
+                        bevitelObjActive = true;
                     }
                     else
                     {

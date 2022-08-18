@@ -38,7 +38,7 @@ public class JatekosCollision : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("x :"+ joPasi.transform.localPosition.x + "\ty: " + joPasi.transform.localPosition.y + "\tz: " + joPasi.transform.localPosition.z);
+        //Debug.Log("x :"+ joPasi.transform.localPosition.x + "\ty: " + joPasi.transform.localPosition.y + "\tz: " + joPasi.transform.localPosition.z);
 
         holgyKesztyuNelkul.SetActive(false);
         vektorSator = new Vector3(-44f,0f,-44.65f);

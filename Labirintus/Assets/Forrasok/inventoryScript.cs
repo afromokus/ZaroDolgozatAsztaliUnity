@@ -17,7 +17,7 @@ public class inventoryScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("i")) 
+        if (Input.GetKeyDown("i") && !FoKod.bevitelObjActive)
         {
             if (InventoryCanv.enabled)
             {
