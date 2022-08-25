@@ -156,6 +156,7 @@ public partial class FoKod : MonoBehaviour
     public static bool mehetEAlvasJel = true;
 
     public static bool HolgySzerelmesE = false;
+    private bool kesztyutJatekosFelhuztaE = false;
 
     private void Start()
     {
@@ -441,6 +442,7 @@ public partial class FoKod : MonoBehaviour
                             uzIdo = 0;
                             athuzKepet(kesztyuKep);
                             karakterTulajdonok.Remove("Kesztyű");
+                            kesztyutJatekosFelhuztaE = true;
                         }
                         else
                         {
@@ -613,9 +615,9 @@ public partial class FoKod : MonoBehaviour
                     kovekObj.SetActive(false);
                     hozzaadTargyatInventoryhoz(koKep);
                 }
-                else if (felvehetoBuzaraNez && karakterTulajdonok.Contains("Kesztyű"))
+                else if (felvehetoBuzaraNez && (karakterTulajdonok.Contains("Kesztyű") || kesztyutJatekosFelhuztaE))
                 {
-                    karakterTulajdonok.Add("Kövek");
+                    karakterTulajdonok.Add("Búza");
                     felvehetoBuzaraNez = false;
                     buzaObj.SetActive(false);
                 }
