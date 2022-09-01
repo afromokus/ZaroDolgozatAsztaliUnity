@@ -45,7 +45,7 @@ public partial class FoKod : MonoBehaviour
     public Image csontKep;
     public Image koKep;
     public Image kesztyuKep;
-    public Image kepUI1;
+    public Image buzaKep;
     public Image kepUI2;
     public Image kepUI3;
     public Image kepUI4;
@@ -160,28 +160,29 @@ public partial class FoKod : MonoBehaviour
 
     private void Start()
     {
-        /*karakterTulajdonok.Add("Kövek");
+
+        csontKep.transform.GetChild(0).gameObject.SetActive(false);
+        koKep.transform.GetChild(0).gameObject.SetActive(false);
+        kesztyuKep.transform.GetChild(0).gameObject.SetActive(false);
+        buzaKep.transform.GetChild(0).gameObject.SetActive(false);
+        kepUI2.transform.GetChild(0).gameObject.SetActive(false);
+        kepUI3.transform.GetChild(0).gameObject.SetActive(false);
+        kepUI4.transform.GetChild(0).gameObject.SetActive(false);
+
+        karakterTulajdonok.Add("Kövek");
         hozzaadTargyatInventoryhoz(koKep);
-        karakterTulajdonok.Add("Csont");
-        hozzaadTargyatInventoryhoz(csontKep);
-        karakterTulajdonok.Add("Tejes Vödör");
-        hozzaadTargyatInventoryhoz(kepUI);
-        karakterTulajdonok.Add("Vödör");
-        hozzaadTargyatInventoryhoz(kepUI1);
-        karakterTulajdonok.Add("Vasdarab");
+        /*karakterTulajdonok.Add("Csont");
+        hozzaadTargyatInventoryhoz(csontKep);*/
+        //karakterTulajdonok.Add("Tejes Vödör");
+        hozzaadTargyatInventoryhoz(buzaKep);
+        karakterTulajdonok.Add("Búza");
+        /*hozzaadTargyatInventoryhoz(kesztyuKep);
+        karakterTulajdonok.Add("Kesztyű");
         hozzaadTargyatInventoryhoz(kepUI2);
         karakterTulajdonok.Add("Hami");
         hozzaadTargyatInventoryhoz(kepUI3);
         karakterTulajdonok.Add("nyami");
         hozzaadTargyatInventoryhoz(kepUI4);*/
-
-        csontKep.transform.GetChild(0).gameObject.SetActive(false);
-        koKep.transform.GetChild(0).gameObject.SetActive(false);
-        kesztyuKep.transform.GetChild(0).gameObject.SetActive(false);
-        kepUI1.transform.GetChild(0).gameObject.SetActive(false);
-        kepUI2.transform.GetChild(0).gameObject.SetActive(false);
-        kepUI3.transform.GetChild(0).gameObject.SetActive(false);
-        kepUI4.transform.GetChild(0).gameObject.SetActive(false);
 
         bevitelObj.SetActive(false);
         bevitelObjActive = false;
@@ -421,40 +422,59 @@ public partial class FoKod : MonoBehaviour
                     bevitelObjActive = false;
                     targyakSzovege.text = uzenet;
                 }
-                else 
+                else if (felvehetoBuzaraNez)
                 {
                     beirtParancs = bevitel.text.ToLower();
 
-                    if (bevitel.text.Length < 20)
+                    if (bevitel.text.Length <= 50)
                     {
                         beirtParancs = bevitel.text.ToLower();
                     }
                     else
                     {
-                        beirtParancs = bevitel.text.Substring(0, 20).ToLower();
+                        beirtParancs = bevitel.text.Substring(0, 50).ToLower();
                     }
 
-                    if ((beirtParancs.Contains("felhúz") || beirtParancs.Contains("felvesz")) && beirtParancs.Contains("kesztyűt"))
+                    if ((beirtParancs.Contains("felvesz") || beirtParancs.Contains("felvhúz")) && beirtParancs.Contains("kesztyűt")) 
                     {
-                        if (karakterTulajdonok.Contains("Kesztyű"))
+                        if (beirtParancs.Contains("levágom") && beirtParancs.Contains("búzát"))
                         {
-                            uzMegjel.megjelenitUzenetet("Rendben!");
+                            uzMegjel.megjelenitUzenetet("Levágtad a kesztyűvel a búzát");
+                            uzIdo = 0;
+                            athuzKepet(kesztyuKep);
+                            karakterTulajdonok.Remove("Kesztyű");
+                            buzaObj.SetActive(false);
+                            karakterTulajdonok.Add("Búza");
+                        }
+                        else
+                        {
+                            uzMegjel.megjelenitUzenetet("Felhúztad a kesztyűt");
                             uzIdo = 0;
                             athuzKepet(kesztyuKep);
                             karakterTulajdonok.Remove("Kesztyű");
                             kesztyutJatekosFelhuztaE = true;
                         }
-                        else
-                        {
-                            uzMegjel.megjelenitUzenetet("Tárgy nincs felvéve!");
-                            uzIdo = 0;
-                        }
                     }
-                    else 
+                    else
                     {
                         uzMegjel.megjelenitUzenetet("Ismeretlen parancs!");
                         uzIdo = 0;
                     }
+                    kesztyutJatekosFelhuztaE = true;
+
+                    bevitel.text = "";
+                    beirtParancs = "";
+                    Cursor.visible = false;
+                    bevitelObj.SetActive(false);
+                    bevitelObjActive = false;
+                    barmikorFelnyithatoE = true;
+                    idozito = 0;
+
+                }
+                else
+                {
+
+                    kesztyuFelveteleSzoveggel();
 
                     bevitel.text = "";
                     beirtParancs = "";
@@ -615,12 +635,6 @@ public partial class FoKod : MonoBehaviour
                     kovekObj.SetActive(false);
                     hozzaadTargyatInventoryhoz(koKep);
                 }
-                else if (felvehetoBuzaraNez && (karakterTulajdonok.Contains("Kesztyű") || kesztyutJatekosFelhuztaE))
-                {
-                    karakterTulajdonok.Add("Búza");
-                    felvehetoBuzaraNez = false;
-                    buzaObj.SetActive(false);
-                }
                 else if (kutyaraNez)
                 {
                     if (!kutyaElindultE)
@@ -677,11 +691,26 @@ public partial class FoKod : MonoBehaviour
                         kecskeFejes();
                         togyHitObj.SetActive(false);
                     }
-                    else 
+                    else
                     {
                         targyakSzovege.text = "Tárgy nincs felvéve";
                     }
                 }
+                else if (felvehetoBuzaraNez)
+                {
+                    if (kesztyutJatekosFelhuztaE)
+                    {
+                        karakterTulajdonok.Add("Búza");
+                        felvehetoBuzaraNez = false;
+                        buzaObj.SetActive(false);
+                        hozzaadTargyatInventoryhoz(buzaKep);
+                    }
+                    else if(karakterTulajdonok.Contains("Kesztyű"))
+                    {
+                        Cursor.visible = true;
+                    }
+                }
+
 
             }
 
@@ -783,6 +812,43 @@ public partial class FoKod : MonoBehaviour
 
         kiirUzenet();
 
+    }
+
+    private void kesztyuFelveteleSzoveggel()
+    {
+
+        beirtParancs = bevitel.text.ToLower();
+
+        if (bevitel.text.Length < 20)
+        {
+            beirtParancs = bevitel.text.ToLower();
+        }
+        else
+        {
+            beirtParancs = bevitel.text.Substring(0, 20).ToLower();
+        }
+
+        if ((beirtParancs.Contains("felhúz") || beirtParancs.Contains("felvesz")) && beirtParancs.Contains("kesztyűt"))
+        {
+            if (karakterTulajdonok.Contains("Kesztyű"))
+            {
+                uzMegjel.megjelenitUzenetet("Rendben!");
+                uzIdo = 0;
+                athuzKepet(kesztyuKep);
+                karakterTulajdonok.Remove("Kesztyű");
+                kesztyutJatekosFelhuztaE = true;
+            }
+            else
+            {
+                uzMegjel.megjelenitUzenetet("Tárgy nincs felvéve!");
+                uzIdo = 0;
+            }
+        }
+        else
+        {
+            uzMegjel.megjelenitUzenetet("Ismeretlen parancs!");
+            uzIdo = 0;
+        }
     }
 
     private void hozzaadTargyatInventoryhoz(Image hozzaadandoKep)

@@ -3793,7 +3793,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532487400}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 24.86, y: 1.28, z: -47.77}
+  m_LocalPosition: {x: -12.9, y: 1.28, z: -32.8}
   m_LocalScale: {x: 1, y: 2.4760776, z: 0.7897158}
   m_Children:
   - {fileID: 534669905}
@@ -3928,7 +3928,7 @@ MonoBehaviour:
   csontKep: {fileID: 896240837}
   koKep: {fileID: 1748818599}
   kesztyuKep: {fileID: 1347142340}
-  kepUI1: {fileID: 1174057660}
+  buzaKep: {fileID: 1174057660}
   kepUI2: {fileID: 1682504390}
   kepUI3: {fileID: 1698145273}
   kepUI4: {fileID: 315843875}
@@ -7977,7 +7977,7 @@ GameObject:
   - component: {fileID: 1174057661}
   - component: {fileID: 1174057660}
   m_Layer: 0
-  m_Name: KepUI (1)
+  m_Name: BuzakepUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8023,7 +8023,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ab8b56205a2bd9b49bfd8e14ccbb148b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
