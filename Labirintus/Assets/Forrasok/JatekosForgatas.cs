@@ -15,7 +15,7 @@ public class JatekosForgatas : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Cursor.visible == false)
+        if (Cursor.visible == false && FoKod.jatekosMozoghatE)
         {
             forgatasVektor.y += forgatasiSebesseg * Input.GetAxis("Mouse X");
 

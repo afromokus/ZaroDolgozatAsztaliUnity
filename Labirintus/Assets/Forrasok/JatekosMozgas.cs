@@ -65,7 +65,7 @@ public class JatekosMozgas : MonoBehaviour
             Debug.Log("búza kijőve");
         }*/
 
-        if (Cursor.visible == false)
+        if (Cursor.visible == false && FoKod.jatekosMozoghatE)
         {
             mozgasVizsgalat();
 

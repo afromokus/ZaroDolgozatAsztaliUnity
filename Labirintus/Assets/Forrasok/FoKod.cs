@@ -54,6 +54,7 @@ public partial class FoKod : MonoBehaviour
     int i = 0;
     int koponyaszam = 0;
 
+    public static bool jatekosMozoghatE = true;
     bool felvehetoCsontraNez = false;
     bool csengoreNez = false;
     bool urraNez = false;
@@ -275,6 +276,7 @@ public partial class FoKod : MonoBehaviour
         {
             fejoJatekos.SetActive(false);
             jatekosAnimaltObj.SetActive(true);
+            jatekosMozoghatE = true;
         }
 
         if (csontAtadvaE)
@@ -1134,7 +1136,7 @@ public partial class FoKod : MonoBehaviour
     private void kecskeFejes()
     {
         jatekosAnimaltObj.SetActive(false);
-        JatekosMozgas.sebesseg = 0;
+        FoKod.jatekosMozoghatE = false;
         fejoJatekos.SetActive(true);
         tejesVodor.SetActive(true);
     }
