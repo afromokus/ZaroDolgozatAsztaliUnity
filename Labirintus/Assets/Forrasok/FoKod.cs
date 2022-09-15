@@ -501,7 +501,7 @@ public partial class FoKod : MonoBehaviour
 
                 if (figyeltTargy != "Talaj" && !figyeltTargy.Contains("Fal"))
                 {
-                    //Debug.Log(figyeltTargy);
+                    Debug.Log(figyeltTargy);
                 }
 
                 if (megjelenitUzenetet)
@@ -799,8 +799,7 @@ public partial class FoKod : MonoBehaviour
             }
             else 
             {
-                holgy.transform.GetChild(0).gameObject.SetActive(false);
-                holgy.transform.GetChild(1).gameObject.SetActive(false);
+                holgy.SetActive(false);
             }
         }
 
