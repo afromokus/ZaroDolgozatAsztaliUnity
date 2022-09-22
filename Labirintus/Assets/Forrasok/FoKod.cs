@@ -101,7 +101,6 @@ public partial class FoKod : MonoBehaviour
     Vector3 eltolasFelul;
     private Vector3 eltolasAlap;
     Vector3 kutyaCel;
-    Vector3 kemenceHely;
 
     public Animator jatekosAnimator;
     public Animator holgyAnimator;
@@ -192,8 +191,6 @@ public partial class FoKod : MonoBehaviour
         bevitelObjActive = false;
         fejoJatekos.SetActive(false);
         tejesVodor.SetActive(false);
-
-        kemenceHely = new Vector3();
 
         figyeloKameraEloreXTukrozott = new VektorSugar(transform.position, 2f);
 
