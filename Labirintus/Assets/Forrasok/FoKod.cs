@@ -23,6 +23,7 @@ public partial class FoKod : MonoBehaviour
     public Transform kutyaTransform;
     public GameObject pasi;
 
+    public GameObject kemenceHit;
     public GameObject tejesVodor;
     public GameObject vodorObj;
     public GameObject csontObj;
@@ -61,6 +62,7 @@ public partial class FoKod : MonoBehaviour
     bool holgyKovessenE = false;
     bool barmikorFelnyithatoE = false;
     private int idozito = 0;
+    private bool lerakomod = false;
 
     public static bool bevitelObjActive { get; set; }
 
@@ -99,6 +101,7 @@ public partial class FoKod : MonoBehaviour
     Vector3 eltolasFelul;
     private Vector3 eltolasAlap;
     Vector3 kutyaCel;
+    Vector3 kemenceHely;
 
     public Animator jatekosAnimator;
     public Animator holgyAnimator;
@@ -190,6 +193,8 @@ public partial class FoKod : MonoBehaviour
         fejoJatekos.SetActive(false);
         tejesVodor.SetActive(false);
 
+        kemenceHely = new Vector3();
+
         figyeloKameraEloreXTukrozott = new VektorSugar(transform.position, 2f);
 
         figyeloKameraEloreX = new VektorSugar(transform.position, -2f);
@@ -277,6 +282,18 @@ public partial class FoKod : MonoBehaviour
             fejoJatekos.SetActive(false);
             jatekosAnimaltObj.SetActive(true);
             jatekosMozoghatE = true;
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+
+            Debug.Log("Click!");
+
+            if (lerakomod)
+            {
+                kemenceHit.transform.parent = null;
+                kemenceHit.GetComponent<BoxCollider>().enabled = true;
+            }
         }
 
         if (csontAtadvaE)
@@ -475,16 +492,40 @@ public partial class FoKod : MonoBehaviour
                 }
                 else
                 {
+                    beirtParancs = bevitel.text.ToLower();
 
-                    kesztyuFelveteleSzoveggel();
+                    if (beirtParancs.Contains("kemencét") && beirtParancs.Contains("kövek"))
+                    {
+                        if (beirtParancs.Length <= 35)
+                        {
+                            kemenceHit.SetActive(true);
+                            Cursor.visible = false;
+                            bevitel.text = "";
+                            bevitelObj.SetActive(false);
+                            bevitelObjActive = false;
+                            barmikorFelnyithatoE = true;
+                            idozito = 0;
+                            lerakomod = true;
+                        }
+                        else 
+                        {
 
-                    bevitel.text = "";
-                    beirtParancs = "";
-                    Cursor.visible = false;
-                    bevitelObj.SetActive(false);
-                    bevitelObjActive = false;
-                    barmikorFelnyithatoE = true;
-                    idozito = 0;
+                            uzMegjel.megjelenitUzenetet("Ismeretlen parancs!");
+                            uzIdo = 0;
+                        }
+                    }
+                    else
+                    {
+                        kesztyuFelveteleSzoveggel();
+
+                        bevitel.text = "";
+                        beirtParancs = "";
+                        Cursor.visible = false;
+                        bevitelObj.SetActive(false);
+                        bevitelObjActive = false;
+                        barmikorFelnyithatoE = true;
+                        idozito = 0;
+                    }
                 }
 
             }
@@ -696,6 +737,12 @@ public partial class FoKod : MonoBehaviour
                     else
                     {
                         targyakSzovege.text = "Tárgy nincs felvéve";
+                        uzIdo = 0;
+                        Cursor.visible = false;
+                        bevitel.text = "";
+                        bevitelObj.SetActive(false);
+                        bevitelObjActive = false;
+                        targyakSzovege.text = uzenet;
                     }
                 }
                 else if (felvehetoBuzaraNez)
