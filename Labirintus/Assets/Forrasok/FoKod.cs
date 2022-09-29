@@ -281,17 +281,17 @@ public partial class FoKod : MonoBehaviour
             jatekosMozoghatE = true;
         }
 
-        if (Input.GetMouseButton(0))
+       if (lerakomod)
         {
-
-            Debug.Log("Click!");
-
-            if (lerakomod)
+            if (Input.GetMouseButton(0) && kemenceHit.GetComponent<MeshRenderer>().enabled)
             {
                 kemenceHit.transform.parent = null;
-                kemenceHit.GetComponent<BoxCollider>().enabled = true;
+                kemenceHit.GetComponent<BoxCollider>().isTrigger = false;
+                kemenceHit.GetComponent<Rigidbody>().useGravity = true;
+                lerakomod = false;
             }
         }
+        
 
         if (csontAtadvaE)
         {
@@ -539,7 +539,7 @@ public partial class FoKod : MonoBehaviour
 
                 if (figyeltTargy != "Talaj" && !figyeltTargy.Contains("Fal"))
                 {
-                    Debug.Log(figyeltTargy);
+                    //Debug.Log(figyeltTargy);
                 }
 
                 if (megjelenitUzenetet)
