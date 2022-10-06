@@ -62,7 +62,7 @@ public partial class FoKod : MonoBehaviour
     bool holgyKovessenE = false;
     bool barmikorFelnyithatoE = false;
     private int idozito = 0;
-    private bool lerakomod = false;
+    public static bool lerakomod = false;
 
     public static bool bevitelObjActive { get; set; }
 
@@ -283,7 +283,7 @@ public partial class FoKod : MonoBehaviour
 
        if (lerakomod)
         {
-            if (Input.GetMouseButton(0) && kemenceHit.GetComponent<MeshRenderer>().enabled)
+            if (Input.GetMouseButton(0) && kemenceHit.GetComponentInChildren<MeshRenderer>().enabled)
             {
                 kemenceHit.transform.parent = null;
                 kemenceHit.GetComponent<BoxCollider>().isTrigger = false;
@@ -496,6 +496,7 @@ public partial class FoKod : MonoBehaviour
                         if (beirtParancs.Length <= 35)
                         {
                             kemenceHit.SetActive(true);
+                            kemenceHit.GetComponentInChildren<MeshRenderer>().enabled = true;
                             Cursor.visible = false;
                             bevitel.text = "";
                             bevitelObj.SetActive(false);

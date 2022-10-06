@@ -7,12 +7,18 @@ public class KemenceCollision : MonoBehaviour
     // Start is called before the first frame update
     void OnTriggerEnter()
     {
-        this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        if (FoKod.lerakomod)
+        {
+            this.gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        this.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        if (FoKod.lerakomod)
+        {
+            this.gameObject.GetComponentInChildren<MeshRenderer>().enabled = true;
+        }
     }
 
     // Update is called once per frame
