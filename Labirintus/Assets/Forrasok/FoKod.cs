@@ -173,13 +173,13 @@ public partial class FoKod : MonoBehaviour
         kepUI3.transform.GetChild(0).gameObject.SetActive(false);
         kepUI4.transform.GetChild(0).gameObject.SetActive(false);
 
-        karakterTulajdonok.Add("Kövek");
+        //karakterTulajdonok.Add("Kövek");
         hozzaadTargyatInventoryhoz(koKep);
         /*karakterTulajdonok.Add("Csont");
         hozzaadTargyatInventoryhoz(csontKep);*/
         //karakterTulajdonok.Add("Tejes Vödör");
-        hozzaadTargyatInventoryhoz(buzaKep);
-        karakterTulajdonok.Add("Búza");
+        //hozzaadTargyatInventoryhoz(buzaKep);
+        //karakterTulajdonok.Add("Búza");
         /*hozzaadTargyatInventoryhoz(kesztyuKep);
         karakterTulajdonok.Add("Kesztyű");
         hozzaadTargyatInventoryhoz(kepUI2);
@@ -496,19 +496,27 @@ public partial class FoKod : MonoBehaviour
                     {
                         if (beirtParancs.Length <= 35)
                         {
-                            kemenceHit.SetActive(true);
-                            kemenceHit.GetComponentInChildren<MeshRenderer>().enabled = true;
+                            if (karakterTulajdonok.Contains("Kövek"))
+                            {
+                                kemenceHit.SetActive(true);
+                                kemenceHit.GetComponentInChildren<MeshRenderer>().enabled = true;
+                                
+                                lerakomod = true;
+                            }
+                            else
+                            {
+                                uzMegjel.megjelenitUzenetet("Tárgy nincs felvéve!");
+                                uzIdo = 0;
+                            }
                             Cursor.visible = false;
                             bevitel.text = "";
                             bevitelObj.SetActive(false);
                             bevitelObjActive = false;
                             barmikorFelnyithatoE = true;
                             idozito = 0;
-                            lerakomod = true;
                         }
                         else 
                         {
-
                             uzMegjel.megjelenitUzenetet("Ismeretlen parancs!");
                             uzIdo = 0;
                         }
