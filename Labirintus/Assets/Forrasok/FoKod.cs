@@ -43,6 +43,8 @@ public partial class FoKod : MonoBehaviour
     public GameObject holgyUtes;
     public GameObject kesztyuObj;
 
+    public AudioSource hangCsengo;
+
     public Image csontKep;
     public Image koKep;
     public Image kesztyuKep;
@@ -163,7 +165,6 @@ public partial class FoKod : MonoBehaviour
 
     private void Start()
     {
-
         csontKep.transform.GetChild(0).gameObject.SetActive(false);
         koKep.transform.GetChild(0).gameObject.SetActive(false);
         kesztyuKep.transform.GetChild(0).gameObject.SetActive(false);
@@ -700,6 +701,7 @@ public partial class FoKod : MonoBehaviour
                 }
                 else if (csengoreNez)
                 {
+                    hangCsengo.Play();
                     ajtoNyitas();
                 }
                 else if (urraNez)
