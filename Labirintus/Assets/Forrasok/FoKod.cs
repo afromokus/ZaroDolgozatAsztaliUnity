@@ -181,8 +181,8 @@ public partial class FoKod : MonoBehaviour
         //karakterTulajdonok.Add("Tejes Vödör");
         //karakterTulajdonok.Add("Búza");
         //hozzaadTargyatInventoryhoz(buzaKep);
-        //karakterTulajdonok.Add("Kesztyű");
-        //hozzaadTargyatInventoryhoz(kesztyuKep);
+        karakterTulajdonok.Add("Kesztyű");
+        hozzaadTargyatInventoryhoz(kesztyuKep);
         //karakterTulajdonok.Add("Hami");
         //hozzaadTargyatInventoryhoz(kepUI2);
         //hozzaadTargyatInventoryhoz(kepUI3);
@@ -499,7 +499,7 @@ public partial class FoKod : MonoBehaviour
                         beirtParancs = bevitel.text.Substring(0, 50).ToLower();
                     }
 
-                    if ((beirtParancs.Contains("felvesz") || beirtParancs.Contains("felvhúz")) && beirtParancs.Contains("kesztyűt")) 
+                    if ((beirtParancs.Contains("felvesz") || beirtParancs.Contains("felhúz")) && beirtParancs.Contains("kesztyűt")) 
                     {
                         if (beirtParancs.Contains("levágom") && beirtParancs.Contains("búzát"))
                         {
@@ -509,6 +509,7 @@ public partial class FoKod : MonoBehaviour
                             //karakterTulajdonok.Remove("Kesztyű");
                             buzaObj.SetActive(false);
                             karakterTulajdonok.Add("Búza");
+                            hozzaadTargyatInventoryhoz(buzaKep);
                         }
                         else
                         {
@@ -711,7 +712,7 @@ public partial class FoKod : MonoBehaviour
                     karakterTulajdonok.Add("Tejes Vödör");
                     tejesVodorreNez = false;
                     tejesVodor.SetActive(false);
-                    karakterTulajdonok.Remove("Vödör");
+                    //karakterTulajdonok.Remove("Vödör");
                     targyakSzovege.text = "Tárgy felvéve";
 
                 }
@@ -809,13 +810,13 @@ public partial class FoKod : MonoBehaviour
                         targyakSzovege.text = uzenet;
                     }
                 }
-                else if (felvehetoBuzaraNez)
+                else if (felvehetoBuzaraNez && !karakterTulajdonok.Contains("Búza"))
                 {
                     if (kesztyutJatekosFelhuztaE)
                     {
-                        karakterTulajdonok.Add("Búza");
                         felvehetoBuzaraNez = false;
-                        buzaObj.SetActive(false);
+                        buzaObj.SetActive(false); 
+                        karakterTulajdonok.Add("Búza");
                         hozzaadTargyatInventoryhoz(buzaKep);
                     }
                     else if (karakterTulajdonok.Contains("Kesztyű"))
