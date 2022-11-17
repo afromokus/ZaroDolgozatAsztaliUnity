@@ -404,6 +404,62 @@ public partial class FoKod : MonoBehaviour
                     bevitelObjActive = false;
                     targyakSzovege.text = uzenet;
                 }
+                else if (parasztraNez)
+                {
+                    if (bevitel.text.Length < 20)
+                    {
+                        beirtParancs = bevitel.text.ToLower();
+                    }
+                    else
+                    {
+                        beirtParancs = bevitel.text.Substring(0, 20).ToLower();
+                    }
+                    if (beirtParancs.Contains("ad") && beirtParancs.Contains(" tej"))
+                    {
+                        if (karakterTulajdonok.Contains("Tejes Vödör"))
+                        {
+                            jatekosAnimator.Play("Atadas", 0);
+
+                            //athuzKepet(tejesvodorKep);
+
+                        }
+                        else
+                        {
+                            uzMegjel.megjelenitUzenetet("Tárgy nincs felvéve!");
+                            uzIdo = 0;
+                        }
+                    }
+                    else if (beirtParancs.Contains("ad") && beirtParancs.Contains(" keny"))
+                    {
+                        if (karakterTulajdonok.Contains("Kenyér"))
+                        {
+                            jatekosAnimator.Play("Atadas", 0);
+
+                            //athuzKepet(kenyerKep);
+
+                        }
+                        else
+                        {
+                            uzMegjel.megjelenitUzenetet("Tárgy nincs felvéve!");
+                            uzIdo = 0;
+                        }
+                    }
+                    else if (beirtParancs.Contains("ad"))
+                    {
+                        uzMegjel.megjelenitUzenetet("Ad - Mit?");
+                        uzIdo = 0;
+                    }
+                    else
+                    {
+                        uzMegjel.megjelenitUzenetet("Ismeretlen parancs");
+                        uzIdo = 0;
+                    }
+                    Cursor.visible = false;
+                    bevitel.text = "";
+                    bevitelObj.SetActive(false);
+                    bevitelObjActive = false;
+                    targyakSzovege.text = uzenet;
+                }
                 else if (kemencereNez)
                 {
                     if (bevitel.text.Length < 71)
@@ -500,7 +556,7 @@ public partial class FoKod : MonoBehaviour
                         beirtParancs = bevitel.text.Substring(0, 50).ToLower();
                     }
 
-                    if ((beirtParancs.Contains("felvesz") || beirtParancs.Contains("felhúz")) && beirtParancs.Contains("kesztyűt")) 
+                    if ((beirtParancs.Contains("felvesz") || beirtParancs.Contains("felhúz")) && beirtParancs.Contains("kesztyűt"))
                     {
                         if (beirtParancs.Contains("levágom") && beirtParancs.Contains("búzát"))
                         {
@@ -549,7 +605,7 @@ public partial class FoKod : MonoBehaviour
                             {
                                 kemenceHit.SetActive(true);
                                 kemenceHit.GetComponentInChildren<MeshRenderer>().enabled = true;
-                                
+
                                 lerakomod = true;
                             }
                             else
@@ -564,7 +620,7 @@ public partial class FoKod : MonoBehaviour
                             barmikorFelnyithatoE = true;
                             idozito = 0;
                         }
-                        else 
+                        else
                         {
                             uzMegjel.megjelenitUzenetet("Ismeretlen parancs!");
                             uzIdo = 0;
