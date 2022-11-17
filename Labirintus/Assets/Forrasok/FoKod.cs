@@ -163,6 +163,7 @@ public partial class FoKod : MonoBehaviour
 
     public static bool HolgySzerelmesE = false;
     private bool kesztyutJatekosFelhuztaE = false;
+    private bool parasztraNez = false;
 
     private void Start()
     {
@@ -608,12 +609,17 @@ public partial class FoKod : MonoBehaviour
                     targyakSzovege.text = "Kemence";
                     kemencereNez = true;
                 }
+                else if (figyeltTargy == "parasztHit") 
+                {
+                    targyakSzovege.text = "Paraszt";
+                    parasztraNez = true;
+                }
                 else if (figyeltTargy == "tejesVodor")
                 {
                     targyakSzovege.text = "Tejes Vödör";
                     tejesVodorreNez = true;
                 }
-                else if (figyeltTargy == "uresVodor") 
+                else if (figyeltTargy == "uresVodor")
                 {
                     targyakSzovege.text = "Vödör";
                     vodorreNez = true;
@@ -716,7 +722,11 @@ public partial class FoKod : MonoBehaviour
                     targyakSzovege.text = "Tárgy felvéve";
 
                 }
-                else if (kemencereNez) 
+                else if (parasztraNez)
+                {
+                    Cursor.visible = true;
+                }
+                else if (kemencereNez)
                 {
                     Cursor.visible = true;
                 }
@@ -815,7 +825,7 @@ public partial class FoKod : MonoBehaviour
                     if (kesztyutJatekosFelhuztaE)
                     {
                         felvehetoBuzaraNez = false;
-                        buzaObj.SetActive(false); 
+                        buzaObj.SetActive(false);
                         karakterTulajdonok.Add("Búza");
                         hozzaadTargyatInventoryhoz(buzaKep);
                     }
