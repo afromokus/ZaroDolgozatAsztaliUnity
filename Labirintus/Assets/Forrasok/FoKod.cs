@@ -139,6 +139,8 @@ public partial class FoKod : MonoBehaviour
 
     UzenetMegjelenito uzMegjel;
     private int uzIdo = 201;
+    private bool tejAtadvaE;
+    private bool kenyerAtadvaE;
     private Animation[] animaciok;
     private bool kutyaElsoHelyenVanE = false;
     private bool kutyaMasodikHelyenVanE = false;
@@ -182,13 +184,15 @@ public partial class FoKod : MonoBehaviour
         //karakterTulajdonok.Add("Tejes Vödör");
         //karakterTulajdonok.Add("Búza");
         //hozzaadTargyatInventoryhoz(buzaKep);
-        karakterTulajdonok.Add("Kesztyű");
-        hozzaadTargyatInventoryhoz(kesztyuKep);
+        //karakterTulajdonok.Add("Kesztyű");
+        //hozzaadTargyatInventoryhoz(kesztyuKep);
         //karakterTulajdonok.Add("Hami");
         //hozzaadTargyatInventoryhoz(kepUI2);
         //hozzaadTargyatInventoryhoz(kepUI3);
         //karakterTulajdonok.Add("nyami");
         //hozzaadTargyatInventoryhoz(kepUI4);
+        karakterTulajdonok.Add("Tejes Vödör");
+        karakterTulajdonok.Add("Kenyér");
 
         bevitelObj.SetActive(false);
         bevitelObjActive = false;
@@ -418,9 +422,14 @@ public partial class FoKod : MonoBehaviour
                     {
                         if (karakterTulajdonok.Contains("Tejes Vödör"))
                         {
-                            jatekosAnimator.Play("Atadas", 0);
+                            //jatekosAnimator.Play("Atadas", 0);
+
+                            uzMegjel.megjelenitUzenetet("Tej átadva.");
+                            uzIdo = 0;
 
                             //athuzKepet(tejesvodorKep);
+
+                            tejAtadvaE = true;
 
                         }
                         else
@@ -435,7 +444,11 @@ public partial class FoKod : MonoBehaviour
                         {
                             jatekosAnimator.Play("Atadas", 0);
 
+                            uzMegjel.megjelenitUzenetet("Kenyér átadva.");
+                            uzIdo = 0;
+
                             //athuzKepet(kenyerKep);
+                            kenyerAtadvaE = true;
 
                         }
                         else
