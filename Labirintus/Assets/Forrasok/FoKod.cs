@@ -349,7 +349,7 @@ public partial class FoKod : MonoBehaviour
             setalKutyaGazban();
         }
 
-        if (Cursor.visible == false && Input.GetKey(KeyCode.Return) && !kutyaraNez && !urraNez && !bevitelObjActive && !barmikorFelnyithatoE)//return = enter
+        if (Cursor.visible == false && Input.GetKey(KeyCode.Return) && !kutyaraNez && !urraNez && !bevitelObjActive && !parasztraNez && !barmikorFelnyithatoE)//return = enter
         {
             Cursor.visible = true;
         }
