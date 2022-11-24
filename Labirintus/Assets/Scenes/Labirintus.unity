@@ -3800,7 +3800,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532487400}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: -19.26, y: 1.28, z: 13.7}
+  m_LocalPosition: {x: 24.6, y: 1.28, z: -30.33}
   m_LocalScale: {x: 1, y: 2.4760776, z: 0.7897158}
   m_Children:
   - {fileID: 534669905}
@@ -3947,8 +3947,8 @@ MonoBehaviour:
   koKep: {fileID: 1748818599}
   kesztyuKep: {fileID: 1347142340}
   buzaKep: {fileID: 1174057660}
-  kepUI2: {fileID: 1682504390}
-  kepUI3: {fileID: 1698145273}
+  vodorKep: {fileID: 1682504390}
+  tejesVodorKep: {fileID: 1698145273}
   kepUI4: {fileID: 315843875}
   jatekosAnimator: {fileID: 119055703}
   holgyAnimator: {fileID: 1064544778}
@@ -11451,7 +11451,7 @@ GameObject:
   - component: {fileID: 1682504391}
   - component: {fileID: 1682504390}
   m_Layer: 0
-  m_Name: KepUI (2)
+  m_Name: VodorKepUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11497,7 +11497,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ea115882856054c4db75b78104cf82ff, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11596,7 +11596,7 @@ GameObject:
   - component: {fileID: 1698145274}
   - component: {fileID: 1698145273}
   m_Layer: 0
-  m_Name: KepUI (3)
+  m_Name: TejesVodorKepUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11642,7 +11642,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d34dfdc865ce3b841a06decc9b1e60ba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -49,8 +49,8 @@ public partial class FoKod : MonoBehaviour
     public Image koKep;
     public Image kesztyuKep;
     public Image buzaKep;
-    public Image kepUI2;
-    public Image kepUI3;
+    public Image vodorKep;
+    public Image tejesVodorKep;
     public Image kepUI4;
     RectTransform rt;
 
@@ -173,8 +173,8 @@ public partial class FoKod : MonoBehaviour
         koKep.transform.GetChild(0).gameObject.SetActive(false);
         kesztyuKep.transform.GetChild(0).gameObject.SetActive(false);
         buzaKep.transform.GetChild(0).gameObject.SetActive(false);
-        kepUI2.transform.GetChild(0).gameObject.SetActive(false);
-        kepUI3.transform.GetChild(0).gameObject.SetActive(false);
+        vodorKep.transform.GetChild(0).gameObject.SetActive(false);
+        tejesVodorKep.transform.GetChild(0).gameObject.SetActive(false);
         kepUI4.transform.GetChild(0).gameObject.SetActive(false);
 
         //karakterTulajdonok.Add("Kövek");
@@ -191,8 +191,8 @@ public partial class FoKod : MonoBehaviour
         //hozzaadTargyatInventoryhoz(kepUI3);
         //karakterTulajdonok.Add("nyami");
         //hozzaadTargyatInventoryhoz(kepUI4);
-        karakterTulajdonok.Add("Tejes Vödör");
-        karakterTulajdonok.Add("Kenyér");
+        //karakterTulajdonok.Add("Tejes Vödör");
+        //karakterTulajdonok.Add("Kenyér");
 
         bevitelObj.SetActive(false);
         bevitelObjActive = false;
@@ -427,7 +427,7 @@ public partial class FoKod : MonoBehaviour
                             uzMegjel.megjelenitUzenetet("Tej átadva.");
                             uzIdo = 0;
 
-                            //athuzKepet(tejesvodorKep);
+                            athuzKepet(tejesVodorKep);
 
                             tejAtadvaE = true;
 
@@ -782,12 +782,14 @@ public partial class FoKod : MonoBehaviour
                     csontObj.SetActive(false);
                     hozzaadTargyatInventoryhoz(csontKep);
                 }
-                else if (tejesVodorreNez)
+                else if (tejesVodorreNez && karakterTulajdonok.Contains("Vödör") && !karakterTulajdonok.Contains("Tejes Vödör"))
                 {
                     karakterTulajdonok.Add("Tejes Vödör");
                     tejesVodorreNez = false;
                     tejesVodor.SetActive(false);
                     //karakterTulajdonok.Remove("Vödör");
+                    athuzKepet(vodorKep);
+                    hozzaadTargyatInventoryhoz(tejesVodorKep);
                     targyakSzovege.text = "Tárgy felvéve";
 
                 }
@@ -804,6 +806,7 @@ public partial class FoKod : MonoBehaviour
                     karakterTulajdonok.Add("Vödör");
                     vodorreNez = false;
                     vodorObj.SetActive(false);
+                    hozzaadTargyatInventoryhoz(vodorKep);
 
                 }
                 else if (jatekosKesztyureNez)
