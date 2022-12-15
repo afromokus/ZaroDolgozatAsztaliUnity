@@ -790,7 +790,7 @@ public partial class FoKod : MonoBehaviour
                     //karakterTulajdonok.Remove("Vödör");
                     athuzKepet(vodorKep);
                     hozzaadTargyatInventoryhoz(tejesVodorKep);
-                    targyakSzovege.text = "Tárgy felvéve";
+                    uzMegjel.megjelenitUzenetet("Tárgy felvéve");
 
                 }
                 else if (parasztraNez)
@@ -875,7 +875,7 @@ public partial class FoKod : MonoBehaviour
                 }
                 else if (jatekosTogyreNez)
                 {
-                    if (karakterTulajdonok.Contains("Vödör"))
+                    if (karakterTulajdonok.Contains("Vödör") && !karakterTulajdonok.Contains("Tejes Vödör"))
                     {
                         inputEngedelyezes = false;
                         kecskeFejes();
@@ -883,7 +883,7 @@ public partial class FoKod : MonoBehaviour
                     }
                     else
                     {
-                        targyakSzovege.text = "Tárgy nincs felvéve";
+                        uzMegjel.megjelenitUzenetet("Tárgy nincs felvéve");
                         uzIdo = 0;
                         Cursor.visible = false;
                         bevitel.text = "";
