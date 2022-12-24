@@ -42,6 +42,9 @@ public partial class FoKod : MonoBehaviour
     public GameObject holgy;
     public GameObject holgyUtes;
     public GameObject kesztyuObj;
+    public GameObject malomko;
+    public GameObject parasztHit;
+    public GameObject ToldiParasztHit;
 
     public AudioSource hangCsengo;
 
@@ -65,6 +68,7 @@ public partial class FoKod : MonoBehaviour
     bool barmikorFelnyithatoE = false;
     private int idozito = 0;
     public static bool lerakomod = false;
+    int idozitoParasztAtfog = 0;
 
     public static bool bevitelObjActive { get; set; }
 
@@ -153,6 +157,7 @@ public partial class FoKod : MonoBehaviour
     private bool holgyHelyenVanE = true;
     private bool holgyJatekosMelletVanE = false;
     private bool holgyElindultE = false;
+    private bool parasztAtengedE = true;
     private int pihenesHolgy = 50;
     private bool vodorreNez;
     private bool kemencereNez = false;
@@ -260,6 +265,36 @@ public partial class FoKod : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if (parasztAtengedE) 
+        {
+            if (idozitoParasztAtfog < 80 && malomko.transform.rotation.y < 0.94f)
+            {
+                malomko.transform.Rotate(0f, 0.35f, 0f);
+                malomko.transform.Translate(0f, 0f, 0.0035f);
+                //malomkő elfordítva
+            }
+            else 
+            {
+                parasztHit.SetActive(false);
+                //akadály eltüntetve
+                if (idozitoParasztAtfog < 100)
+                {
+                    idozitoParasztAtfog++;
+                }
+                else 
+                {
+                    //Paraszt átfogott a malomkövön
+                    if (ToldiParasztHit.transform.position.x < -19)
+                    {
+                        ToldiParasztHit.transform.Translate(0.03f, 0f, 0.01f);
+                        malomko.transform.Rotate(0f,0f,0.4f);
+                    }
+                }
+
+            }
+        }
+
         if (idozito <= 5)
         {
             idozito++;
