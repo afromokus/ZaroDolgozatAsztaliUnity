@@ -157,7 +157,7 @@ public partial class FoKod : MonoBehaviour
     private bool holgyHelyenVanE = true;
     private bool holgyJatekosMelletVanE = false;
     private bool holgyElindultE = false;
-    private bool parasztAtengedE = true;
+    private bool parasztAtengedE = false;
     private int pihenesHolgy = 50;
     private bool vodorreNez;
     private bool kemencereNez = false;
@@ -196,8 +196,8 @@ public partial class FoKod : MonoBehaviour
         //hozzaadTargyatInventoryhoz(kepUI3);
         //karakterTulajdonok.Add("nyami");
         //hozzaadTargyatInventoryhoz(kepUI4);
-        //karakterTulajdonok.Add("Tejes Vödör");
-        //karakterTulajdonok.Add("Kenyér");
+        karakterTulajdonok.Add("Tejes Vödör");
+        karakterTulajdonok.Add("Kenyér");
 
         bevitelObj.SetActive(false);
         bevitelObjActive = false;
@@ -265,6 +265,10 @@ public partial class FoKod : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (kenyerAtadvaE && tejAtadvaE) 
+        {
+            parasztAtengedE = true;
+        }
 
         if (parasztAtengedE) 
         {
@@ -445,15 +449,32 @@ public partial class FoKod : MonoBehaviour
                 }
                 else if (parasztraNez)
                 {
-                    if (bevitel.text.Length < 20)
+                    if (bevitel.text.Length < 40)
                     {
                         beirtParancs = bevitel.text.ToLower();
                     }
                     else
                     {
-                        beirtParancs = bevitel.text.Substring(0, 20).ToLower();
+                        beirtParancs = bevitel.text.Substring(0, 40).ToLower();
+                        Debug.Log(beirtParancs);
                     }
-                    if (beirtParancs.Contains("ad") && beirtParancs.Contains(" tej"))
+                    if (beirtParancs.Contains("ad") && beirtParancs.Contains(" tej") && beirtParancs.Contains(" keny"))
+                    {
+
+                        athuzKepet(tejesVodorKep);
+
+                        tejAtadvaE = true;
+                        jatekosAnimator.Play("Atadas", 0);
+
+                        //athuzKepet(kenyerKep);
+                        kenyerAtadvaE = true;
+
+                        uzMegjel.megjelenitUzenetet("Tej és kenyér átadva.");
+                        uzIdo = 0;
+
+
+                    }
+                    else if (beirtParancs.Contains("ad") && beirtParancs.Contains(" tej"))
                     {
                         if (karakterTulajdonok.Contains("Tejes Vödör"))
                         {
