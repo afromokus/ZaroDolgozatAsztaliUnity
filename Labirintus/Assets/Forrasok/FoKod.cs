@@ -54,7 +54,8 @@ public partial class FoKod : MonoBehaviour
     public Image buzaKep;
     public Image vodorKep;
     public Image tejesVodorKep;
-    public Image kepUI4;
+    public Image kenyerKep;
+    public Image vasKep;
     RectTransform rt;
 
     int i = 0;
@@ -180,7 +181,7 @@ public partial class FoKod : MonoBehaviour
         buzaKep.transform.GetChild(0).gameObject.SetActive(false);
         vodorKep.transform.GetChild(0).gameObject.SetActive(false);
         tejesVodorKep.transform.GetChild(0).gameObject.SetActive(false);
-        kepUI4.transform.GetChild(0).gameObject.SetActive(false);
+        kenyerKep.transform.GetChild(0).gameObject.SetActive(false);
 
         //karakterTulajdonok.Add("Kövek");
         //hozzaadTargyatInventoryhoz(koKep);
@@ -195,9 +196,8 @@ public partial class FoKod : MonoBehaviour
         //hozzaadTargyatInventoryhoz(kepUI2);
         //hozzaadTargyatInventoryhoz(kepUI3);
         //karakterTulajdonok.Add("nyami");
-        //hozzaadTargyatInventoryhoz(kepUI4);
-        karakterTulajdonok.Add("Tejes Vödör");
-        karakterTulajdonok.Add("Kenyér");
+        //karakterTulajdonok.Add("Tejes Vödör");
+        //karakterTulajdonok.Add("Kenyér");
 
         bevitelObj.SetActive(false);
         bevitelObjActive = false;
@@ -551,6 +551,7 @@ public partial class FoKod : MonoBehaviour
                                         athuzKepet(buzaKep);
                                         //karakterTulajdonok.Remove("Búza");
                                         karakterTulajdonok.Add("Kenyér");
+                                        hozzaadTargyatInventoryhoz(kenyerKep);
 
                                         uzMegjel.megjelenitUzenetet("Kenyeret készítettél a búzából.");
                                         uzIdo = 0;
@@ -926,8 +927,13 @@ public partial class FoKod : MonoBehaviour
                 }
                 else if (helikopterreNez)
                 {
-                    uzMegjel.megjelenitUzenetet("Vas felvéve, hozzáadva a tárgykahoz");
+                    uzMegjel.megjelenitUzenetet("Felvetted a vasdarabot.");
+                    uzIdo = 0;
                     karakterTulajdonok.Add("vasdarab");
+                    hozzaadTargyatInventoryhoz(vasKep);
+
+                    //wierd bug without waiting a tenth of a second
+                    System.Threading.Thread.Sleep(100);
                 }
                 else if (jatekosTogyreNez)
                 {
