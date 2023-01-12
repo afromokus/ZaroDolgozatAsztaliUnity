@@ -190,7 +190,7 @@ public partial class FoKod : MonoBehaviour
         //karakterTulajdonok.Add("Tejes Vödör");
         //karakterTulajdonok.Add("Búza");
         //hozzaadTargyatInventoryhoz(buzaKep);
-        //karakterTulajdonok.Add("Kesztyű");
+        //karakterTulajdonok.Add("kesztyű");
         //hozzaadTargyatInventoryhoz(kesztyuKep);
         //karakterTulajdonok.Add("Hami");
         //hozzaadTargyatInventoryhoz(kepUI2);
@@ -628,23 +628,31 @@ public partial class FoKod : MonoBehaviour
 
                     if ((beirtParancs.Contains("felvesz") || beirtParancs.Contains("felhúz")) && beirtParancs.Contains("kesztyűt"))
                     {
-                        if (beirtParancs.Contains("levágom") && beirtParancs.Contains("búzát"))
+                        if (karakterTulajdonok.Contains("kesztyű"))
                         {
-                            uzMegjel.megjelenitUzenetet("Levágtad a kesztyűvel a búzát");
-                            uzIdo = 0;
-                            athuzKepet(kesztyuKep);
-                            //karakterTulajdonok.Remove("Kesztyű");
-                            buzaObj.SetActive(false);
-                            karakterTulajdonok.Add("Búza");
-                            hozzaadTargyatInventoryhoz(buzaKep);
+                            if (beirtParancs.Contains("levágom") && beirtParancs.Contains("búzát"))
+                            {
+                                uzMegjel.megjelenitUzenetet("Levágtad a kesztyűvel a búzát");
+                                uzIdo = 0;
+                                athuzKepet(kesztyuKep);
+                                //karakterTulajdonok.Remove("kesztyű");
+                                buzaObj.SetActive(false);
+                                karakterTulajdonok.Add("Búza");
+                                hozzaadTargyatInventoryhoz(buzaKep);
+                            }
+                            else
+                            {
+                                uzMegjel.megjelenitUzenetet("Felhúztad a kesztyűt");
+                                uzIdo = 0;
+                                athuzKepet(kesztyuKep);
+                                //karakterTulajdonok.Remove("kesztyű");
+                                kesztyutJatekosFelhuztaE = true;
+                            }
                         }
                         else
                         {
-                            uzMegjel.megjelenitUzenetet("Felhúztad a kesztyűt");
+                            uzMegjel.megjelenitUzenetet("Tárgy nincs felvéve!");
                             uzIdo = 0;
-                            athuzKepet(kesztyuKep);
-                            //karakterTulajdonok.Remove("Kesztyű");
-                            kesztyutJatekosFelhuztaE = true;
                         }
                     }
                     else
@@ -652,7 +660,6 @@ public partial class FoKod : MonoBehaviour
                         uzMegjel.megjelenitUzenetet("Ismeretlen parancs!");
                         uzIdo = 0;
                     }
-                    kesztyutJatekosFelhuztaE = true;
 
                     bevitel.text = "";
                     beirtParancs = "";
@@ -868,7 +875,7 @@ public partial class FoKod : MonoBehaviour
                 }
                 else if (jatekosKesztyureNez)
                 {
-                    karakterTulajdonok.Add("Kesztyű");
+                    karakterTulajdonok.Add("kesztyű");
                     jatekosKesztyureNez = false;
                     kesztyuObj.SetActive(false);
                     hozzaadTargyatInventoryhoz(kesztyuKep);
@@ -963,7 +970,7 @@ public partial class FoKod : MonoBehaviour
                         karakterTulajdonok.Add("Búza");
                         hozzaadTargyatInventoryhoz(buzaKep);
                     }
-                    else if (karakterTulajdonok.Contains("Kesztyű"))
+                    else if (karakterTulajdonok.Contains("kesztyű"))
                     {
                         Cursor.visible = true;
                     }
@@ -1087,12 +1094,12 @@ public partial class FoKod : MonoBehaviour
 
         if ((beirtParancs.Contains("felhúz") || beirtParancs.Contains("felvesz")) && beirtParancs.Contains("kesztyűt"))
         {
-            if (karakterTulajdonok.Contains("Kesztyű"))
+            if (karakterTulajdonok.Contains("kesztyű"))
             {
                 uzMegjel.megjelenitUzenetet("Rendben!");
                 uzIdo = 0;
                 athuzKepet(kesztyuKep);
-                //karakterTulajdonok.Remove("Kesztyű");
+                //karakterTulajdonok.Remove("kesztyű");
                 kesztyutJatekosFelhuztaE = true;
             }
             else
