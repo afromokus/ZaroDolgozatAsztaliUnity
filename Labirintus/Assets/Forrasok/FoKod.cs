@@ -134,7 +134,7 @@ public partial class FoKod : MonoBehaviour
     private float jatekosHelyeX;
     private Transform jatekosTransf;
     private Vector3 holgyEredetiHely;
-    private bool ajtotLattaMar = true;
+    private bool ajtotLattaMar = true; //false;
     private bool urKutyaraRakerdezett;
     private bool urLezarva;
     private bool satorraNez;
@@ -936,16 +936,14 @@ public partial class FoKod : MonoBehaviour
                 {
                     pasiKijonE = true;
                 }
-                else if (helikopterreNez)
+                else if (helikopterreNez && !karakterTulajdonok.Contains("vasdarab"))
                 {
-                    Cursor.visible = false;
+                    //Cursor.visible = false;
                     uzMegjel.megjelenitUzenetet("Felvetted a vasdarabot.");
                     uzIdo = 0;
                     karakterTulajdonok.Add("vasdarab");
                     hozzaadTargyatInventoryhoz(vasKep);
 
-                    //wierd bug without waiting a tenth/hundredth? of a second
-                    System.Threading.Thread.Sleep(100);
                 }
                 else if (jatekosTogyreNez)
                 {
@@ -1410,7 +1408,8 @@ public partial class FoKod : MonoBehaviour
 
     private void urBeszel()
     {
-        if (!ajtotLattaMar)
+        //ha a játékos az ajtót nem látta még, vagy már megvan a öntőforma (és a kutyával kapcsolatban nincs már teendő)
+        if (!ajtotLattaMar || karakterTulajdonok.Contains("vas öntőforma"))
         {
             uzMegjel.megjelenitUzenetet("Jó napot!");
             uzIdo = 0;
