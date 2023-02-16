@@ -57,6 +57,7 @@ public partial class FoKod : MonoBehaviour
     public Image kenyerKep;
     public Image vasKep;
     public Image femTokKep;
+    public Image kulcsKep;
     RectTransform rt;
 
     int i = 0;
@@ -186,6 +187,7 @@ public partial class FoKod : MonoBehaviour
         kenyerKep.transform.GetChild(0).gameObject.SetActive(false);
         vasKep.transform.GetChild(0).gameObject.SetActive(false);
         femTokKep.transform.GetChild(0).gameObject.SetActive(false);
+        kulcsKep.transform.GetChild(0).gameObject.SetActive(false);
 
         karakterTulajdonok.Add("Kövek");
         hozzaadTargyatInventoryhoz(koKep);
@@ -197,12 +199,14 @@ public partial class FoKod : MonoBehaviour
         //karakterTulajdonok.Add("kesztyű");
         //hozzaadTargyatInventoryhoz(kesztyuKep);
         //karakterTulajdonok.Add("nyami");
-        karakterTulajdonok.Add("vasdarab");
+        karakterTulajdonok.Add("Vasdarab");
         hozzaadTargyatInventoryhoz(vasKep);
         karakterTulajdonok.Add("Tejes Vödör");
         hozzaadTargyatInventoryhoz(tejesVodorKep);
         karakterTulajdonok.Add("Kenyér");
         hozzaadTargyatInventoryhoz(kenyerKep);
+        karakterTulajdonok.Add("Kulcs");
+        hozzaadTargyatInventoryhoz(kulcsKep);
 
         bevitelObj.SetActive(false);
         bevitelObjActive = false;
@@ -548,7 +552,7 @@ public partial class FoKod : MonoBehaviour
 
                         beirtParancs = bevitel.text.ToLower();
 
-                        if (karakterTulajdonok.Contains("vasdarab"))
+                        if (karakterTulajdonok.Contains("Vasdarab"))
                         {
                             if (beirtParancs.Contains("beolvaszt") && beirtParancs.Contains("vas"))
                             {
@@ -776,7 +780,10 @@ public partial class FoKod : MonoBehaviour
                             uzIdo = 0;
 
                             karakterTulajdonok.Add("kulcs");
-                            //hozzaadTargyatInventoryhoz(kulcsKep);
+                            hozzaadTargyatInventoryhoz(kulcsKep);
+                            athuzKepet(vasKep);
+                            athuzKepet(femTokKep);
+                            beolvasztasE = false;
                         }
                         else
                         {
@@ -1008,12 +1015,12 @@ public partial class FoKod : MonoBehaviour
                 {
                     pasiKijonE = true;
                 }
-                else if (helikopterreNez && !karakterTulajdonok.Contains("vasdarab"))
+                else if (helikopterreNez && !karakterTulajdonok.Contains("Vasdarab"))
                 {
                     //Cursor.visible = false;
                     uzMegjel.megjelenitUzenetet("Felvetted a vasdarabot.");
                     uzIdo = 0;
-                    karakterTulajdonok.Add("vasdarab");
+                    karakterTulajdonok.Add("Vasdarab");
                     hozzaadTargyatInventoryhoz(vasKep);
 
                 }
