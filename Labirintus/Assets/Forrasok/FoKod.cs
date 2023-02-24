@@ -1202,8 +1202,8 @@ public partial class FoKod : MonoBehaviour
         Cursor.visible = false;
         bevitelObj.SetActive(false);
         bevitelObjActive = false;
-        barmikorFelnyithatoE = true;
-        idozito = 0;
+        //barmikorFelnyithatoE = true;
+        //idozito = 0;
     }
 
     private void kesztyuFelveteleSzoveggel()
