@@ -175,6 +175,7 @@ public partial class FoKod : MonoBehaviour
     private bool kesztyutJatekosFelhuztaE = false;
     private bool parasztraNez = false;
     private bool beolvasztasE = false;
+    private bool kulcsFrissenVoltE = false;
 
     private void Start()
     {
@@ -316,6 +317,7 @@ public partial class FoKod : MonoBehaviour
         else 
         {
             barmikorFelnyithatoE = false;
+            kulcsFrissenVoltE = false;
         }
         if (mehetEAlvasJel == true)
         {
@@ -562,18 +564,27 @@ public partial class FoKod : MonoBehaviour
                                 {
                                     if (beirtParancs.Contains("beolvaszt") && beirtParancs.Contains(" vas"))
                                     {
-                                        Debug.Log("beolvasztás");
-                                        uzMegjel.megjelenitUzenetet("És?");
-                                        uzIdo = 0;
-                                        beolvasztasE = true;
-                                        bevitel.text = "";
-                                        bevitel.placeholder.GetComponent<Text>().text = "Beolvasztod a vasat. Mit teszel vele?";
-
-
+                                        if (!karakterTulajdonok.Contains("kulcs"))
+                                        {
+                                            Debug.Log("beolvasztás");
+                                            uzMegjel.megjelenitUzenetet("És?");
+                                            uzIdo = 0;
+                                            beolvasztasE = true;
+                                            bevitel.text = "";
+                                            bevitel.placeholder.GetComponent<Text>().text = "Beolvasztod a vasat. Mit teszel vele?";
+                                        }
+                                        else
+                                        {
+                                            uzMegjel.megjelenitUzenetet("Már elkészítetted a kulcsot!");
+                                            uzIdo = 0;
+                                            closeDownBevitelObj();
+                                            bevitel.text = "";
+                                            beirtParancs = "";
+                                        }
                                     }
                                     else
                                     {
-                                        //if (!beirtParancs.Contains("kulcs") && karakterTulajdonok.Contains("fémtok"))
+                                        if (!kulcsFrissenVoltE)
                                         {
                                             uzMegjel.megjelenitUzenetet("Ismeretlen parancs! (kemencérenéz beolvasztás)");
                                             bevitel.text = "";
@@ -797,6 +808,8 @@ public partial class FoKod : MonoBehaviour
                             kemencereNez = false;
 
                             Debug.Log("Kulcs megkapva");
+                            kulcsFrissenVoltE = true;
+                            idozito = 0;
                         }
                         else
                         {
@@ -1225,7 +1238,7 @@ public partial class FoKod : MonoBehaviour
         }
         else
         {
-            //if (barmikorFelnyithatoE)
+            if (!kulcsFrissenVoltE)
             {
                 uzMegjel.megjelenitUzenetet("Ismeretlen parancs! (kesztyű-felhúz bármikorfelnyitható)");
                 uzIdo = 0;
@@ -1533,7 +1546,7 @@ public partial class FoKod : MonoBehaviour
         {
             uzMegjel.megjelenitUzenetet("Kinyitni az ajtót? Régen nem járt már arra senki. Már csak a " +
                 "fémtokja maradt meg,a kulcsot három évszázada senki nem látta.");
-            uzIdo = -450;
+            uzIdo = -100;
             Cursor.visible = true;
         }
     }
