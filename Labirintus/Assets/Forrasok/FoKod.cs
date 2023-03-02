@@ -822,7 +822,14 @@ public partial class FoKod : MonoBehaviour
                             bevitel.text = "";
                         }
                     }
-                    else 
+                    else if (beirtParancs.Contains("kulcs"))
+                    {
+                        uzMegjel.megjelenitUzenetet("Kulcs? Milyen kulcs?");
+                        uzIdo = 0;
+                        beirtParancs = "";
+                        bevitel.text = "";
+                    }
+                    else
                     {
                         if (!karakterTulajdonok.Contains("kulcs"))
                         {
