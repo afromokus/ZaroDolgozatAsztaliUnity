@@ -406,6 +406,7 @@ public partial class FoKod : MonoBehaviour
         if (Cursor.visible == false && !kemencereNez && Input.GetKey(KeyCode.Return) && !kutyaraNez && !urraNez && !bevitelObjActive && !parasztraNez && !barmikorFelnyithatoE)//return = enter
         {
             Cursor.visible = true;
+            uzMegjel.megjelenitUzenetet("");
         }
 
         if (Cursor.visible == true)
@@ -1244,6 +1245,7 @@ public partial class FoKod : MonoBehaviour
                 uzIdo = 0;
             }
         }
+
     }
 
     private void hozzaadTargyatInventoryhoz(Image hozzaadandoKep)
