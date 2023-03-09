@@ -195,8 +195,8 @@ public partial class FoKod : MonoBehaviour
         //karakterTulajdonok.Add("Csont");
         //hozzaadTargyatInventoryhoz(csontKep);
         //karakterTulajdonok.Add("Tejes Vödör");
-        //karakterTulajdonok.Add("Búza");
-        //hozzaadTargyatInventoryhoz(buzaKep);
+        karakterTulajdonok.Add("Búza");
+        hozzaadTargyatInventoryhoz(buzaKep);
         //karakterTulajdonok.Add("kesztyű");
         //hozzaadTargyatInventoryhoz(kesztyuKep);
         //karakterTulajdonok.Add("nyami");
@@ -204,10 +204,12 @@ public partial class FoKod : MonoBehaviour
         hozzaadTargyatInventoryhoz(vasKep);
         karakterTulajdonok.Add("Tejes Vödör");
         hozzaadTargyatInventoryhoz(tejesVodorKep);
-        karakterTulajdonok.Add("Kenyér");
-        hozzaadTargyatInventoryhoz(kenyerKep);
+        //karakterTulajdonok.Add("Kenyér");
+        //hozzaadTargyatInventoryhoz(kenyerKep);
         //karakterTulajdonok.Add("Kulcs");
         //hozzaadTargyatInventoryhoz(kulcsKep);
+        karakterTulajdonok.Add("Liszt");
+        //hozzaadTargyatInventoryhoz(lisztKep);
 
         bevitelObj.SetActive(false);
         bevitelObjActive = false;
@@ -470,6 +472,7 @@ public partial class FoKod : MonoBehaviour
                     }
                     else if (parasztraNez)
                     {
+                        if(karakterTulajdonok.Contains("Kenyér"))
                         if (bevitel.text.Length < 40)
                         {
                             beirtParancs = bevitel.text.ToLower();
@@ -583,6 +586,49 @@ public partial class FoKod : MonoBehaviour
                                             beirtParancs = "";
                                         }
                                     }
+                                    else if (beirtParancs.Contains("liszt"))
+                                    {
+                                        Debug.Log("Liszt észlelve!");
+                                        if (karakterTulajdonok.Contains("Liszt"))
+                                        {
+                                            if (beirtParancs.Contains("kenyeret"))
+                                            {
+
+                                                //Debug.Log("Kenyér észlelve!");
+                                                if (beirtParancs.Contains("sütö") || beirtParancs.Contains("készítek"))
+                                                {
+                                                    //Debug.Log("Elkészítés észlelve!");
+                                                    athuzKepet(buzaKep);
+                                                    //karakterTulajdonok.Remove("Búza");
+                                                    karakterTulajdonok.Add("Kenyér");
+                                                    hozzaadTargyatInventoryhoz(kenyerKep);
+
+                                                    uzMegjel.megjelenitUzenetet("Kenyeret sütöttél a lisztből.");
+                                                    uzIdo = 0;
+                                                    bevitelObj.SetActive(false);
+                                                    bevitelObjActive = false;
+                                                    Cursor.visible = false;
+                                                }
+                                                else
+                                                {
+                                                    uzMegjel.megjelenitUzenetet("Ismeretlen parancs! (kemencérenéz kenyérsütés)");
+                                                    bevitel.text = "";
+                                                    uzIdo = 0;
+                                                    bevitelObj.SetActive(false);
+                                                    bevitelObjActive = false;
+                                                    Cursor.visible = false;
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            uzMegjel.megjelenitUzenetet("Tárgy nincs felvéve!");
+                                            uzIdo = 0;
+                                            bevitelObj.SetActive(false);
+                                            bevitelObjActive = false;
+                                            Cursor.visible = false;
+                                        }
+                                    }
                                     else
                                     {
                                         if (!kulcsFrissenVoltE)
@@ -597,42 +643,6 @@ public partial class FoKod : MonoBehaviour
                                     }
                                 }
                             }
-                            else if (karakterTulajdonok.Contains("Búza"))
-                            {
-                                if (beirtParancs.Contains("búzából") || beirtParancs.Contains("búzát"))
-                                {
-                                    //Debug.Log("Búza észlelve!");
-                                    if (beirtParancs.Contains("kenyeret"))
-                                    {
-
-                                        //Debug.Log("Kenyér észlelve!");
-                                        if (beirtParancs.Contains("sütö") || beirtParancs.Contains("készítek"))
-                                        {
-                                            //Debug.Log("Elkészítés észlelve!");
-                                            athuzKepet(buzaKep);
-                                            //karakterTulajdonok.Remove("Búza");
-                                            karakterTulajdonok.Add("Kenyér");
-                                            hozzaadTargyatInventoryhoz(kenyerKep);
-
-                                            uzMegjel.megjelenitUzenetet("Kenyeret készítettél a búzából.");
-                                            uzIdo = 0;
-                                            bevitelObj.SetActive(false);
-                                            bevitelObjActive = false;
-                                            Cursor.visible = false;
-                                        }
-
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                uzMegjel.megjelenitUzenetet("Tárgy nincs felvéve!");
-                                uzIdo = 0;
-                                bevitelObj.SetActive(false);
-                                bevitelObjActive = false;
-                                Cursor.visible = false;
-                            }
-
                         }
                     }
                     else if (urraNez && !urLezarva)
