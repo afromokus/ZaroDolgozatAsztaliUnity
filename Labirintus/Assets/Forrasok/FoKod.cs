@@ -279,7 +279,6 @@ public partial class FoKod : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
         if (kenyerAtadvaE && tejAtadvaE) 
         {
             parasztAtengedE = true;
@@ -474,24 +473,82 @@ public partial class FoKod : MonoBehaviour
                     }
                     else if (parasztraNez)
                     {
-                        kenyerTejAtadas();
-                        if (karakterTulajdonok.Contains("Búza"))
+
+                        if (bevitel.text.Length < 90)
                         {
-                            if (beirtParancs.Contains("kér") && (beirtParancs.Contains("őröl") || beirtParancs.Contains("morzs")) && beirtParancs.Contains("búz"))
+                            beirtParancs = bevitel.text.ToLower();
+
+                            if (beirtParancs.Contains("ad"))
                             {
-                                //paraszt őrli a búzát
-                                karakterTulajdonok.Add("Liszt");
-                                hozzaadTargyatInventoryhoz(lisztKep);
-                                uzMegjel.megjelenitUzenetet("Paraszt lisztté őrölte neked a búzát");
-                                uzIdo = 0;
+                                if (beirtParancs.Contains("keny") && beirtParancs.Contains("tej"))
+                                {
+                                    if (karakterTulajdonok.Contains("Kenyér") && karakterTulajdonok.Contains("Tejes Vödör"))
+                                    {
+                                        uzMegjel.megjelenitUzenetet("Kenyér és tej átadva");
+                                        uzIdo = 0;
+
+                                        parasztAtengedE = true;
+                                    }
+                                    else
+                                    {
+                                        if (karakterTulajdonok.Contains("Kenyér"))
+                                        {
+                                            atadKenyeret();
+                                        }
+                                        else
+                                        {
+                                            if (karakterTulajdonok.Contains("Tejes Vödör"))
+                                            {
+                                                atadTejet();
+                                            }
+                                            else
+                                            {
+                                                uzMegjel.megjelenitUzenetet("Kenyér és tej nincs felvéve!");
+                                                uzIdo = 0;
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    uzMegjel.megjelenitUzenetet("Ad - Mit?");
+                                    uzIdo = 0;
+
+                                    vizsgalKulonKenyTej();                                }
                             }
+                            else 
+                            {
+                                if (beirtParancs.Contains("kér") && beirtParancs.Contains("búz") &&
+                                                                                (beirtParancs.Contains("őröl") || beirtParancs.Contains("morzs")))
+                                {
+                                    if (karakterTulajdonok.Contains("Búza"))
+                                    {
+                                        megkapLisztet();
+                                    }
+                                    else
+                                    {
+                                        uzMegjel.megjelenitUzenetet("Tárgy nincs fölvéve");
+                                        uzIdo = 0;
+                                    }
+                                }
+                                else
+                                {
+                                    uzMegjel.megjelenitUzenetet("Ismeretlen parancs(Parasztra néz)");
+                                    uzIdo = 0;
+                                }
+                            }
+
                         }
                         else
                         {
-                            uzMegjel.megjelenitUzenetet("Tárgy nincs felvéve");
+                            uzMegjel.megjelenitUzenetet("Ismeretlen parancs(Paraszt túl hosszú üzenet)");
                             uzIdo = 0;
                         }
-                        
+
+                        bevitel.text = "";
+                        bevitelObj.SetActive(false);
+                        bevitelObjActive = false;
+                        Cursor.visible = false;
                     }
                     else if (kemencereNez)
                     {
@@ -1164,102 +1221,60 @@ public partial class FoKod : MonoBehaviour
 
     }
 
-    private void kenyerTejAtadas()
+    private void atadTejet()
     {
-        if (bevitel.text.Length < 60)
-        {
-            beirtParancs = bevitel.text.ToLower();
-        }
-        else
-        {
-            beirtParancs = bevitel.text.Substring(0, 40).ToLower();
-        }
-        if (beirtParancs.Contains("ad") && beirtParancs.Contains(" tej") && beirtParancs.Contains(" keny"))
-        {
-            if (karakterTulajdonok.Contains("Tejes Vödör"))
-            {
-                athuzKepet(tejesVodorKep);
+        athuzKepet(tejesVodorKep);
+        uzMegjel.megjelenitUzenetet("Tej átadva");
+        uzIdo = 0;
+        tejAtadvaE = true;
+    }
 
-                tejAtadvaE = true;
-                jatekosAnimator.Play("Atadas", 0);
-            }
-            else //nincs tej
-            {
-            
-            }
+    private void atadKenyeret()
+    {
+        athuzKepet(kenyerKep);
+        uzMegjel.megjelenitUzenetet("Kenyér átadva");
+        uzIdo = 0;
+        kenyerAtadvaE = true;
+    }
 
-            if (karakterTulajdonok.Contains("Kenyér"))
-            {
-                athuzKepet(kenyerKep);
-                kenyerAtadvaE = true;
-
-                uzMegjel.megjelenitUzenetet("Tej és kenyér átadva.");
-                uzIdo = 0;
-            }
-            else //nincs kenyér
-            {
-
-                uzMegjel.megjelenitUzenetet("Tej átadva.");
-                uzIdo = 0;
-            }
-
-
-        }
-        else if (beirtParancs.Contains("ad") && beirtParancs.Contains(" tej"))
-        {
-            if (karakterTulajdonok.Contains("Tejes Vödör"))
-            {
-                //jatekosAnimator.Play("Atadas", 0);
-
-                uzMegjel.megjelenitUzenetet("Tej átadva.");
-                uzIdo = 0;
-
-                athuzKepet(tejesVodorKep);
-
-                tejAtadvaE = true;
-
-            }
-            else
-            {
-                uzMegjel.megjelenitUzenetet("Tárgy nincs felvéve!");
-                uzIdo = 0;
-            }
-        }
-        else if (beirtParancs.Contains("ad") && beirtParancs.Contains(" keny"))
+    private void vizsgalKulonKenyTej()
+    {
+        if (beirtParancs.Contains("keny"))
         {
             if (karakterTulajdonok.Contains("Kenyér"))
             {
-                jatekosAnimator.Play("Atadas", 0);
-
-                uzMegjel.megjelenitUzenetet("Kenyér átadva.");
-                uzIdo = 0;
-
-                athuzKepet(kenyerKep);
-                kenyerAtadvaE = true;
-
+                atadKenyeret();
             }
             else
             {
-                uzMegjel.megjelenitUzenetet("Tárgy nincs felvéve!");
+                uzMegjel.megjelenitUzenetet("Tárgy nincs felvéve");
                 uzIdo = 0;
             }
         }
-        else if (beirtParancs.Contains("ad"))
+        else 
         {
-            uzMegjel.megjelenitUzenetet("Ad - Mit?");
-            uzIdo = 0;
+            if (beirtParancs.Contains("tej"))
+            {
+                if (karakterTulajdonok.Contains("Tejes Vödör"))
+                {
+                    atadTejet();
+                }
+                else
+                {
+                    uzMegjel.megjelenitUzenetet("Tárgy nincs felvéve");
+                    uzIdo = 0;
+                }
+            }
         }
-        else
-        {
-            uzMegjel.megjelenitUzenetet("Ismeretlen parancs");
-            uzIdo = 0;
-        }
-        Cursor.visible = false;
-        System.Threading.Thread.Sleep(100);
-        bevitel.text = "";
-        bevitelObj.SetActive(false);
-        bevitelObjActive = false;
-        targyakSzovege.text = uzenet;
+    }
+
+    private void megkapLisztet()
+    {
+        karakterTulajdonok.Add("Liszt");
+        hozzaadTargyatInventoryhoz(lisztKep);
+
+        uzMegjel.megjelenitUzenetet("Paraszt lisztté őrölte neked a búzát");
+        uzIdo = 0;
     }
 
     private void closeDownBevitelObj()
