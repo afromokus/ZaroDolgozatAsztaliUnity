@@ -1,0 +1,13 @@
+# Blender 3.1.2 MTL File: 'KapuKezdetek.blend'
+# www.blender.org
+
+newmtl Nyami
+Ns 19.607841
+Ka 1.000000 1.000000 1.000000
+Kd 0.588235 0.588235 0.588235
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 0.000000
+illum 1
+map_Kd  ..\..\..\..\..\Programozó\Desktop\Kirsch János Márk\ZaroDolgozatAsztaliUnity\Labirintus\Assets\Textures\Environment\Fort Wall\Fortress.psd
