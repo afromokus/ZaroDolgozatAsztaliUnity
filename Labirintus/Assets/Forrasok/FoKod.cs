@@ -45,6 +45,7 @@ public partial class FoKod : MonoBehaviour
     public GameObject malomko;
     public GameObject parasztHit;
     public GameObject ToldiParasztHit;
+    public GameObject hatsoKapuJobb;
 
     public AudioSource hangCsengo;
 
@@ -180,6 +181,9 @@ public partial class FoKod : MonoBehaviour
 
     private void Start()
     {
+
+        //hatsoKapuJobb.GetComponent<Animation>().Play();
+
         csontKep.transform.GetChild(0).gameObject.SetActive(false);
         koKep.transform.GetChild(0).gameObject.SetActive(false);
         kesztyuKep.transform.GetChild(0).gameObject.SetActive(false);

@@ -1,8 +1,29 @@
 fileFormatVersion: 2
-guid: f044a49512163c549bd297a16b7c0ccc
+guid: f89607f9f2319924dbafda522181689e
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 7237119382716421992
+    second: Gate_Left|Gate_LeftAction
+  - first:
+      74: -2976254878487705034
+    second: Gate_Left|Gate_LeftAction.001
+  - first:
+      74: -5807606545329210498
+    second: Gate_Left|Gate_LeftAction.002
+  - first:
+      74: -7300763663494222202
+    second: Gate_Left|Gate_LeftAction.003
+  - first:
+      74: -5997349040084263018
+    second: Gate_Left|Gate_LeftAction.004
+  - first:
+      74: -3553417552818880115
+    second: Gate_Left|Gate_LeftAction.005
+  - first:
+      74: -8682182972910252370
+    second: Gate_Left|Gate_LeftAction.006
   externalObjects: {}
   materials:
     materialImportMode: 2
