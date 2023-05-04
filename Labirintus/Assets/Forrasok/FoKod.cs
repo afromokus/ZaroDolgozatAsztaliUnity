@@ -45,7 +45,6 @@ public partial class FoKod : MonoBehaviour
     public GameObject malomko;
     public GameObject parasztHit;
     public GameObject ToldiParasztHit;
-    public GameObject hatsoKapuJobb;
 
     public AudioSource hangCsengo;
 
@@ -115,6 +114,8 @@ public partial class FoKod : MonoBehaviour
 
     public Animator jatekosAnimator;
     public Animator holgyAnimator;
+    public Animator hatsoKapuJobbAnimator;
+    public Animator hatsoKapuBalAnimator;
 
     string figyeltTargy = "";
 
@@ -150,7 +151,6 @@ public partial class FoKod : MonoBehaviour
     private int uzIdo = 201;
     private bool tejAtadvaE;
     private bool kenyerAtadvaE;
-    private Animation[] animaciok;
     private bool kutyaElsoHelyenVanE = false;
     private bool kutyaMasodikHelyenVanE = false;
     private bool kutyaMegyMasodikHelyre;
@@ -181,8 +181,6 @@ public partial class FoKod : MonoBehaviour
 
     private void Start()
     {
-
-        //hatsoKapuJobb.GetComponent<Animation>().Play();
 
         csontKep.transform.GetChild(0).gameObject.SetActive(false);
         koKep.transform.GetChild(0).gameObject.SetActive(false);
@@ -414,6 +412,9 @@ public partial class FoKod : MonoBehaviour
         {
             Cursor.visible = true;
             uzMegjel.megjelenitUzenetet("");
+
+            hatsoKapuJobbAnimator.SetTrigger("Open");
+            hatsoKapuBalAnimator.SetTrigger("Open");
         }
 
         if (Cursor.visible == true)
