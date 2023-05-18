@@ -178,6 +178,8 @@ public partial class FoKod : MonoBehaviour
     private bool parasztraNez = false;
     private bool beolvasztasE = false;
     private bool kulcsFrissenVoltE = false;
+    private bool kapuraNez = false;
+    private bool kapunyitvaE = false;
 
     private void Start()
     {
@@ -210,8 +212,8 @@ public partial class FoKod : MonoBehaviour
         hozzaadTargyatInventoryhoz(tejesVodorKep);
         //karakterTulajdonok.Add("Kenyér");
         //hozzaadTargyatInventoryhoz(kenyerKep);
-        //karakterTulajdonok.Add("Kulcs");
-        //hozzaadTargyatInventoryhoz(kulcsKep);
+        karakterTulajdonok.Add("kulcs");
+        hozzaadTargyatInventoryhoz(kulcsKep);
         karakterTulajdonok.Add("Liszt");
         hozzaadTargyatInventoryhoz(lisztKep);
 
@@ -410,11 +412,10 @@ public partial class FoKod : MonoBehaviour
         //ha megnyomom az entert amikor a játék épp nem áll
         if (Cursor.visible == false && !kemencereNez && Input.GetKey(KeyCode.Return) && !kutyaraNez && !urraNez && !bevitelObjActive && !parasztraNez && !barmikorFelnyithatoE)//return = enter
         {
+
             Cursor.visible = true;
             uzMegjel.megjelenitUzenetet("");
 
-            hatsoKapuJobbAnimator.SetTrigger("Open");
-            hatsoKapuBalAnimator.SetTrigger("Open");
         }
 
         if (Cursor.visible == true)
@@ -966,6 +967,11 @@ public partial class FoKod : MonoBehaviour
                     targyakSzovege.text = "Kesztyű";
                     jatekosKesztyureNez = true;
                 }
+                else if (figyeltTargy == "kapuHit" || figyeltTargy == "KapuBalAnimalt" || figyeltTargy == "KapuJobbAnimalt")
+                {
+                    targyakSzovege.text = "Kapu";
+                    kapuraNez = true;
+                }
                 else
                 {
                     //very crucial
@@ -983,6 +989,7 @@ public partial class FoKod : MonoBehaviour
                     tejesVodorreNez = false;
                     parasztraNez = false;
                     kemencereNez = false;
+                    kapuraNez = false;
                 }
             }
 
@@ -1038,6 +1045,18 @@ public partial class FoKod : MonoBehaviour
                     kesztyuObj.SetActive(false);
                     hozzaadTargyatInventoryhoz(kesztyuKep);
 
+                }
+                else if (kapuraNez)
+                {
+                    if (karakterTulajdonok.Contains("kulcs"))
+                    {
+                        kapunyitas();
+                    }
+                    else 
+                    {
+                        uzMegjel.megjelenitUzenetet("Tárgy nincs felvéve");
+                        uzIdo = 0;
+                    }
                 }
                 else if (felvehetoKovekreNez)
                 {
@@ -1224,6 +1243,16 @@ public partial class FoKod : MonoBehaviour
 
         kiirUzenet();
 
+    }
+
+    private void kapunyitas()
+    {
+        if (!kapunyitvaE)
+        {
+            hatsoKapuJobbAnimator.SetTrigger("Open");
+            hatsoKapuBalAnimator.SetTrigger("Open");
+            kapunyitvaE = true;
+        }
     }
 
     private void atadTejet()
