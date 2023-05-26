@@ -15598,6 +15598,7 @@ GameObject:
   - component: {fileID: 1840934619}
   - component: {fileID: 1840934618}
   - component: {fileID: 1840934617}
+  - component: {fileID: 1840934620}
   m_Layer: 0
   m_Name: kapuHit (1)
   m_TagString: Untagged
@@ -15681,6 +15682,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1840934615}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1818360608 &1840934620
+PositionConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840934615}
+  m_Enabled: 1
+  m_Weight: 0
+  m_TranslationAtRest: {x: -5.46, y: -0.84, z: 3.82}
+  m_TranslationOffset: {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_IsContraintActive: 0
+  m_IsLocked: 0
+  m_Sources: []
 --- !u!1001 &1845004701
 PrefabInstance:
   m_ObjectHideFlags: 0

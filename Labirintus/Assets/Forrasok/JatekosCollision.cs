@@ -138,7 +138,7 @@ public class JatekosCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.name.Contains("alvasjel")) 
+        if (col.gameObject.name.Contains("alvasjel"))
         {
             A.SetActive(false);
             B.SetActive(false);
@@ -150,6 +150,26 @@ public class JatekosCollision : MonoBehaviour
             joPasiAlszik = false;
             idozito = 0;
 
+        } 
+        else if (col.gameObject.name.Contains("lepcsoHit")) 
+        {
+            //ha lentrõl fölfele megy a lépcsõn
+            if (transform.localPosition.y < 1.5f)
+            {
+                if (JatekosMozgas.sebesseg < 3.8f)
+                {
+                    JatekosMozgas.sebesseg += 0.2f;
+                    if (JatekosMozgas.sebesseg < 2.8f)
+                    {
+                        JatekosMozgas.sebesseg += 1f;
+                    }
+                }
+            }
+            //else slow them down
+            else 
+            {
+                //JatekosMozgas.sebesseg -= 1f;
+            }
         }
     }
     private void visszaAllitAlvasJelA()

@@ -23,7 +23,7 @@ public class JatekosMozgas : MonoBehaviour
 
     bool jatekosUtkozikE = false;
 
-    bool jatekosElore = false, jatekosHatra = false;
+    private bool jatekosElore = false, jatekosHatra = false;
     private float jatekosZ;
 
     private void Start()
