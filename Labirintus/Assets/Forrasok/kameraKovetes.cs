@@ -31,30 +31,30 @@ public class kameraKovetes : MonoBehaviour
 
         foKamera.SetActive(true);
 
-        tolatasFigyeles = new VektorSugar(transform.position, 5f);
+        /*tolatasFigyeles = new VektorSugar(transform.position, 5f);
         eloreFigyeles = new VektorSugar(transform.position, -hosszuVektorhossz);
-        kameraAllapot = Pozicio.alap;
+        kameraAllapot = Pozicio.alap;*/
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("c") && transform.position.y + Input.GetAxis("Mouse Y") < 9f && transform.position.y + Input.GetAxis("Mouse Y") > 1.2f)
+        /*if (Input.GetKey("c") && transform.position.y + Input.GetAxis("Mouse Y") < 9f && transform.position.y + Input.GetAxis("Mouse Y") > 1.2f)
         {
             Eltolas.Set(Eltolas.x, Eltolas.y + Input.GetAxis("Mouse Y"), Eltolas.z);
         }
         else if (Input.GetKey("r"))
         {
             Eltolas.Set(5f, normalKameraMagassag, 0);
-        }
+        }*/
 
 
-        transform.position = jatekosTranszformacio.position + Eltolas;
+        /*transform.position = jatekosTranszformacio.position + Eltolas;
         tolatasFigyeles.setSugarOrigin(valtoKamera.transform.position, tolatasRadarVisszah);
-        eloreFigyeles.setSugarOrigin(valtoKamera.transform.position);
+        eloreFigyeles.setSugarOrigin(valtoKamera.transform.position);*/
 
-        if (kameraAllapot == Pozicio.alap && tolatasFigyeles.utkozikEX())
+        /*if (kameraAllapot == Pozicio.alap && tolatasFigyeles.utkozikEX())
         {
             kameraValtKozeli();
         }
@@ -69,11 +69,11 @@ public class kameraKovetes : MonoBehaviour
         else if (!tolatasFigyeles.utkozikEX() && kameraAllapot == Pozicio.felul)
         {
             kameraValtKozeli();
-        }
+        }*/
 
 
-        tolatasFigyeles.rajzolFigyelo(Color.white);
-        eloreFigyeles.rajzolFigyelo();
+        /*tolatasFigyeles.rajzolFigyelo(Color.white);
+        eloreFigyeles.rajzolFigyelo();*/
 
     }
 

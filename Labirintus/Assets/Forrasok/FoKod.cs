@@ -212,8 +212,8 @@ public partial class FoKod : MonoBehaviour
         hozzaadTargyatInventoryhoz(tejesVodorKep);
         //karakterTulajdonok.Add("Kenyér");
         //hozzaadTargyatInventoryhoz(kenyerKep);
-        karakterTulajdonok.Add("kulcs");
-        hozzaadTargyatInventoryhoz(kulcsKep);
+        //karakterTulajdonok.Add("kulcs");
+        //hozzaadTargyatInventoryhoz(kulcsKep);
         karakterTulajdonok.Add("Liszt");
         hozzaadTargyatInventoryhoz(lisztKep);
 
@@ -539,7 +539,7 @@ public partial class FoKod : MonoBehaviour
                                 }
                                 else
                                 {
-                                    uzMegjel.megjelenitUzenetet("Ismeretlen parancs(Parasztra néz)");
+                                    uzMegjel.megjelenitUzenetet("Ismeretlen parancs");
                                     uzIdo = 0;
                                 }
                             }
@@ -547,7 +547,7 @@ public partial class FoKod : MonoBehaviour
                         }
                         else
                         {
-                            uzMegjel.megjelenitUzenetet("Ismeretlen parancs(Paraszt túl hosszú üzenet)");
+                            uzMegjel.megjelenitUzenetet("Ismeretlen parancs");
                             uzIdo = 0;
                         }
 
@@ -1152,7 +1152,7 @@ public partial class FoKod : MonoBehaviour
                 Application.Quit();
             }
 
-            figyeloKameraEloreX.setSugarOrigin(transform.position);
+            /*figyeloKameraEloreX.setSugarOrigin(transform.position);
             kijovetelFigyelo.setSugarOrigin(transform.position, -2f);
 
             figyeloKameraEloreXTukrozott.setSugarOrigin(transform.position);
@@ -1216,7 +1216,7 @@ public partial class FoKod : MonoBehaviour
             {
                 transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x -
                     Input.GetAxis("Mouse Y") * 2, 270f, 0f);
-            }
+            }*/
         }
 
         pasiMozog();
