@@ -39,20 +39,25 @@ public class mainCameraPositionSwap : MonoBehaviour
         }
 
         Physics.Linecast(behindHitTr.position, jatekosTr.position, out RaycastHit hitInfo);
+
         if (hitInfo.collider.name == "JatekosKocka")
         {
             Debug.DrawLine(behindHitTr.position, jatekosTr.position, Color.blue);
             utkozneE = false;
-
-            if (idozito <= hatarIdozito)
-            {
-                idozito++;
-            }
         }
         else
         {
             Debug.DrawLine(behindHitTr.position, jatekosTr.position, Color.red);
             utkozneE = true;
+            if (simaNezetE == false)
+            {
+                idozito = 0;
+            }
+        }
+
+        if (idozito <= hatarIdozito)
+        {
+            idozito++;
         }
         Debug.Log(idozito);
 
@@ -70,7 +75,7 @@ public class mainCameraPositionSwap : MonoBehaviour
     void valtSima()
     {
         mainCameraTr.localRotation = Quaternion.Euler(0f, -90f, 0f);
-        //mainCameraTr.position = kameraSimaPozicio;
+        mainCameraTr.Translate(0f, -0.8f, -2.2f);
         simaNezetE = true;
     }
 
