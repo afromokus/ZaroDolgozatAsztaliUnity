@@ -59,7 +59,6 @@ public class mainCameraPositionSwap : MonoBehaviour
         {
             idozito++;
         }
-        Debug.Log(idozito);
 
     }
 

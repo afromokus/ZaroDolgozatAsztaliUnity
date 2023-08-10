@@ -180,6 +180,7 @@ public partial class FoKod : MonoBehaviour
     private bool kulcsFrissenVoltE = false;
     private bool kapuraNez = false;
     private bool kapunyitvaE = false;
+    private bool kecskeMegfejveE = false;
 
     private void Start()
     {
@@ -196,26 +197,26 @@ public partial class FoKod : MonoBehaviour
         kulcsKep.transform.GetChild(0).gameObject.SetActive(false);
         lisztKep.transform.GetChild(0).gameObject.SetActive(false);
 
-        karakterTulajdonok.Add("Kövek");
-        hozzaadTargyatInventoryhoz(koKep);
+        //karakterTulajdonok.Add("Kövek");
+        //hozzaadTargyatInventoryhoz(koKep);
         //karakterTulajdonok.Add("Csont");
         //hozzaadTargyatInventoryhoz(csontKep);
         //karakterTulajdonok.Add("Tejes Vödör");
-        karakterTulajdonok.Add("Búza");
-        hozzaadTargyatInventoryhoz(buzaKep);
+        //karakterTulajdonok.Add("Búza");
+        //hozzaadTargyatInventoryhoz(buzaKep);
         //karakterTulajdonok.Add("kesztyű");
         //hozzaadTargyatInventoryhoz(kesztyuKep);
         //karakterTulajdonok.Add("nyami");
-        karakterTulajdonok.Add("Vasdarab");
-        hozzaadTargyatInventoryhoz(vasKep);
-        karakterTulajdonok.Add("Tejes Vödör");
-        hozzaadTargyatInventoryhoz(tejesVodorKep);
+        //karakterTulajdonok.Add("Vasdarab");
+        //hozzaadTargyatInventoryhoz(vasKep);
+        //karakterTulajdonok.Add("Tejes Vödör");
+        //hozzaadTargyatInventoryhoz(tejesVodorKep);
         //karakterTulajdonok.Add("Kenyér");
         //hozzaadTargyatInventoryhoz(kenyerKep);
         //karakterTulajdonok.Add("kulcs");
         //hozzaadTargyatInventoryhoz(kulcsKep);
-        karakterTulajdonok.Add("Liszt");
-        hozzaadTargyatInventoryhoz(lisztKep);
+        //karakterTulajdonok.Add("Liszt");
+        //hozzaadTargyatInventoryhoz(lisztKep);
 
         bevitelObj.SetActive(false);
         bevitelObjActive = false;
@@ -283,6 +284,16 @@ public partial class FoKod : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if (fejoJatekos.active) //ha a játékos fej, a tejesvödör nem kattintható
+        {
+            tejesVodor.GetComponent<BoxCollider>().enabled = false;
+        }
+        else if(kecskeMegfejveE)//ha a játékos nem fej, de a kecskét már megfejte a tejes vödör kattintható
+        {
+            tejesVodor.GetComponent<BoxCollider>().enabled = true;
+        }
+
         if (kenyerAtadvaE && tejAtadvaE) 
         {
             parasztAtengedE = true;
@@ -1111,10 +1122,18 @@ public partial class FoKod : MonoBehaviour
                 }
                 else if (jatekosTogyreNez)
                 {
-                    if (karakterTulajdonok.Contains("Vödör") && !karakterTulajdonok.Contains("Tejes Vödör"))
+                    if (karakterTulajdonok.Contains("Vödör"))
                     {
+                        Debug.Log("Háló");
                         inputEngedelyezes = false;
-                        kecskeFejes();
+                        if (!kecskeMegfejveE)
+                        {
+                            kecskeFejes();
+                        }
+                        else 
+                        {
+                            uzMegjel.megjelenitUzenetet("Elfogyott a tej!");
+                        }
                         togyHitObj.SetActive(false);
                     }
                     else
@@ -1648,6 +1667,7 @@ public partial class FoKod : MonoBehaviour
         FoKod.jatekosMozoghatE = false;
         fejoJatekos.SetActive(true);
         tejesVodor.SetActive(true);
+        kecskeMegfejveE = true;
     }
 
     private void urBeszel()
