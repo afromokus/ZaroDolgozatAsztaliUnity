@@ -1031,6 +1031,7 @@ public partial class FoKod : MonoBehaviour
                     athuzKepet(vodorKep);
                     hozzaadTargyatInventoryhoz(tejesVodorKep);
                     uzMegjel.megjelenitUzenetet("Tárgy felvéve");
+                    uzIdo = 0;
 
                 }
                 else if (parasztraNez)
@@ -1133,6 +1134,7 @@ public partial class FoKod : MonoBehaviour
                         else 
                         {
                             uzMegjel.megjelenitUzenetet("Elfogyott a tej!");
+                            uzIdo = 0;
                         }
                         togyHitObj.SetActive(false);
                     }
