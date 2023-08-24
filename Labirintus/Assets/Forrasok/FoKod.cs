@@ -19,6 +19,7 @@ public partial class FoKod : MonoBehaviour
     public InputField bevitel;
     public GameObject fejoJatekos;
     public GameObject jatekosAnimaltObj;
+    public GameObject jatekosKesztyubenObj;
 
     public Transform kutyaTransform;
     public GameObject pasi;
@@ -221,6 +222,7 @@ public partial class FoKod : MonoBehaviour
         bevitelObj.SetActive(false);
         bevitelObjActive = false;
         fejoJatekos.SetActive(false);
+        //jatekosKesztyubenObj.SetActive(false);
         tejesVodor.SetActive(false);
 
         figyeloKameraEloreXTukrozott = new VektorSugar(transform.position, 2f);
@@ -1155,6 +1157,8 @@ public partial class FoKod : MonoBehaviour
                     {
                         felvehetoBuzaraNez = false;
                         buzaObj.SetActive(false);
+                        jatekosKesztyubenObj.SetActive(false);
+                        jatekosAnimaltObj.SetActive(true);
                         karakterTulajdonok.Add("Búza");
                         hozzaadTargyatInventoryhoz(buzaKep);
                     }
@@ -1363,6 +1367,9 @@ public partial class FoKod : MonoBehaviour
                 uzMegjel.megjelenitUzenetet("Rendben!");
                 uzIdo = 0;
                 athuzKepet(kesztyuKep);
+                jatekosAnimaltObj.SetActive(false);
+                jatekosKesztyubenObj.SetActive(true);
+                
                 //karakterTulajdonok.Remove("kesztyű");
                 kesztyutJatekosFelhuztaE = true;
             }

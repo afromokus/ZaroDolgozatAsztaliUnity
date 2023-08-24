@@ -7,6 +7,7 @@ public class JatekosMozgas : MonoBehaviour
 {
 
     public Animator jatekosAnimator;
+    public Animator jatekosKesztyubenAnim;
 
     public Rigidbody jatekosTest;
     public GameObject buzaWatch;
@@ -56,6 +57,9 @@ public class JatekosMozgas : MonoBehaviour
         {
             jatekosAnimator.Play("Idle", 0);
             jatekosAnimator.speed = 0.6f;
+
+            jatekosKesztyubenAnim.Play("Idle", 0);
+            jatekosKesztyubenAnim.speed = 0.6f;
         }
 
         /*if (!buzaWatch.active && !(jatekosTest.position.z > -43.6f && jatekosTest.position.z < -41.55f &&
@@ -123,10 +127,12 @@ public class JatekosMozgas : MonoBehaviour
         if (sebesseg < 2)
         {
             jatekosAnimator.speed = sebesseg / 3;
+            jatekosKesztyubenAnim.speed = sebesseg / 3;
         }
         else if (sebesseg > 5)
         {
             jatekosAnimator.speed = sebesseg / 8;
+            jatekosKesztyubenAnim.speed = sebesseg / 8;
         }
     }
 
@@ -154,6 +160,7 @@ public class JatekosMozgas : MonoBehaviour
             if (jatekosAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
             {
                 jatekosAnimator.Play("Haladas");
+                jatekosKesztyubenAnim.Play("Haladas");
             }
 
             if (jatekosHatra)
